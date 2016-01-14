@@ -1,11 +1,25 @@
 <div class="row">
     <div class="col-md-8">
-        <div class="page-header">
-            <h2>{{article.title}}</h2>
-            <small>发表时间：{{formatDate article.created_time 'yyyy-MM-dd hh:mm:ss'}}</small>
-        </div>
-        <div>
-            {{article.content}}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="page-header">
+                    <h2>{{article.title}}</h2>
+                    <small>发表时间：{{formatDate article.created_time 'yyyy-MM-dd hh:mm:ss'}}</small>
+                    <small>
+                        <a href="/articles/{{article.id}}/edit">
+                            <i class="fa fa-edit"></i>
+                            编辑
+                        </a>
+                        <a href="/articles/{{article.id}}/delete" class="text-danger">
+                            <i class="fa fa-trash"></i>
+                            删除
+                        </a>
+                    </small>
+                </div>
+                <div>
+                    {{article.content}}
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-4"></div>

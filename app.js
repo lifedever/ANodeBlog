@@ -3,6 +3,7 @@ var session = require('express-session')
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var flash = require('connect-flash');
 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -39,6 +40,7 @@ app.set('view engine', 'hbs');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
+app.use(flash());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -49,6 +51,8 @@ app.use(session({
 }));
 app.use(function (req, res, next) {
     res.locals.appTitle = config.site.title;
+    res.locals.flash_success_message = req.flash('flash_success_message');
+    res.locals.flash_error_message = req.flash('flash_error_message');
     next();
 });
 
@@ -63,8 +67,6 @@ app.use(function (req, res, next) {
     err.status = 404;
     next(err);
 });
-
-// error handlers
 
 // development error handler
 // will print stacktrace

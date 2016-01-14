@@ -10,7 +10,7 @@ router.get('/create', function(req, res){
 });
 
 router.post('/create', function (req, res) {
-    var Article = global.dbHelper.getModel('article');
+    var Article = global.dbHelper.getArticle();
     var title = req.body.title;
     var content = req.body.content;
     Article.create({
@@ -20,13 +20,26 @@ router.post('/create', function (req, res) {
         if(error){
             res.send(error)
         }else{
+            req.flash('flash_success_message', '文章添加成功!');
             res.redirect('/');
         }
     });
 });
+router.get('/:id/delete', function (req, res) {
+    var id = req.params.id;
+    var Article = global.dbHelper.getArticle();
+    Article.findById(id, function (err, doc) {
+        doc.remove(function(err, doc){
+            if(err) {
 
+            }else{
+                res.redirect('/');
+            }
+        });
+    });
+});
 router.get('/:id', function(req, res, next) {
-    var Article = global.dbHelper.getModel('article');
+    var Article = global.dbHelper.getArticle();
     Article.findById(req.params.id, function (err, article) {
         if(err){
             res.send(err);

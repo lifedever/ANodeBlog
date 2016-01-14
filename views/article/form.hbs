@@ -1,19 +1,21 @@
 <div class="row">
-    <div class="col-md-12">
-        <h1>发表文章</h1>
-    </div>
     <div class="col-md-8">
-        <form action="/articles/create" method="post">
-            <div class="form-group">
-                <label for="title">文章标题</label>
-                <input type="text" class="form-control" name="title" id="title">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h1>发表文章</h1>
+                <form action="/articles/create" method="post">
+                    <div class="form-group">
+                        <label for="title">文章标题</label>
+                        <input type="text" class="form-control" name="title" id="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="content">文章内容</label>
+                        <textarea rows="10" class="form-control" name="content" id="content"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">发布</button>
+                </form>
             </div>
-            <div class="form-group">
-                <label for="content">文章内容</label>
-                <textarea rows="10" class="form-control" name="content" id="content"></textarea>
-            </div>
-            <button type="submit"  class="btn btn-primary">发布</button>
-        </form>
+        </div>
     </div>
     <div class="col-md-4"></div>
 </div>
