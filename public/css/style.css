@@ -1,3 +1,27 @@
 .navbar {
-  border-radius: 0px;
+    border-radius: 0px;
+}
+
+.bg-grey {
+    background: #e1e1e1;
+}
+
+.articles {
+    background: #ffffff;
+}
+
+.article {
+
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.article a {
+    color: #6c6c6c;
+    text-decoration: none;
+}
+
+.article a:hover {
+    color: #2c2c2c;
+    text-decoration: none;
 }

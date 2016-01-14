@@ -1,1 +1,4 @@
-<p>{{addOne @index}}. <a href="/articles/{{id}}">{{title}}</a></p>
+<div class="article">
+    {{addOne @index}}. <a href="/articles/{{id}}">{{title}}</a>
+    <small class="pull-right">{{formatDate created_time 'yyyy.MM.dd'}}</small>
+</div>

@@ -1,6 +1,12 @@
-<h1>{{article.title}}
-    <small>{{formatDate article.created_time 'yyyy-MM-dd hh:mm:ss'}}</small>
-</h1>
-<div>
-    {{article.content}}
+<div class="row">
+    <div class="col-md-8">
+        <div class="page-header">
+            <h2>{{article.title}}</h2>
+            <small>发表时间：{{formatDate article.created_time 'yyyy-MM-dd hh:mm:ss'}}</small>
+        </div>
+        <div>
+            {{article.content}}
+        </div>
+    </div>
+    <div class="col-md-4"></div>
 </div>
