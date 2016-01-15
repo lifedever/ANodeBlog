@@ -2,15 +2,16 @@
  * Created by gefan on 2016/1/14.
  */
 var express = require('express');
+var authority = require('../lib/authority');
 var webHelper = require('../lib/webHelper');
 var router = express.Router();
 
 
-router.get('/create', function (req, res) {
+router.get('/create', authority.auth_login, function (req, res) {
     res.render('article/form');
 });
 
-router.post('/create', function (req, res) {
+router.post('/create', authority.auth_login, function (req, res) {
     var Article = global.dbHelper.getArticle();
     var title = req.body.title;
     var content = req.body.content;
@@ -24,7 +25,7 @@ router.post('/create', function (req, res) {
         });
     });
 });
-router.get('/:id/delete', function (req, res, next) {
+router.get('/:id/delete', authority.auth_login, function (req, res, next) {
     var id = req.params.id;
     var Article = global.dbHelper.getArticle();
     Article.findById(id, function (err, doc) {
