@@ -1,17 +1,16 @@
 var express = require('express');
+var webHelper = require('../lib/webHelper');
 var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
     var Article = global.dbHelper.getModel('article');
-    Article.find(function(error, doc){
-        if(error){
-
-        }else{
+    Article.find(function (error, doc) {
+            webHelper.reshook(error, function () {
             res.render('index', {
                 articles: doc
             });
-        }
+        });
     });
 
 });

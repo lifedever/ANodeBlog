@@ -2,6 +2,7 @@
  * Created by gefan on 2016/1/14.
  */
 var express = require('express');
+var webHelper = require('../lib/webHelper');
 var router = express.Router();
 
 
@@ -17,12 +18,12 @@ router.post('/create', function (req, res) {
         title: title,
         content: content
     }, function(error, doc){
-        if(error){
+        webHelper.reshook(error, function () {
             res.send(error)
-        }else{
+        }, function(){
             req.flash('flash_success_message', '文章添加成功!');
             res.redirect('/');
-        }
+        });
     });
 });
 router.get('/:id/delete', function (req, res) {

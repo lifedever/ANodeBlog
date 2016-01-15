@@ -13,7 +13,7 @@ var exphbs = require('express-handlebars');
 
 var config = require('./lib/config');
 var routes = require('./routes/index');
-var dbHelper = require('./lib/dbHelper');
+var dbHelper = require('./db/dbHelper');
 var hbsHelper = require('./lib/hbsHelper');
 var users = require('./routes/users');
 var articles = require('./routes/articles');
