@@ -6,7 +6,7 @@ var router = express.Router();
 router.get('/', function (req, res, next) {
     var Article = global.dbHelper.getModel('article');
     Article.find(function (error, doc) {
-            webHelper.reshook(error, function () {
+        webHelper.reshook(req, res, next, error, function () {
             res.render('index', {
                 articles: doc
             });

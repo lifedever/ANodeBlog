@@ -19,6 +19,9 @@ var users = require('./routes/users');
 var articles = require('./routes/articles');
 
 var app = express();
+app.set('env', 'development');
+
+
 var hbs = exphbs.create({
     partialsDir: 'views/partials',
     layoutsDir: "views/layouts/",

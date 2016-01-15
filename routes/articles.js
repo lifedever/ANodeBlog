@@ -6,7 +6,7 @@ var webHelper = require('../lib/webHelper');
 var router = express.Router();
 
 
-router.get('/create', function(req, res){
+router.get('/create', function (req, res) {
     res.render('article/form');
 });
 
@@ -17,36 +17,37 @@ router.post('/create', function (req, res) {
     Article.create({
         title: title,
         content: content
-    }, function(error, doc){
-        webHelper.reshook(error, function () {
-            res.send(error)
-        }, function(){
+    }, function (error, doc) {
+        webHelper.reshook(req, res, next, error, function () {
             req.flash('flash_success_message', '文章添加成功!');
             res.redirect('/');
         });
     });
 });
-router.get('/:id/delete', function (req, res) {
+router.get('/:id/delete', function (req, res, next) {
     var id = req.params.id;
     var Article = global.dbHelper.getArticle();
     Article.findById(id, function (err, doc) {
-        doc.remove(function(err, doc){
-            if(err) {
-
-            }else{
-                res.redirect('/');
-            }
-        });
+        if (doc) {
+            doc.remove(function (err, doc) {
+                webHelper.reshook(req, res, next, err, function () {
+                    req.flash('flash_success_message', '文章删除成功!');
+                    res.redirect('/');
+                });
+            });
+        } else {
+            var error = new Error('cannot find the article which id is [' + id + ']');
+            error.status = 500;
+            next(error);
+        }
     });
 });
-router.get('/:id', function(req, res, next) {
+router.get('/:id', function (req, res, next) {
     var Article = global.dbHelper.getArticle();
     Article.findById(req.params.id, function (err, article) {
-        if(err){
-            res.send(err);
-        }else{
+        webHelper.reshook(req, res, next, err, function () {
             res.render('article/view', {article: article});
-        }
+        });
     });
 });
 
