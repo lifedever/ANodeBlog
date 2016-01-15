@@ -1,6 +1,16 @@
 a {
     text-decoration: none;
 }
+
+.breadcrumb {
+    padding: 10px 15px;
+}
+
+.panel>.breadcrumb {
+    border-color: #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
 .navbar {
     border-radius: 0px;
 }

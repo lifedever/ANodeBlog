@@ -19,5 +19,8 @@ module.exports = {
     },
     getArticle: function(){
         return _getModel('article');
+    },
+    getUser: function(){
+        return _getModel('user');
     }
 };

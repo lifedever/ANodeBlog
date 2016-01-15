@@ -19,7 +19,7 @@ router.post('/create', authority.auth_login, function (req, res) {
         title: title,
         content: content
     }, function (error, doc) {
-        webHelper.reshook(req, res, next, error, function () {
+        webHelper.reshook(error, next, function () {
             req.flash('flash_success_message', '文章添加成功!');
             res.redirect('/');
         });
@@ -31,7 +31,7 @@ router.get('/:id/delete', authority.auth_login, function (req, res, next) {
     Article.findById(id, function (err, doc) {
         if (doc) {
             doc.remove(function (err, doc) {
-                webHelper.reshook(req, res, next, err, function () {
+                webHelper.reshook(err, next, function () {
                     req.flash('flash_success_message', '文章删除成功!');
                     res.redirect('/');
                 });
@@ -46,7 +46,7 @@ router.get('/:id/delete', authority.auth_login, function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     var Article = global.dbHelper.getArticle();
     Article.findById(req.params.id, function (err, article) {
-        webHelper.reshook(req, res, next, err, function () {
+        webHelper.reshook(err, next, function () {
             res.render('article/view', {article: article});
         });
     });
