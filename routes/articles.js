@@ -4,6 +4,7 @@
 var express = require('express');
 var authority = require('../lib/authority');
 var webHelper = require('../lib/webHelper');
+var config = require('../config');
 var router = express.Router();
 
 
@@ -20,7 +21,7 @@ router.post('/create', authority.auth_login, function (req, res) {
         content: content
     }, function (error, doc) {
         webHelper.reshook(error, next, function () {
-            req.flash('flash_success_message', '文章添加成功!');
+            req.flash(config.constant.flash.success, '文章添加成功!');
             res.redirect('/');
         });
     });
@@ -32,7 +33,7 @@ router.get('/:id/delete', authority.auth_login, function (req, res, next) {
         if (doc) {
             doc.remove(function (err, doc) {
                 webHelper.reshook(err, next, function () {
-                    req.flash('flash_success_message', '文章删除成功!');
+                    req.flash(config.constant.flash.success, '文章删除成功!');
                     res.redirect('/');
                 });
             });

@@ -1,6 +1,7 @@
 var express = require('express');
 var webHelper = require('../lib/webHelper');
 var dbHelper = require('../db/dbHelper');
+var config = require('../config');
 var router = express.Router();
 
 /* GET home page. */
@@ -34,12 +35,12 @@ router.post('/join', function (req, res, next) {
     User.findOne({username: user.username}, function (err, doc) {
         webHelper.reshook(err, next, function () {
             if(doc) {
-                req.flash('flash_error_message', '用户名已被占用!');
+                req.flash(config.constant.flash.error, '用户名已被占用!');
                 res.redirect('/join');
             }else{
                 User.create(user, function (err, doc) {
                     webHelper.reshook(err, next, function () {
-                        req.flash('flash_success_message', '注册成功，请登录!');
+                        req.flash(config.constant.flash.success, '注册成功，请登录!');
                         res.redirect('/login');
                     });
                 });

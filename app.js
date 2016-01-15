@@ -11,7 +11,7 @@ var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
 var exphbs = require('express-handlebars');
 
-var config = require('./lib/config');
+var config = require('./config');
 var routes = require('./routes/index');
 var dbHelper = require('./db/dbHelper');
 var hbsHelper = require('./lib/hbsHelper');
@@ -54,8 +54,8 @@ app.use(session({
 }));
 app.use(function (req, res, next) {
     res.locals.appTitle = config.site.title;
-    res.locals.flash_success_message = req.flash('flash_success_message');
-    res.locals.flash_error_message = req.flash('flash_error_message');
+    res.locals.flash_success_message = req.flash(config.constant.flash.success);
+    res.locals.flash_error_message = req.flash(config.constant.flash.error);
     next();
 });
 
