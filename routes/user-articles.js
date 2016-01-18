@@ -3,10 +3,28 @@
  */
 var express = require('express');
 var passport = require('passport');
+var Remarkable = require('remarkable');
+var hljs       = require('highlight.js');
 var webHelper = require('../lib/webHelper');
 var authority = require('../lib/authority');
 var config = require('../config');
+
 var router = express.Router();
+var md = new Remarkable({
+    highlight: function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            try {
+                return hljs.highlight(lang, str).value;
+            } catch (err) {}
+        }
+
+        try {
+            return hljs.highlightAuto(str).value;
+        } catch (err) {}
+
+        return ''; // use external default escaping
+    }
+});
 
 router.get('/create', authority.isAuthenticated, function (req, res) {
     res.render('article/form');
@@ -19,6 +37,7 @@ router.post('/create',authority.isAuthenticated, function (req, res, next) {
     Article.create({
         title: title,
         content: content,
+        html: md.render(content),
         _user: req.session.passport.user._id
     }, function (error, doc) {
         webHelper.reshook(error, next, function () {
@@ -47,6 +66,5 @@ router.get('/:id/delete',authority.isAuthenticated, function (req, res, next) {
     });
 });
 
-router.get('/')
 
 module.exports = router;

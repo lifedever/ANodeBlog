@@ -1,6 +1,6 @@
 var Config = {
     site: {
-        title: 'A Blog build by NodeJS+Express'
+        title: '一个博客'
     },
     db:{
     	cookieSecret: 'blogbynodesecret',

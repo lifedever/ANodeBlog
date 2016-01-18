@@ -4,6 +4,7 @@ module.exports = {
     article: {
         title: {type: String, required: true},  // 标题
         content: {type: String, required: true},    // 内容
+        html: {type: String},
         created_time: {type: Date, default: Date.now},   // 创建时间
         _user: {
             type: Schema.Types.ObjectId,
