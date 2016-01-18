@@ -1,21 +1,20 @@
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-12">
         <div class="panel panel-default">
+            <div class="panel-heading"><h4>发表文章</h4></div>
             <div class="panel-body">
-                <h1>发表文章</h1>
                 <form action="/user/p/create" method="post">
                     <div class="form-group">
                         <label for="title">文章标题</label>
                         <input type="text" class="form-control" name="title" id="title">
                     </div>
                     <div class="form-group">
-                        <label for="content">文章内容</label>
-                        <textarea rows="10" class="form-control" name="content" id="content"></textarea>
+                        <label for="content">文章内容 <small class="text-primary">使用markdown语法</small></label>
+                        <textarea class="form-control" name="content" id="content" style="height: 49vh"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">发布</button>
                 </form>
             </div>
         </div>
     </div>
-    <div class="col-md-4"></div>
 </div>
