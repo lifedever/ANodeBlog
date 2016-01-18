@@ -18,8 +18,10 @@
                     <li class="active"><a href="#"> 热门 <span class="sr-only">(current)</span></a></li>
                     <li><a href="#">最新发表</a></li>
                     <li><a href="#">最多评论</a></li>
-                    <li><a href="#">我喜欢的</a></li>
-                    <li><a href="#">我发表的</a></li>
+                    {{#if session.passport.user}}
+                        <li><a href="/p/i-favorite">我喜欢的</a></li>
+                        <li><a href="/p/i-post">我发表的</a></li>
+                    {{/if}}
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     {{#if session.passport.user}}

@@ -4,7 +4,9 @@
             <div class="panel-body">
                 <div class="page-header">
                     <h2>{{article.title}}</h2>
-                    <small>发表时间：{{formatDate article.created_time 'yyyy-MM-dd hh:mm:ss'}}</small>
+                    <small class="margin10-r">
+                        <strong>{{article._user.username}}</strong>  发表于 {{timeFromNow article.created_time}}
+                    </small>
                 </div>
                 <div>
                     {{article.content}}

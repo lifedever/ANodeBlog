@@ -47,4 +47,6 @@ router.get('/:id/delete',authority.isAuthenticated, function (req, res, next) {
     });
 });
 
+router.get('/')
+
 module.exports = router;

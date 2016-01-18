@@ -1,4 +1,5 @@
 <div class="article">
     {{addOne @index}}. <a href="/p/{{id}}">{{title}}</a>
-    <small class="pull-right">{{formatDate created_time 'yyyy.MM.dd'}}</small>
+    <small class="pull-right">{{timeFromNow created_time}}</small>
+    <span class="label label-primary pull-right margin10-r">{{_user.username}}</span>
 </div>

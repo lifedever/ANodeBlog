@@ -18,6 +18,7 @@
     "font-awesome": "^4.5.0",
     "handlebars-intl": "^1.1.1",
     "jquery": "^2.2.0",
+    "moment": "^2.11.1",
     "mongoose": "^4.3.5",
     "morgan": "~1.6.1",
     "passport": "^0.3.2",

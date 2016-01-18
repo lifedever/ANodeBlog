@@ -8,7 +8,7 @@ var passport = require('passport');
 /* GET home page. */
 router.get('/', function (req, res, next) {
     var Article = global.dbHelper.Article;
-    Article.find(function (error, doc) {
+    Article.find().populate('_user').sort({'created_time': 'desc'}).exec(function (error, doc) {
         webHelper.reshook(error, next, function () {
             res.render('index', {
                 articles: doc

@@ -13,7 +13,7 @@ module.exports = {
     user: {
         username: {type: String, required: true, unique: true},// 用户名
         password: {type: String, required: true},
-        email: {type: String, unique: true},  // 邮箱
+        email: {type: String},  // 邮箱
         website: {type: String},    // 个人网站
         address: {type: String},    // 所在地点
         github: {type: String}, // github
