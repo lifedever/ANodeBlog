@@ -3,10 +3,11 @@ var webHelper = require('../lib/webHelper');
 var dbHelper = require('../db/dbHelper');
 var config = require('../config');
 var router = express.Router();
+var passport = require('passport');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
-    var Article = global.dbHelper.getModel('article');
+    var Article = global.dbHelper.Article;
     Article.find(function (error, doc) {
         webHelper.reshook(error, next, function () {
             res.render('index', {
@@ -21,9 +22,9 @@ router.get('/login', function (req, res) {
     res.render('login');
 });
 
-router.post('/login', function (req, res, next) {
-
-    next();
+router.post('/login', passport.authenticate('local', {failureRedirect: '/login'}), function (req, res, next) {
+    req.flash(config.constant.flash.success, '欢迎回来，' + req.body.username);
+    res.redirect('/');
 });
 
 router.get('/join', function (req, res) {
@@ -31,13 +32,13 @@ router.get('/join', function (req, res) {
 });
 router.post('/join', function (req, res, next) {
     var user = req.body;
-    var User = dbHelper.getUser();
+    var User = dbHelper.User;
     User.findOne({username: user.username}, function (err, doc) {
         webHelper.reshook(err, next, function () {
-            if(doc) {
+            if (doc) {
                 req.flash(config.constant.flash.error, '用户名已被占用!');
                 res.redirect('/join');
-            }else{
+            } else {
                 User.create(user, function (err, doc) {
                     webHelper.reshook(err, next, function () {
                         req.flash(config.constant.flash.success, '注册成功，请登录!');

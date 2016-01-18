@@ -5,22 +5,22 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var models = require('./models');
 
-for(var m in models){
-    mongoose.model(m, new Schema(models[m]));
-}
+var _getUser = function () {
+    var userSchema = new Schema(models.user);
+    userSchema.methods.validPassword = function (password) {
+        return this.password == password;
+    };
+    var User = mongoose.model('User', userSchema);
+    return User;
+};
 
-var _getModel = function (type) {
-    return mongoose.model(type);
+var _getArticle = function () {
+    var articleSchema = new Schema(models.article);
+    var Article = mongoose.model('Article', articleSchema);
+    return Article;
 };
 
 module.exports = {
-    getModel: function (type) {
-        return _getModel(type);
-    },
-    getArticle: function(){
-        return _getModel('article');
-    },
-    getUser: function(){
-        return _getModel('user');
-    }
+    User: _getUser(),
+    Article: _getArticle()
 };

@@ -4,6 +4,8 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var flash = require('connect-flash');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
 
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -17,6 +19,37 @@ var dbHelper = require('./db/dbHelper');
 var hbsHelper = require('./lib/hbsHelper');
 var users = require('./routes/users');
 var articles = require('./routes/articles');
+
+passport.use(new LocalStrategy(
+    function (username, password, cb) {
+        dbHelper.User.findOne({username: username}, function (err, user) {
+            if (err) {
+                return cb(err);
+            }
+            if (!user) {
+                return cb(null, false);
+            }
+            if (!user.validPassword(password)) {
+                return cb(null, false);
+            }
+            return cb(null, user);
+        });
+    }
+));
+
+
+passport.serializeUser(function(user, cb) {
+    cb(null, user.id);
+});
+
+passport.deserializeUser(function (id, cb) {
+    dbHelper.User.findById(id, function (err, user) {
+        if (err) {
+            return cb(err);
+        }
+        cb(null, user);
+    });
+});
 
 var app = express();
 app.set('env', 'development');
@@ -49,9 +82,15 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use(session({
     secret: config.db.cookieSecret
 }));
+// config passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.use(function (req, res, next) {
     res.locals.appTitle = config.site.title;
     res.locals.flash_success_message = req.flash(config.constant.flash.success);
