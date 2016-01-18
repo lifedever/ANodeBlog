@@ -4,11 +4,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var models = require('./models');
+var utils = require('utility');
 
 var _getUser = function () {
     var userSchema = new Schema(models.user);
     userSchema.methods.validPassword = function (password) {
-        return this.password == password;
+        return utils.md5(password, 'base64') == this.password;
     };
     var User = mongoose.model('User', userSchema);
     return User;

@@ -1,5 +1,17 @@
 <div class="article">
-    {{addOne @index}}. <a href="/p/{{id}}">{{title}}</a>
-    <small class="pull-right">{{timeFromNow created_time}}</small>
-    <span class="label label-primary pull-right margin10-r">{{_user.username}}</span>
+    <div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object touxiang" src="/imgs/touxiang.jpg">
+            </a>
+        </div>
+        <div class="media-body">
+            <span class="media-heading article-title"><a href="/p/{{id}}">{{title}}</a></span>
+            <small class="pull-right">{{timeFromNow created_time}}</small>
+            <span class="label label-primary pull-right margin10-r">{{_user.username}}</span>
+        </div>
+    </div>
+
+
+
 </div>

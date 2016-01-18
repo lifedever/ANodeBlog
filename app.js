@@ -85,7 +85,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
     secret: config.db.cookieSecret,
-    cookie: {maxAge: 30 * 60 * 60}
+    cookie: {maxAge: 30 * 60 * 1000}
 }));
 // config passport
 app.use(passport.initialize());

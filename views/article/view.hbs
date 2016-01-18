@@ -3,13 +3,13 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="page-header">
-                    <h2>{{article.title}}</h2>
+                    <h3>{{article.title}}</h3>
                     <small class="margin10-r">
                         <strong>{{article._user.username}}</strong>  发表于 {{timeFromNow article.created_time}}
                     </small>
                 </div>
                 <div>
-                    {{article.content}}
+                    {{{article.html}}}
                 </div>
             </div>
         </div>

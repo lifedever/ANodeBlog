@@ -4,6 +4,7 @@ var dbHelper = require('../db/dbHelper');
 var config = require('../config');
 var router = express.Router();
 var passport = require('passport');
+var utils = require('utility');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -42,6 +43,7 @@ router.post('/join', function (req, res, next) {
                 req.flash(config.constant.flash.error, '用户名已被占用!');
                 res.redirect('/join');
             } else {
+                user.password = utils.md5(user.password, 'base64');
                 User.create(user, function (err, doc) {
                     webHelper.reshook(err, next, function () {
                         req.flash(config.constant.flash.success, '注册成功，请登录!');

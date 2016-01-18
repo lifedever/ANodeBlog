@@ -15,13 +15,18 @@
     "express-handlebars": "^2.0.1",
     "express-session": "^1.13.0",
     "font-awesome": "^4.5.0",
+    "gravatar": "^1.4.0",
     "handlebars-intl": "^1.1.1",
+    "highlight.js": "^9.1.0",
     "jquery": "^2.2.0",
+    "markdown": "^0.5.0",
     "moment": "^2.11.1",
     "mongoose": "^4.3.5",
     "morgan": "~1.6.1",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    "serve-favicon": "~2.3.0"
+    "remarkable": "^1.6.1",
+    "serve-favicon": "~2.3.0",
+    "utility": "^1.6.0"
   }
 }
