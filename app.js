@@ -15,39 +15,40 @@ var exphbs = require('express-handlebars');
 
 var config = require('./config');
 var routes = require('./routes/index');
+var authority = require('./lib/authority');
 var dbHelper = require('./db/dbHelper');
 var hbsHelper = require('./lib/hbsHelper');
-var users = require('./routes/users');
-var articles = require('./routes/articles');
+
+// routers
 
 passport.use(new LocalStrategy(
-    function (username, password, cb) {
+    function (username, password, done) {
         dbHelper.User.findOne({username: username}, function (err, user) {
             if (err) {
-                return cb(err);
+                return done(err);
             }
             if (!user) {
-                return cb(null, false);
+                return done(null, false);
             }
             if (!user.validPassword(password)) {
-                return cb(null, false);
+                return done(null, false);
             }
-            return cb(null, user);
+            return done(null, user);
         });
     }
 ));
 
 
-passport.serializeUser(function(user, cb) {
-    cb(null, user.id);
+passport.serializeUser(function(user, done) {
+    done(null, user);
 });
 
-passport.deserializeUser(function (id, cb) {
+passport.deserializeUser(function (id, done) {
     dbHelper.User.findById(id, function (err, user) {
         if (err) {
-            return cb(err);
+            return done(err);
         }
-        cb(null, user);
+        done(null, user);
     });
 });
 
@@ -90,19 +91,22 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-
+/**
+ * 全局参数传递
+ */
 app.use(function (req, res, next) {
     res.locals.appTitle = config.site.title;
-    res.locals.flash_success_message = req.flash(config.constant.flash.success);
-    res.locals.flash_error_message = req.flash(config.constant.flash.error);
+    res.locals.success = req.flash(config.constant.flash.success);
+    res.locals.error = req.flash(config.constant.flash.error);
+    res.locals.session = req.session;
     next();
 });
 
-
 app.use('/', routes);
 
-app.use('/users', users);
-app.use('/p', articles);
+app.use('/users', require('./routes/users'));
+app.use('/p', require('./routes/articles'));
+app.use('/user/p',authority.isAuthenticated, require('./routes/user-articles'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

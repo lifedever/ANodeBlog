@@ -18,16 +18,18 @@
                     <li class="active"><a href="#"> 热门 <span class="sr-only">(current)</span></a></li>
                     <li><a href="#">最新发表</a></li>
                     <li><a href="#">最多评论</a></li>
+                    <li><a href="#">我喜欢的</a></li>
+                    <li><a href="#">我发表的</a></li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    {{#if session.id}}
-                        <li><a href="/p/create"> <i class="fa fa-edit"></i> 发表文章</a></li>
+                    {{#if session.passport.user}}
+                        <li><a href="/user/p/create"> <i class="fa fa-edit"></i> 发表文章</a></li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user"></i> {{session.user.username}} <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="fa fa-user"></i> {{session.passport.user.username}} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="#">个人信息</a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a href="#"> 退出</a></li>
+                                <li><a href="/logout"> 退出</a></li>
                             </ul>
                         </li>
                     {{else}}

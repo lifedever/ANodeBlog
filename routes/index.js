@@ -22,7 +22,10 @@ router.get('/login', function (req, res) {
     res.render('login');
 });
 
-router.post('/login', passport.authenticate('local', {failureRedirect: '/login'}), function (req, res, next) {
+router.post('/login', passport.authenticate('local', {
+    failureRedirect: '/login',
+    failureFlash: '用户名或密码错误!'
+}), function (req, res, next) {
     req.flash(config.constant.flash.success, '欢迎回来，' + req.body.username);
     res.redirect('/');
 });
@@ -48,6 +51,11 @@ router.post('/join', function (req, res, next) {
             }
         });
     });
+});
+
+router.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
 });
 
 module.exports = router;

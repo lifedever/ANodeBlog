@@ -10,8 +10,8 @@ var Config = {
     },
     constant: {
         flash:{
-            success: 'flash_success_message',
-            error: 'flash_error_message'
+            success: 'success',
+            error: 'error'
         }
     }
 };
