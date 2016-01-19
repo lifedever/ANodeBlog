@@ -24,6 +24,9 @@ var md = new Remarkable({
     }
 });
 
+router.get('/', function (req, res, next) {
+    res.render('dashboard/p/list', {layout: 'dashboard'});
+});
 
 router.get('/create', function (req, res, next) {
     res.render('dashboard/p/create', {layout: 'dashboard'});
