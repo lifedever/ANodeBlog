@@ -77,7 +77,7 @@ img {
     margin: 0 0 0 -180px;
     width: 360px;
     position: fixed;
-    bottom: 60px;
+    top: 20px;
     z-index: 999999;
     opacity: 0.8;
 }

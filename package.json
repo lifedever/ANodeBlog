@@ -6,6 +6,8 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "async": "^1.5.2",
+    "bluebird": "^3.1.1",
     "body-parser": "~1.13.2",
     "bootstrap": "^3.3.6",
     "connect-flash": "^0.1.1",
