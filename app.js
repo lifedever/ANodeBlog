@@ -63,7 +63,11 @@ var hbs = exphbs.create({
     helpers: hbsHelper
 });
 
-mongoose.connect(config.db.url);
+try {
+    mongoose.connect(config.db.url);
+} catch (error) {
+    console.log(error);
+}
 global.dbHelper = dbHelper;
 
 
@@ -95,7 +99,7 @@ app.use(passport.session());
  * 全局参数传递
  */
 app.use(function (req, res, next) {
-    res.locals.appTitle = config.site.title;
+    res.locals.site = config.site;
     res.locals.success = req.flash(config.constant.flash.success);
     res.locals.error = req.flash(config.constant.flash.error);
     res.locals.session = req.session;

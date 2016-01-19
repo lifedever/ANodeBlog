@@ -1,6 +1,7 @@
 var Config = {
     site: {
-        title: '一个博客'
+        title: 'Wincn.net',
+        version: '1.0.0'
     },
     db:{
     	cookieSecret: 'blogbynodesecret',

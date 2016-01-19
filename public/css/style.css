@@ -1,14 +1,12 @@
 a {
     text-decoration: none;
 }
-img {
-    max-width: 100%;
-}
-.breadcrumb {
-    padding: 10px 15px;
+
+.content-header {
+    padding: 20px 15px;
 }
 
-.panel>.breadcrumb {
+.panel > .breadcrumb {
     border-color: #ddd;
     border-bottom: 1px solid #ddd;
 }
@@ -17,36 +15,77 @@ img {
     border-radius: 0px;
 }
 
+.bg-white {
+    background: #fff;
+}
+
 .bg-grey {
     background: #e1e1e1;
 }
 
-.articles {
-    background: #ffffff;
+.article {
+    padding: 5px 10px;
 }
 
-.article {
-
-    padding: 10px 0;
-    border-bottom: 1px solid #f0f0f0;
+.article-cell {
+    vertical-align: middle;
 }
 
 .article a {
     color: #6c6c6c;
     text-decoration: none;
+    font-size: 16px;
 }
 
 .article a:hover {
     color: #2c2c2c;
     text-decoration: none;
 }
-.margin10-r {
-    margin-right: 10px;
-}
+
 .touxiang {
-    width:32px;
-    height:32px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
 }
-.article-title {
-    font-size: 16px;
+
+.time-from-now {
+    font-size: 11px;
+    color: #6c6c6c;
+}
+
+.user-block {
+    border-bottom: 1px solid #F0F0F0;
+    padding: 12px 0;
+}
+
+.user-block .username {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+img {
+    max-width: 100%;
+}
+
+.flash-message {
+    left: 50%;
+    margin: 0 0 0 -180px;
+    width: 360px;
+    position: fixed;
+    top: 60px;
+}
+
+.box-body {
+    padding: 10px 15px;
+}
+
+.content-wrapper, .right-side {
+    background-color: #E0E3E7;
+}
+code {
+    padding: 2px 4px;
+    font-size: 95%;
+    color: #C7254E;
+    background-color: #F2F2F2;
+    border-radius: 4px;
 }

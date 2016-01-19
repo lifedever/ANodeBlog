@@ -1,13 +1,18 @@
 <!doctype html>
 <html>
 <head>
-{{> head}}
+    {{> head}}
 </head>
-<body class="bg-grey">
-{{> header}}
-<div class="container">
-    {{{body}}}
+<body class="hold-transition skin-blue layout-top-nav">
+<div class="wrapper">
+    {{>header}}
+    <!-- Full Width Column -->
+    <div class="content-wrapper">
+        <div class="container">
+            {{{body}}}
+        </div>
+    </div>
 </div>
-{{> footer}}
+{{>footer}}
 </body>
 </html>

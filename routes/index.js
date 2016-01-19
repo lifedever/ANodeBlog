@@ -20,7 +20,9 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/login', function (req, res) {
-    res.render('login');
+    res.render('login', {
+        layout: 'lg'
+    });
 });
 
 router.post('/login', passport.authenticate('local', {
@@ -32,11 +34,34 @@ router.post('/login', passport.authenticate('local', {
 });
 
 router.get('/join', function (req, res) {
-    res.render('register')
+    res.render('register', {
+        layout: 'lg'
+    })
 });
-router.post('/join', function (req, res, next) {
+router.post('/join', function(req, res, next){
+    var user = req.body;
+    if(!user.username || !user.password){
+        req.flash(config.constant.flash.error, '用户名或密码不能为空!');
+        res.redirect('/join');
+        return;
+    }
+    if(!user.email) {
+        req.flash(config.constant.flash.error, '又想不能为空!');
+        res.redirect('/join');
+        return;
+    }
+    if(user.password != user.confirm_password){
+        req.flash(config.constant.flash.error, '两次密码输入不一致!');
+        res.redirect('/join');
+        return;
+    }
+    next();
+
+}, function (req, res, next) {
     var user = req.body;
     var User = dbHelper.User;
+
+
     User.findOne({username: user.username}, function (err, doc) {
         webHelper.reshook(err, next, function () {
             if (doc) {
@@ -55,7 +80,7 @@ router.post('/join', function (req, res, next) {
     });
 });
 
-router.get('/logout', function(req, res){
+router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
 });
