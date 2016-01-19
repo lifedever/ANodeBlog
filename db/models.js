@@ -2,10 +2,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 module.exports = {
     article: {
-        title: {type: String, required: true},  // 标题
-        content: {type: String, required: true},    // 内容
-        html: {type: String},
-        created_time: {type: Date, default: Date.now},   // 创建时间
+        title: {type: String, required: true},              // 标题
+        content: {type: String, required: true},            // 内容
+        html: {type: String},                               // 转化后的内容
+        index: {type: String},                              // 目录索引
+        views: {type: Number, default: 0},                  // 阅读数
+        favorite: {type: Number, default: 0},               // 喜欢数
+        created_time: {type: Date, default: Date.now},      // 创建时间
         _user: {
             type: Schema.Types.ObjectId,
             ref: 'User'

@@ -108,9 +108,11 @@ app.use(function (req, res, next) {
 
 app.use('/', routes);
 
-app.use('/users', require('./routes/users'));
+app.use('/u', require('./routes/users'));
 app.use('/p', require('./routes/articles'));
 app.use('/user/p', authority.isAuthenticated, require('./routes/user-articles'));
+app.use('/dashboard', authority.isAuthenticated, require('./routes/dashboard'));
+app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard-p'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

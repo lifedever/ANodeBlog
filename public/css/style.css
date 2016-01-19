@@ -1,3 +1,8 @@
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: Consolas, "Source Sans Pro",sans-serif;
+    font-weight: 400;
+}
+
 a {
     text-decoration: none;
 }
@@ -72,9 +77,13 @@ img {
     margin: 0 0 0 -180px;
     width: 360px;
     position: fixed;
-    top: 60px;
+    bottom: 60px;
+    z-index: 999999;
+    opacity: 0.8;
 }
-
+.flash-message:hover {
+    opacity: 1;
+}
 .box-body {
     padding: 10px 15px;
 }
@@ -88,4 +97,11 @@ code {
     color: #C7254E;
     background-color: #F2F2F2;
     border-radius: 4px;
+}
+blockquote {
+    padding: 10px 10px;
+    margin: 0px 0px 20px;
+    font-size: 13px;
+    border-left: 5px solid #EEE;
+    background: #f6f6f6;
 }

@@ -60,8 +60,6 @@ router.post('/join', function(req, res, next){
 }, function (req, res, next) {
     var user = req.body;
     var User = dbHelper.User;
-
-
     User.findOne({username: user.username}, function (err, doc) {
         webHelper.reshook(err, next, function () {
             if (doc) {
