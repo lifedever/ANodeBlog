@@ -11,10 +11,18 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">文章列表</h3>
                 </div>
-                <table class="table table-striped">
+                <table class="table table-striped table-hover">
                     {{#each articles}}
                         <tr>
-                            <td>{{title}}</td>
+                            <td data-toggle="hover" data-target="hover{{_id}}">
+                                <a href="/p/{{_id}}" target="_blank" class="font16">{{title}}</a>
+                                <div class="hide" id="hover{{_id}}">
+                                    <a href="#" class="text-danger">删除</a>
+                                    |
+                                    <a href="#">编辑</a>
+                                </div>
+                            </td>
+                            <td width="160">{{formatDate created_time 'yy.MM.dd hh:mm:ss'}}</td>
                         </tr>
                     {{/each}}
                 </table>
