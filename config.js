@@ -7,7 +7,8 @@ var Config = {
     	cookieSecret: 'blogbynodesecret',
     	name: 'blog',
     	host: 'localhost',
-        url: 'mongodb://127.0.0.1:27017/blog'
+        //url: 'mongodb://127.0.0.1:27017/blog'
+        url: 'mongodb://192.241.226.198:27017/blog'
     },
     constant: {
         flash:{

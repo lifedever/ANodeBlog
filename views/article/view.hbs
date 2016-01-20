@@ -31,8 +31,11 @@
                                     |
                                     0 次评论
                                 </small>
-
-
+                                {{#equals article._user.username session.passport.user.username}}
+                                    <small class="pull-right">
+                                        <a href="/dashboard/p/edit/{{article._id}}">编辑</a>
+                                    </small>
+                                {{/equals}}
 
                             </span>
                         </div>
@@ -60,13 +63,14 @@
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-aqua-active">
-                    <h2 class="widget-user-username">{{article._user.username}}</h2>
+                    <h2 class="widget-user-username">{{article._user.username}} <small style="color: #ffffff; font-size: 10px;"><b>{{timeFromNow article._user.created_time}}</b> 加入本站</small></h2>
                     <h5 class="widget-user-desc">{{article._user.job}}</h5>
                 </div>
                 <div class="widget-user-image">
                     <img class="img-circle" src="{{gravatar article._user.email}}" alt="User Avatar">
                 </div>
                 <div class="box-footer">
+
                     <div class="text-center margin small">{{article._user.signature}}</div>
                     <hr>
                     <dl>

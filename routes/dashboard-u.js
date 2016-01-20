@@ -15,7 +15,6 @@ router.get('/', function (req, res, next) {
 router.post('/', function (req, res, next) {
 
     dbHelper.User.findOneAndUpdate({_id: req.session.passport.user._id}, {
-        email: req.body.email,  // 邮箱
         website: req.body.website,    // 个人网站
         address: req.body.address,    // 所在地点
         github: req.body.github, // github
