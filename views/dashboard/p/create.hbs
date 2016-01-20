@@ -7,6 +7,7 @@
 </section>
 <section class="content">
     <form role="form" action="/dashboard/p/create" method="post">
+        <input type="hidden" name="id" value="{{article._id}}">
         <div class="box box-primary " id="createP">
             <div class="box-header with-border">
                 <h3 class="box-title">发表新文章</h3>
@@ -17,11 +18,11 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <input class="form-control" id="title" name="title" placeholder="输入标题" type="text">
+                            <input class="form-control" id="title" name="title" placeholder="输入标题" type="text" value="{{article.title}}">
                         </div>
                         <div class="form-group">
                             <label for="content">文章内容</label>
-                            <textarea class="form-control " id="content" name="content"></textarea>
+                            <textarea class="form-control " id="content" name="content">{{article.content}}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="fa fa-location-arrow"></i> 发布</button>
                     </div>

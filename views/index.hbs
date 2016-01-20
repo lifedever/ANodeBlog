@@ -10,11 +10,22 @@
 
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-hover bg-white">
-                {{#each articles}}
-                    {{> index-article}}
-                {{/each}}
-            </table>
+            {{#if articles}}
+                <table class="table table-hover bg-white">
+                    {{#each articles}}
+                        {{> index-article}}
+                    {{/each}}
+                </table>
+            {{else}}
+                <div class="box box-solid">
+                    <div class="box-body">
+                        <div class="help-block">
+                            此作者比较懒，没有发表任何文章!
+                            去 <a href="/">首页</a> 浏览更多文章
+                        </div>
+                    </div>
+                </div>
+            {{/if}}
         </div>
     </div>
 </section>

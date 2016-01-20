@@ -15,9 +15,13 @@ router.get('/:username', function(req, res, next) {
             });
         },
         function(user, callback) {
-            Article.find({_user: user.id}).populate('_user').exec(function(err, articles) {
-                callback(null, articles);
-            });
+            if(user) {
+                Article.find({_user: user.id}).populate('_user').exec(function(err, articles) {
+                    callback(null, articles);
+                });
+            }else{
+                callback(null, null);
+            }
         }
     ], function (err, articles) {
         res.render('index', {
