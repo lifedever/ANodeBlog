@@ -1,0 +1,56 @@
+<!-- Main content -->
+<section class="content">
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="box box-widget widget-user">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-aqua-active">
+                    <h2 class="widget-user-username">{{user.username}}
+                        <small style="color: #ffffff; font-size: 10px;"><b>{{timeFromNow user.created_time}}</b> 加入本站
+                        </small>
+                    </h2>
+                    <h5 class="widget-user-desc">{{article._user.job}}</h5>
+                </div>
+                <div class="widget-user-image">
+                    <img class="img-circle" src="{{gravatar user.email}}" alt="User Avatar">
+                </div>
+                <div class="box-footer">
+
+                    <div class="text-center margin small">{{user.signature}}</div>
+                    <hr>
+                    <dl>
+                        <dt>他的主页</dt>
+                        <dd><a href="{{user.website}}" target="_blank">{{user.website}}</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>他的Github</dt>
+                        <dd><a href="{{user.github}}" target="_blank">{{user.github}}</a></dd>
+                    </dl>
+
+
+                    {{#if articles}}
+                        <table class="table table-hover bg-white">
+                            <dl>
+                                <dt>他的所有文章：</dt>
+                            </dl>
+                            {{#each articles}}
+                                {{> index-article}}
+                            {{/each}}
+                        </table>
+                    {{else}}
+                        <div class="box box-solid">
+                            <div class="box-body">
+                                <div class="help-block">
+                                    此作者比较懒，没有发表任何文章!
+                                    去 <a href="/">首页</a> 浏览更多文章
+                                </div>
+                            </div>
+                        </div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
