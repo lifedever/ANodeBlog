@@ -18,9 +18,8 @@
         <ul class="sidebar-menu">
             <li class="header">管理中心</li>
             <!-- Optionally, you can add icons to the links -->
-            <li class="active"><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>概览</span></a></li>
-            <li><a href="/dashboard/p/create"><i class="fa fa-edit"></i> <span>写文章</span></a></li>
-            <li><a href="/dashboard/p"><i class="fa fa-file-text"></i> <span>文章管理</span></a></li>
+            <li {{#if menu}}{{#equals menu 'index'}}class="active"{{/equals}}{{/if}}><a href="/dashboard"><i class="fa fa-dashboard"></i> <span>概览</span></a></li>
+            <li {{#if menu}}{{#equals menu 'p-list'}}class="active"{{/equals}}{{/if}}><a href="/dashboard/p"><i class="fa fa-file-text"></i> <span>文章管理</span></a></li>
             <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
             <li class="treeview">
                 <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>

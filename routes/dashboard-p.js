@@ -9,7 +9,8 @@ var config = require('../config');
 
 var router = express.Router();
 
-var md = new Remarkable({
+var md = new Remarkable('full',{
+    linkify:      true,         // autoconvert URL-like texts to links
     highlight: function (str, lang) {
         if (lang && hljs.getLanguage(lang)) {
             try {
@@ -29,15 +30,15 @@ var md = new Remarkable({
 
 router.get('/', function (req, res, next) {
     articleDao.findArticlesByUser(req.session.passport.user._id, function(articles){
-        res.render('dashboard/p/list', {articles: articles, layout: 'dashboard'});
+        res.render('dashboard/p/list', {articles: articles, menu:'p-list', layout: 'dashboard'});
     });
 });
 
 router.get('/create', function (req, res, next) {
-    res.render('dashboard/p/create', {layout: 'dashboard'});
+    res.render('dashboard/p/create', {menu:'p-list', layout: 'dashboard'});
 });
 
-router.post('/create', authority.isAuthenticated, function (req, res, next) {
+router.post('/create', function (req, res, next) {
     var Article = global.dbHelper.Article;
     var title = req.body.title;
     var content = req.body.content;
@@ -49,12 +50,17 @@ router.post('/create', authority.isAuthenticated, function (req, res, next) {
     }, function (error, doc) {
         webHelper.reshook(error, next, function () {
             req.flash(config.constant.flash.success, '文章添加成功!');
-            res.redirect('/dashboard/p/create');
+            res.redirect('/dashboard/p');
         });
     });
 });
 
-router.get('/:id/delete', authority.isAuthenticated, function (req, res, next) {
+router.post('/create/preview', function (req, res) {
+    var content = req.body.content;
+    res.send(md.render(content));
+});
+
+router.get('/delete/:id', function (req, res, next) {
     var id = req.params.id;
     var Article = global.dbHelper.Article;
     Article.findById(id, function (err, doc) {
@@ -62,7 +68,7 @@ router.get('/:id/delete', authority.isAuthenticated, function (req, res, next) {
             doc.remove(function (err, doc) {
                 webHelper.reshook(err, next, function () {
                     req.flash(config.constant.flash.success, '文章删除成功!');
-                    res.redirect('/');
+                    res.redirect('/dashboard/p');
                 });
             });
         } else {

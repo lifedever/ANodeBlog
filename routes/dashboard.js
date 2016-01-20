@@ -9,7 +9,7 @@ var config = require('../config');
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
-    res.render('dashboard/index', {layout: 'dashboard'});
+    res.render('dashboard/index', {menu: 'index',layout: 'dashboard'});
 });
 
 
