@@ -6,6 +6,8 @@ A Blog build by NodeJS+Express
 - NodeJs
 - Express
  - authenticate by `passportjs` 
+ - `async`
+ - `lodash`
 - Handlebars
 - MongoDB
 - Bootstrap
