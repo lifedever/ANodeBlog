@@ -1,15 +1,18 @@
 var express = require('express');
 var webHelper = require('../lib/webHelper');
 var dbHelper = require('../db/dbHelper');
+
 var config = require('../config');
 var router = express.Router();
 var passport = require('passport');
 var utils = require('utility');
 var async = require('async');
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
     var Article = global.dbHelper.Article;
+
+    
+
     Article.find().populate('_user').sort({'views': 'desc'}).exec(function (error, doc) {
         webHelper.reshook(error, next, function () {
             res.render('index', {

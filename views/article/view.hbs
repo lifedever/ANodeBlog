@@ -21,13 +21,15 @@
                             <span class="description">
                                 <strong>
                                     <span class="">
-                                        <a href="/u/{{article._user.username}}" >{{article._user.username}}</a>
+                                        <a href="/u/{{article._user.username}}">{{article._user.username}}</a>
                                     </span>
                                 </strong>
                                 <small>
                                     发表于 {{timeFromNow article.created_time}}
                                     |
                                     {{article.views}} 次浏览
+                                    |
+                                    0 次评论
                                 </small>
 
 
@@ -58,46 +60,33 @@
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-aqua-active">
-                    <h3 class="widget-user-username">{{article._user.username}}</h3>
+                    <h2 class="widget-user-username">{{article._user.username}}</h2>
                     <h5 class="widget-user-desc">{{article._user.job}}</h5>
                 </div>
                 <div class="widget-user-image">
                     <img class="img-circle" src="{{gravatar article._user.email}}" alt="User Avatar">
                 </div>
                 <div class="box-footer">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div>
-                                <table class="table table-condensed">
-                                    <tr>
-                                        <th>
-                                            他的热门文章
-                                        </th>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#">文章一</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#">文章一</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#">文章一</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <a href="#">文章一</a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="text-center margin small">{{article._user.signature}}</div>
+                    <hr>
+                    <dl>
+                        <dt>他的主页</dt>
+                        <dd><a href="{{article._user.website}}" target="_blank">{{article._user.website}}</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>他的Github</dt>
+                        <dd><a href="{{article._user.github}}" target="_blank">{{article._user.github}}</a></dd>
+                    </dl>
+                    <dl>
+                        <dt>他的热门文章</dt>
+                        <ol style="margin-left: -15px;">
+                            {{#each userHotArticles}}
+                                <li>
+                                   <a href="/p/{{_id}}" class="text-over">{{title}}</a>
+                                </li>
+                            {{/each}}
+                        </ol>
+                    </dl>
                 </div>
             </div>
         </div>

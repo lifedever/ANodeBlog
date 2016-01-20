@@ -16,6 +16,7 @@
                     <table class="table table-striped table-hover">
                         {{#each articles}}
                             <tr>
+                                <td width="50"><span class="label label-default">0/{{views}}</span> </td>
                                 <td data-toggle="hover" data-target="hover{{_id}}" style="height: 60px;">
                                     <a href="/p/{{_id}}" target="_blank" class="font16">{{title}}</a>
                                     <div class="hide" id="hover{{_id}}">
