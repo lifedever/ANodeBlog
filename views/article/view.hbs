@@ -26,7 +26,12 @@
                                 </strong>
                                 <small>
                                     发表于 {{timeFromNow article.created_time}}
+                                    |
+                                    {{article.views}} 次浏览
                                 </small>
+
+
+
                             </span>
                         </div>
                         <div>
@@ -50,17 +55,49 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="box box-primary">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><i class="fa fa-book margin-r-5"></i>索引</h3>
+            <div class="box box-widget widget-user">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-aqua-active">
+                    <h3 class="widget-user-username">{{article._user.username}}</h3>
+                    <h5 class="widget-user-desc">{{article._user.job}}</h5>
                 </div>
-                <div class="box-body">
-                    <ul>
-                        <li>标题一</li>
-                        <li>标题二</li>
-                        <li>标题三</li>
-                        <li>标题四</li>
-                    </ul>
+                <div class="widget-user-image">
+                    <img class="img-circle" src="{{gravatar article._user.email}}" alt="User Avatar">
+                </div>
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <th>
+                                            他的热门文章
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">文章一</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">文章一</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">文章一</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <a href="#">文章一</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
