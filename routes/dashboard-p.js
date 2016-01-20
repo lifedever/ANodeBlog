@@ -7,6 +7,8 @@ var webHelper = require('../lib/webHelper');
 var articleDao = require('../db/articleDao');
 var authority = require('../lib/authority');
 var config = require('../config');
+var lodash = require('lodash');
+
 
 var router = express.Router();
 
@@ -40,7 +42,6 @@ router.get('/create', function (req, res, next) {
 });
 
 router.post('/create', function (req, res, next) {
-    var Article = global.dbHelper.Article;
     var title = req.body.title;
     var content = req.body.content;
     var id = req.body.id;

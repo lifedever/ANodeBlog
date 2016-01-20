@@ -29,21 +29,3 @@ $('[data-toggle="confirm"]').on('click', function (e) {
         location.href = $this.attr('href');
     }
 });
-
-$('#title,#content').on('keyup', function () {
-    var title = $('#title').val();
-    var content = $('#content').val();
-
-    $.ajax({
-        type: 'post',
-        url: "/dashboard/p/create/preview",
-        data: {
-            content: content
-        },
-        dataType: 'html',
-        success: function(data) {
-            console.log(data);
-            $('#content-preview').html(data);
-        }
-    });
-});
