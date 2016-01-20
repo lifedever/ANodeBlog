@@ -12,21 +12,23 @@
                     <h3 class="box-title">文章列表</h3>
                     <a href="/dashboard/p/create" class="btn btn-primary pull-right"><i class="fa fa-edit"></i> <span>写文章</span></a>
                 </div>
-                <table class="table table-striped table-hover">
-                    {{#each articles}}
-                        <tr>
-                            <td data-toggle="hover" data-target="hover{{_id}}" style="height: 60px;">
-                                <a href="/p/{{_id}}" target="_blank" class="font16">{{title}}</a>
-                                <div class="hide" id="hover{{_id}}">
-                                    <a href="/dashboard/p/delete/{{_id}}" data-toggle="confirm" data-message="确认要删除此文章吗" class="text-danger">删除</a>
-                                    |
-                                    <a href="#">编辑</a>
-                                </div>
-                            </td>
-                            <td width="160">{{formatDate created_time 'yy.MM.dd hh:mm:ss'}}</td>
-                        </tr>
-                    {{/each}}
-                </table>
+                <div class="box-body">
+                    <table class="table table-striped table-hover">
+                        {{#each articles}}
+                            <tr>
+                                <td data-toggle="hover" data-target="hover{{_id}}" style="height: 60px;">
+                                    <a href="/p/{{_id}}" target="_blank" class="font16">{{title}}</a>
+                                    <div class="hide" id="hover{{_id}}">
+                                        <a href="/dashboard/p/delete/{{_id}}" data-toggle="confirm" data-message="确认要删除此文章吗" class="text-danger">删除</a>
+                                        |
+                                        <a href="#">编辑</a>
+                                    </div>
+                                </td>
+                                <td width="160">{{formatDate created_time 'yy.MM.dd hh:mm:ss'}}</td>
+                            </tr>
+                        {{/each}}
+                    </table>
+                </div>
             </div>
         </div>
     </div>

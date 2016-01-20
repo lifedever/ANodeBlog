@@ -113,6 +113,7 @@ app.use('/p', require('./routes/articles'));
 app.use('/user/p', authority.isAuthenticated, require('./routes/user-articles'));
 app.use('/dashboard', authority.isAuthenticated, require('./routes/dashboard'));
 app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard-p'));
+app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard-u'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

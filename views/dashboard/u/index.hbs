@@ -1,0 +1,78 @@
+<section class="content-header">
+    <ol class="breadcrumb">
+        <li><a href="/dashboard"><i class="fa fa-dashboard"></i> 管理中心</a></li>
+        <li class="active">修改信息</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/dashboard/u" class="form-horizontal" method="post">
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">修改个人信息</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label">用户名</label>
+
+                            <div class="col-sm-7">
+                                <input class="form-control" id="username" value="{{user.username}}" placeholder="用户名" type="text" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label">邮箱</label>
+                            <div class="col-sm-7">
+                                <input class="form-control" id="email" name="email" value="{{user.email}}" placeholder="邮箱" type="email">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="website" class="col-sm-2 control-label">个人站点</label>
+
+                            <div class="col-sm-7">
+                                <input class="form-control" id="website" value="{{user.website}}" name="website" placeholder="个人站点" type="text" >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="address" class="col-sm-2 control-label">所在地点</label>
+
+                            <div class="col-sm-7">
+                                <input class="form-control" id="address" value="{{user.address}}" name="address"  placeholder="所在地点" type="text" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="address" class="col-sm-2 control-label">职业</label>
+
+                            <div class="col-sm-7">
+                                <input class="form-control" id="address" value="{{user.job}}" name="job"  placeholder="职业" type="text" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="github" class="col-sm-2 control-label">Github</label>
+
+                            <div class="col-sm-7">
+                                <input class="form-control" id="github" value="{{user.github}}" name="github" placeholder="Github" type="text" >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="signature" class="col-sm-2 control-label">个人签名</label>
+
+                            <div class="col-sm-7">
+                                <input class="form-control" id="signature" value="{{user.signature}}" name="signature" placeholder="个人签名" type="text" >
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-7">
+                                <button type="submit" class="btn btn-primary">保存信息</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

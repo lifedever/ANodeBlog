@@ -22,6 +22,7 @@ module.exports = {
         address: {type: String},    // 所在地点
         github: {type: String}, // github
         signature: {type: String},  // 个人签名
+        job: {type: String},        // 职业,
         created_time: {type: Date, default: Date.now}   // 创建时间
     }
 };

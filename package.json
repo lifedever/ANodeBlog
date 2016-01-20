@@ -21,6 +21,7 @@
     "handlebars-intl": "^1.1.1",
     "highlight.js": "^9.1.0",
     "jquery": "^2.2.0",
+    "lodash": "^4.0.0",
     "markdown": "^0.5.0",
     "moment": "^2.11.1",
     "mongoose": "^4.3.5",
