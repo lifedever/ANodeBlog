@@ -5,6 +5,7 @@ var config = require('../config');
 var router = express.Router();
 var passport = require('passport');
 var utils = require('utility');
+var async = require('async');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -38,19 +39,19 @@ router.get('/join', function (req, res) {
         layout: 'lg'
     })
 });
-router.post('/join', function(req, res, next){
+router.post('/join', function (req, res, next) {
     var user = req.body;
-    if(!user.username || !user.password){
+    if (!user.username || !user.password) {
         req.flash(config.constant.flash.error, '用户名或密码不能为空!');
         res.redirect('/join');
         return;
     }
-    if(!user.email) {
-        req.flash(config.constant.flash.error, '又想不能为空!');
+    if (!user.email) {
+        req.flash(config.constant.flash.error, '邮箱不能为空!');
         res.redirect('/join');
         return;
     }
-    if(user.password != user.confirm_password){
+    if (user.password != user.confirm_password) {
         req.flash(config.constant.flash.error, '两次密码输入不一致!');
         res.redirect('/join');
         return;
@@ -60,20 +61,36 @@ router.post('/join', function(req, res, next){
 }, function (req, res, next) {
     var user = req.body;
     var User = dbHelper.User;
-    User.findOne({username: user.username}, function (err, doc) {
-        webHelper.reshook(err, next, function () {
-            if (doc) {
-                req.flash(config.constant.flash.error, '用户名已被占用!');
-                res.redirect('/join');
-            } else {
-                user.password = utils.md5(user.password, 'base64');
-                User.create(user, function (err, doc) {
-                    webHelper.reshook(err, next, function () {
-                        req.flash(config.constant.flash.success, '注册成功，请登录!');
-                        res.redirect('/login');
-                    });
-                });
-            }
+
+    async.parallel({
+        username: function (callback) {
+            User.findOne({username: user.username}, function (err, doc) {
+                callback(null, doc);
+            });
+        },
+        email: function (callback) {
+            User.findOne({email: user.email}, function (err, doc) {
+                callback(null, doc);
+            });
+        }
+    }, function (err, results) {
+        if(results.username) {
+            req.flash(config.constant.flash.error, '用户名已被占用');
+            res.redirect('/join');
+            return;
+        }
+        if(results.email){
+            req.flash(config.constant.flash.error, '邮箱已被占用');
+            res.redirect('/join');
+            return;
+        }
+
+        user.password = utils.md5(user.password, 'base64');
+        User.create(user, function (err, doc) {
+            webHelper.reshook(err, next, function () {
+                req.flash(config.constant.flash.success, '注册成功，请登录!');
+                res.redirect('/login');
+            });
         });
     });
 });
