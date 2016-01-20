@@ -11,18 +11,35 @@ var async = require('async');
 router.get('/', function (req, res, next) {
     var Article = global.dbHelper.Article;
 
-    
-
     Article.find().populate('_user').sort({'views': 'desc'}).exec(function (error, doc) {
         webHelper.reshook(error, next, function () {
             res.render('index', {
-                articles: doc
+                articles: doc,
+                menu: 'hot'
             });
         });
     });
-
 });
 
+/**
+ * 最新发表
+ */
+router.get('/new', function (req, res, next) {
+    var Article = global.dbHelper.Article;
+
+    Article.find().populate('_user').sort({'created_time': 'desc'}).exec(function (error, doc) {
+        webHelper.reshook(error, next, function () {
+            res.render('index', {
+                articles: doc,
+                menu: 'new'
+            });
+        });
+    });
+});
+
+/**
+ * 登录
+ */
 router.get('/login', function (req, res) {
     res.render('login', {
         layout: 'lg'
@@ -37,6 +54,9 @@ router.post('/login', passport.authenticate('local', {
     res.redirect('/');
 });
 
+/**
+ * 注册
+ */
 router.get('/join', function (req, res) {
     res.render('register', {
         layout: 'lg'
@@ -98,6 +118,9 @@ router.post('/join', function (req, res, next) {
     });
 });
 
+/**
+ * 退出
+ */
 router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
