@@ -174,3 +174,14 @@ blockquote {
 .fullscreen textarea {
     height: 70vh;
 }
+
+.comment .CodeMirror{
+    height: 150px;
+}
+.create .CodeMirror{
+    height: 165px;
+}
+
+.fullscreen .create .CodeMirror{
+    height:360px;
+}

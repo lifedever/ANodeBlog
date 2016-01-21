@@ -20,11 +20,11 @@
 
                     <div class="text-center margin small">{{user.signature}}</div>
                     <hr>
-                    <dl>
+                    <dl class="pad">
                         <dt>他的主页</dt>
                         <dd><a href="{{user.website}}" target="_blank">{{user.website}}</a></dd>
                     </dl>
-                    <dl>
+                    <dl class="pad">
                         <dt>他的Github</dt>
                         <dd><a href="{{user.github}}" target="_blank">{{user.github}}</a></dd>
                     </dl>
@@ -32,7 +32,7 @@
 
                     {{#if articles}}
                         <table class="table table-hover bg-white">
-                            <dl>
+                            <dl class="pad">
                                 <dt>他的所有文章：</dt>
                             </dl>
                             {{#each articles}}
