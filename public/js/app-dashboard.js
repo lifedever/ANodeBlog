@@ -29,5 +29,9 @@ $('[data-toggle="confirm"]').on('click', function (e) {
         location.href = $this.attr('href');
     }
 });
-var editor = new Editor();
-editor.render();
+var editor = new Editor({
+    element: document.getElementById('editor')
+});
+if(document.querySelector('textarea')){
+    editor.render();
+}
