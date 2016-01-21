@@ -29,7 +29,7 @@
                                     |
                                     {{article.views}} 次浏览
                                     |
-                                    0 次评论
+                                    <a href="#comment">{{article.children.length}}</a> 次评论
                                 </small>
                                 {{#equals article._user.username session.passport.user.username}}
                                     <small class="pull-right">
@@ -44,35 +44,62 @@
                         </div>
 
                     </div>
-                    <ul class="list-inline">
+                    <ul class="list-inline w">
                         <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> 分享</a>
                         </li>
                         <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> 喜欢</a>
                         </li>
                         <li class="pull-right">
-                            <a href="#" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i>
+                            <a href="#comment" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i>
                                 评论
                                 (5)
                             </a>
                         </li>
                     </ul>
+
+
                 </div>
-            </div>
-            <div class="box box-solid">
-                <div class="box-header with-border">留言</div>
-                <div class="box-body comment">
-                    <form action="/">
-                        <textarea class="form-control input-sm" rows="2" placeholder="Type a comment"></textarea>
-                        <button class="btn btn-primary"> <i class="fa fa-comment"></i> 回复</button>
-                    </form>
+
+                <div class="box-footer box-comments">
+                    {{#each article.children}}
+                        <div class="box-comment">
+                            <!-- User image -->
+                            <img class="img-circle img-sm" src="{{gravatar _user.email}}" alt="User Image">
+
+                            <div class="comment-text">
+                              <span class="username">
+                                <a href="/u/{{_user.username}}">{{_user.username}}</a>
+                                  <span class="text-muted pull-right">{{timeFromNow created_at}}</span>
+                              </span><!-- /.username -->
+                                {{{content}}}
+                            </div>
+                            <!-- /.comment-text -->
+                        </div>
+                    {{/each}}
                 </div>
+                {{#if session.passport.user}}
+                    <div class="box-footer" id="comment">
+                        <form action="/p/{{article._id}}/comment" method="post">
+                            <img class="img-responsive img-circle img-sm" src="{{gravatar session.passport.user.email}}"
+                                 alt="Alt Text">
+                            <div class="img-push">
+                                <input class="form-control input-sm" placeholder="回车提交评论"
+                                       type="text" name="content">
+                            </div>
+                        </form>
+                    </div>
+                {{/if}}
             </div>
         </div>
         <div class="col-md-3">
             <div class="box box-widget widget-user">
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-aqua-active">
-                    <h2 class="widget-user-username">{{article._user.username}} <small style="color: #ffffff; font-size: 10px;"><b>{{timeFromNow article._user.created_time}}</b> 加入本站</small></h2>
+                    <h2 class="widget-user-username">{{article._user.username}}
+                        <small style="color: #ffffff; font-size: 10px;">
+                            <b>{{timeFromNow article._user.created_time}}</b> 加入本站
+                        </small>
+                    </h2>
                     <h5 class="widget-user-desc">{{article._user.job}}</h5>
                 </div>
                 <div class="widget-user-image">
@@ -95,7 +122,7 @@
                         <ol style="margin-left: -15px;">
                             {{#each userHotArticles}}
                                 <li>
-                                   <a href="/p/{{_id}}" class="text-over">{{title}}</a>
+                                    <a href="/p/{{_id}}" class="text-over">{{title}}</a>
                                 </li>
                             {{/each}}
                         </ol>

@@ -1,7 +1,6 @@
 var express = require('express');
 var passport = require('passport');
-var Remarkable = require('remarkable');
-var hljs = require('highlight.js');
+
 var async = require('async');
 var webHelper = require('../lib/webHelper');
 var articleDao = require('../db/articleDao');
@@ -12,24 +11,7 @@ var lodash = require('lodash');
 
 var router = express.Router();
 
-var md = new Remarkable('full', {
-    linkify: true,         // autoconvert URL-like texts to links
-    highlight: function (str, lang) {
-        if (lang && hljs.getLanguage(lang)) {
-            try {
-                return hljs.highlight(lang, str).value;
-            } catch (err) {
-            }
-        }
-
-        try {
-            return hljs.highlightAuto(str).value;
-        } catch (err) {
-        }
-
-        return ''; // use external default escaping
-    }
-});
+var md = webHelper.Remarkable();
 
 router.get('/', function (req, res, next) {
     articleDao.findArticlesByUser(req.session.passport.user._id, function (articles) {

@@ -3,16 +3,19 @@
  */
 var express = require('express');
 var webHelper = require('../lib/webHelper');
+var dbHelper = require('../db/dbHelper');
 var config = require('../config');
 var async = require('async');
+
 var router = express.Router();
+var md = webHelper.Remarkable();
 
 router.get('/:id', function (req, res, next) {
-    var Article = global.dbHelper.Article;
+    var Article = dbHelper.Article;
     var id = req.params.id;
     async.waterfall([
         function (callback) {
-            Article.findById(id).populate('_user').exec(function (err, article) {
+            Article.findById(id).populate(['_user', 'children._user']).exec(function (err, article) {
                 callback(null, article);
             });
         },
@@ -36,5 +39,37 @@ router.get('/:id', function (req, res, next) {
 
 });
 
+/**
+ * 添加评论
+ */
+router.post('/:id/comment', function (req, res, next) {
+    var Article = dbHelper.Article;
+    var id = req.params.id;
+    var content = req.body.content;
+
+    async.waterfall([
+        function(callback){
+            Article.findById(id).exec(function (err, article) {
+                callback(err, article);
+            });
+        },
+        function(article, callback) {
+            article.children.push({
+                content: md.render(content),
+                _user: req.session.passport.user._id
+            });
+            article.save(function(err) {
+                callback(err, article);
+            })
+        }
+    ], function(err, article){
+        if(!err) {
+            res.redirect('/p/' + id + '#chat-box');
+        }else{
+            next(err);
+        }
+    })
+
+});
 
 module.exports = router;
