@@ -29,3 +29,5 @@ $('[data-toggle="confirm"]').on('click', function (e) {
         location.href = $this.attr('href');
     }
 });
+var editor = new Editor();
+editor.render();

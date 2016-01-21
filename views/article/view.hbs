@@ -35,7 +35,7 @@
                                     |
                                     {{article.views}} 次浏览
                                     |
-                                    <a href="#comment">{{article.children.length}}</a> 次评论
+                                    <a href="#comment"><span class="ds-thread-count" data-thread-key="{{article._id}}" data-count-type="comments"></span></a> 次评论
                                 </small>
                                 {{#equals article._user.username session.passport.user.username}}
                                     <small class="pull-right">
