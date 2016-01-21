@@ -63,6 +63,10 @@ router.get('/join', function (req, res) {
     })
 });
 router.post('/join', function (req, res, next) {
+
+    req.flash(config.constant.flash.error, '注册功能已被停用，请联系管理员: gefangshuai@outlook.com');
+    res.redirect('/login');
+    return ;
     var user = req.body;
     if (!user.username || !user.password) {
         req.flash(config.constant.flash.error, '用户名或密码不能为空!');

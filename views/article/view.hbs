@@ -11,7 +11,7 @@
         <div class="col-md-9">
             <div class="box box-primary">
                 <div class="box-body">
-                    <div class="post">
+                    <div class="post margin-bottom">
                         <div class="user-block">
                             <img class="img-circle img-bordered-sm" src="{{gravatar article._user.email}}"
                                  alt="user image">
@@ -44,7 +44,8 @@
                         </div>
 
                     </div>
-                    <ul class="list-inline w">
+                    <br>
+                    <ul class="list-inline">
                         <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> 分享</a>
                         </li>
                         <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> 喜欢</a>
@@ -52,28 +53,26 @@
                         <li class="pull-right">
                             <a href="#comment" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i>
                                 评论
-                                (5)
+                                ({{article.children.length}})
                             </a>
                         </li>
                     </ul>
-
-
                 </div>
 
                 <div class="box-footer box-comments">
                     {{#each article.children}}
                         <div class="box-comment">
-                            <!-- User image -->
                             <img class="img-circle img-sm" src="{{gravatar _user.email}}" alt="User Image">
 
                             <div class="comment-text">
-                              <span class="username">
-                                <a href="/u/{{_user.username}}">{{_user.username}}</a>
-                                  <span class="text-muted pull-right">{{timeFromNow created_at}}</span>
-                              </span><!-- /.username -->
+                                <span class="username">
+                                   <a href="/u/{{_user.username}}">{{_user.username}}</a>
+                                        <span class="text-muted pull-right">{{timeFromNow created_at}}
+                                            #{{addOne @index}}
+                                        </span>
+                                  </span>
                                 {{{content}}}
                             </div>
-                            <!-- /.comment-text -->
                         </div>
                     {{/each}}
                 </div>
@@ -83,8 +82,10 @@
                             <img class="img-responsive img-circle img-sm" src="{{gravatar session.passport.user.email}}"
                                  alt="Alt Text">
                             <div class="img-push">
-                                <input class="form-control input-sm" placeholder="回车提交评论"
-                                       type="text" name="content">
+                                <input class="form-control input-sm" placeholder="回车提交评论" type="text" name="content">
+<!--
+                                <span class="help-block small "><span class="text-danger"> <b>提示：</b> 如需回复楼层，只需输入'#楼层号 内容即可', 如：'#1 说得很好!'</span></span>
+-->
                             </div>
                         </form>
                     </div>

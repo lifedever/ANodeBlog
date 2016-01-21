@@ -45,7 +45,7 @@ var _getArticle = function () {
     /*文章定义*/
     var articleSchema = new Schema({
         title: {type: String, required: true},              // 标题
-        content: {type: String, required: true},            // 内容
+        content: {type: String},                            // 内容
         html: {type: String},                               // 转化后的内容
         index: {type: String},                              // 目录索引
         views: {type: Number, default: 0},                  // 阅读数
