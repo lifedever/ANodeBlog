@@ -13,11 +13,17 @@
                 <div class="box-body">
                     <div class="post margin-bottom">
                         <div class="user-block">
-                            <img class="img-circle img-bordered-sm" src="{{gravatar article._user.email}}"
+                            <img class="img-circle" src="{{gravatar article._user.email}}"
                                  alt="user image">
                             <span class="username">
+
                               <a href="/p/{{article._id}}">{{article.title}}</a>
+                                <small>
+                                    {{#if article.up}} <span class="label label-primary">置顶</span>{{/if}}
+                                    {{#if article.recommend}} <span class="label label-success">推荐</span>{{/if}}
+                                </small>
                             </span>
+
                             <span class="description">
                                 <strong>
                                     <span class="">

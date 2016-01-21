@@ -18,14 +18,25 @@
                             <tr>
                                 <td width="50"><span class="label label-default">0/{{views}}</span> </td>
                                 <td data-toggle="hover" data-target="hover{{_id}}" style="height: 60px;">
+                                    {{#if recommend}}
+                                        <span class="label label-success">已推荐</span>
+                                    {{/if}}
+                                    {{#if up}}
+                                        <span class="label label-primary">已置顶</span>
+                                    {{/if}}
                                     <a href="/p/{{_id}}" target="_blank" class="font16">{{title}}</a>
+
                                     <div class="hide" id="hover{{_id}}">
                                         <a href="/dashboard/p/delete/{{_id}}" data-toggle="confirm" data-message="确认要删除此文章吗" class="text-danger">删除</a>
                                         |
                                         <a href="/dashboard/p/edit/{{_id}}">编辑</a>
+                                        |
+                                        <a href="/dashboard/p/up/{{_id}}?up={{up}}">置顶</a>
+                                        |
+                                        <a href="/dashboard/p/recommend/{{_id}}?recommend={{recommend}}">推荐</a>
                                     </div>
                                 </td>
-                                <td width="160">{{formatDate created_time 'yy.MM.dd hh:mm:ss'}}</td>
+                                <td width="160">{{formatDate created_time 'yy.MM.dd hh:mm'}}</td>
                             </tr>
                         {{/each}}
                     </table>

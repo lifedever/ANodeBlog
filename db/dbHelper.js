@@ -46,6 +46,8 @@ var _getArticle = function () {
     var articleSchema = new Schema({
         title: {type: String, required: true},              // 标题
         content: {type: String},                            // 内容
+        up: {type: Boolean, default: false},                // 置顶
+        recommend: {type: Boolean, default: false},         // 推荐
         html: {type: String},                               // 转化后的内容
         index: {type: String},                              // 目录索引
         views: {type: Number, default: 0},                  // 阅读数

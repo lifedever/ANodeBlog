@@ -11,7 +11,7 @@ var async = require('async');
 router.get('/', function (req, res, next) {
     var Article = global.dbHelper.Article;
 
-    Article.find().populate('_user').sort({'views': 'desc'}).exec(function (error, doc) {
+    Article.find().populate('_user').sort({up: -1, views: 'desc'}).exec(function (error, doc) {
         webHelper.reshook(error, next, function () {
             res.render('index', {
                 articles: doc,
@@ -27,7 +27,7 @@ router.get('/', function (req, res, next) {
 router.get('/new', function (req, res, next) {
     var Article = global.dbHelper.Article;
 
-    Article.find().populate('_user').sort({'created_time': 'desc'}).exec(function (error, doc) {
+    Article.find().populate('_user').sort({up: -1,'created_time': 'desc'}).exec(function (error, doc) {
         webHelper.reshook(error, next, function () {
             res.render('index', {
                 articles: doc,
@@ -51,7 +51,7 @@ router.post('/login', passport.authenticate('local', {
     failureFlash: '用户名或密码错误!'
 }), function (req, res, next) {
     req.flash(config.constant.flash.success, '欢迎回来，' + req.body.username);
-    res.redirect('/');
+    res.redirect('/dashboard');
 });
 
 /**
@@ -66,7 +66,7 @@ router.post('/join', function (req, res, next) {
 
     req.flash(config.constant.flash.error, '注册功能已被停用，请联系管理员: gefangshuai@outlook.com');
     res.redirect('/login');
-    return ;
+    return;
     var user = req.body;
     if (!user.username || !user.password) {
         req.flash(config.constant.flash.error, '用户名或密码不能为空!');
@@ -101,12 +101,12 @@ router.post('/join', function (req, res, next) {
             });
         }
     }, function (err, results) {
-        if(results.username) {
+        if (results.username) {
             req.flash(config.constant.flash.error, '用户名已被占用');
             res.redirect('/join');
             return;
         }
-        if(results.email){
+        if (results.email) {
             req.flash(config.constant.flash.error, '邮箱已被占用');
             res.redirect('/join');
             return;

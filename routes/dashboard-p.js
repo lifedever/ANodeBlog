@@ -3,6 +3,7 @@ var passport = require('passport');
 
 var async = require('async');
 var webHelper = require('../lib/webHelper');
+var dbHelper = require('../db/dbHelper');
 var articleDao = require('../db/articleDao');
 var authority = require('../lib/authority');
 var config = require('../config');
@@ -10,6 +11,8 @@ var lodash = require('lodash');
 
 
 var router = express.Router();
+var Article = dbHelper.Article;
+var User = dbHelper.User;
 
 var md = webHelper.Remarkable();
 
@@ -48,7 +51,6 @@ router.post('/create/preview', function (req, res) {
 
 router.get('/delete/:id', function (req, res, next) {
     var id = req.params.id;
-    var Article = global.dbHelper.Article;
     Article.findById(id, function (err, doc) {
         if (doc) {
             doc.remove(function (err, doc) {
@@ -67,7 +69,6 @@ router.get('/delete/:id', function (req, res, next) {
 
 router.get('/edit/:id', function (req, res, next) {
     var id = req.params.id;
-    var Article = global.dbHelper.Article;
     Article.findById(id, function (err, doc) {
         if (doc) {
             res.render('dashboard/p/create', {menu: 'p-list', article: doc, layout: 'dashboard'})
@@ -75,6 +76,48 @@ router.get('/edit/:id', function (req, res, next) {
             var error = new Error('cannot find the article which id is [' + id + ']');
             error.status = 500;
             next(error);
+        }
+    });
+});
+
+/**
+ * 置顶
+ */
+router.get('/up/:id', function (req, res, next) {
+    var id = req.params.id;
+    var up = req.query.up;
+    if (up && up == 'true') {
+        up = false;
+    } else {
+        up = true;
+    }
+    Article.update({_id: id}, {up: up}, function (err, raw) {
+        if (err) {
+            next(err);
+        } else {
+            res.redirect('/dashboard/p');
+        }
+    });
+});
+
+/**
+ * 推荐
+ */
+router.get('/recommend/:id', function (req, res, next) {
+    var id = req.params.id;
+    var recommend = req.query.recommend;
+
+    if (recommend && recommend == 'true') {
+        recommend = false;
+    } else {
+        recommend = true;
+    }
+
+    Article.update({_id: id}, {recommend: recommend}, function (err, raw) {
+        if (err) {
+            next(err);
+        } else {
+            res.redirect('/dashboard/p');
         }
     });
 });
