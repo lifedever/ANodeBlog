@@ -51,51 +51,31 @@
 
                     </div>
                     <br>
-                    <ul class="list-inline">
-                        <li><a href="#" class="link-black text-sm"><i class="fa fa-share margin-r-5"></i> 分享</a>
-                        </li>
-                        <li><a href="#" class="link-black text-sm"><i class="fa fa-thumbs-o-up margin-r-5"></i> 喜欢</a>
-                        </li>
-                        <li class="pull-right">
-                            <a href="#comment" class="link-black text-sm"><i class="fa fa-comments-o margin-r-5"></i>
-                                评论
-                                ({{article.children.length}})
-                            </a>
-                        </li>
-                    </ul>
+
                 </div>
 
                 <div class="box-footer box-comments">
-                    {{#each article.children}}
-                        <div class="box-comment">
-                            <img class="img-circle img-sm" src="{{gravatar _user.email}}" alt="User Image">
-
-                            <div class="comment-text">
-                                <span class="username">
-                                   <a href="/u/{{_user.username}}">{{_user.username}}</a>
-                                        <span class="text-muted pull-right">{{timeFromNow created_at}}
-                                            #{{addOne @index}}
-                                        </span>
-                                  </span>
-                                {{{content}}}
-                            </div>
-                        </div>
-                    {{/each}}
+                    <!-- 多说评论框 start -->
+                    <div class="ds-thread" data-thread-key="{{article._id}}" data-title="{{article.title}}" data-url="/p/{{article._id}}"></div>
+                    <!-- 多说评论框 end -->
+                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                    <script type="text/javascript">
+                        var duoshuoQuery = {short_name: "gefangshuai"};
+                        (function () {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';
+                            ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                            || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                    </script>
+                    <!-- 多说公共JS代码 end -->
                 </div>
-                {{#if session.passport.user}}
-                    <div class="box-footer" id="comment">
-                        <form action="/p/{{article._id}}/comment" method="post">
-                            <img class="img-responsive img-circle img-sm" src="{{gravatar session.passport.user.email}}"
-                                 alt="Alt Text">
-                            <div class="img-push">
-                                <input class="form-control input-sm" placeholder="回车提交评论" type="text" name="content">
-<!--
-                                <span class="help-block small "><span class="text-danger"> <b>提示：</b> 如需回复楼层，只需输入'#楼层号 内容即可', 如：'#1 说得很好!'</span></span>
--->
-                            </div>
-                        </form>
-                    </div>
-                {{/if}}
+                <div class="box-footer" id="comment">
+
+                </div>
             </div>
         </div>
         <div class="col-md-3">
@@ -134,6 +114,29 @@
                             {{/each}}
                         </ol>
                     </dl>
+                </div>
+            </div>
+            <div class="box box-widget box-solid">
+                <div class="box-header">
+                    热评文章
+                </div>
+                <div class="box-body">
+                    <!-- 多说热评文章 start -->
+                    <div class="ds-top-threads" data-range="monthly" data-num-items="10"></div>
+                    <!-- 多说热评文章 end -->
+                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                    <script type="text/javascript">
+                        var duoshuoQuery = {short_name:"gefangshuai"};
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                            || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                    </script>
+                    <!-- 多说公共JS代码 end -->
                 </div>
             </div>
         </div>
