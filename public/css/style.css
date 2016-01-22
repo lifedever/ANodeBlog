@@ -63,11 +63,10 @@ a {
 }
 
 .article {
-    padding: 5px 10px;
 }
 
 .article-cell {
-    vertical-align: middle;
+    padding-top: 8px;
 }
 
 .article a {
