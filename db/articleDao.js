@@ -10,7 +10,7 @@ module.exports = {
     saveOrUpdate: function (article, callback) {
         var Article = dbHelper.Article;
         if (article.id) {
-
+            article.updated_time = new Date();
             Article.update({
                 _id: article.id
             }, article, function (error, doc) {
