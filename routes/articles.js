@@ -25,8 +25,9 @@ router.get('/:id', function (req, res, next) {
                 callback(null, article);
             });
         },
+        // 热门文章
         function (article, callback) {
-            Article.find({_user: article._user.id}).limit(10).sort({views: 1}).exec(function(err, docs){
+            Article.find({_user: article._user.id}).limit(10).sort({views: -1}).exec(function(err, docs){
                 callback(null, article, docs);
             });
         }
