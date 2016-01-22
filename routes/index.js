@@ -10,7 +10,6 @@ var async = require('async');
 /* GET home page. */
 router.get('/', function (req, res, next) {
     var Article = global.dbHelper.Article;
-
     Article.find().populate('_user').sort({up: -1, views: 'desc'}).exec(function (error, doc) {
         webHelper.reshook(error, next, function () {
             res.render('index', {

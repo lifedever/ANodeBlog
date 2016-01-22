@@ -1,6 +1,5 @@
 var express = require('express');
 var webHelper = require('../lib/webHelper');
-var authority = require('../lib/authority');
 var dbHelper = require('../db/dbHelper');
 var config = require('../config');
 

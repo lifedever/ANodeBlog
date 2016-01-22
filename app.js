@@ -13,7 +13,6 @@ var mongoose = require('mongoose');
 var exphbs = require('express-handlebars');
 
 var config = require('./config');
-var routes = require('./routes/index');
 var authority = require('./lib/authority');
 var dbHelper = require('./db/dbHelper');
 var hbsHelper = require('./lib/hbsHelper');
@@ -106,11 +105,9 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.use('/', routes);
-
-app.use('/u', require('./routes/users'));
+app.use('/', require('./routes/index'));
 app.use('/p', require('./routes/articles'));
-app.use('/user/p', authority.isAuthenticated, require('./routes/user-articles'));
+app.use('/u', require('./routes/users'));
 app.use('/dashboard', authority.isAuthenticated, require('./routes/dashboard'));
 app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard-p'));
 app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard-u'));
