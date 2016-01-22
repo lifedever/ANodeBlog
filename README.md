@@ -29,7 +29,3 @@ A Blog build by NodeJS+Express
 
 即可获取下载地址！还在犹豫什么，学习NodeJS，就从这一刻开始！
 
-# 您的赞助是我分享的动力！
-![img](https://raw.githubusercontent.com/gefangshuai/wincn-static/master/imgs/zhong.png)
-
-支付宝扫码赞助!
