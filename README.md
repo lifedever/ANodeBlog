@@ -17,6 +17,7 @@ A Blog build by NodeJS+Express
 
 # 资料放送
 ![img](https://raw.githubusercontent.com/gefangshuai/wincn-static/master/imgs/node-ziliao.png)
+
 6本资料助您一步登天！学习NodeJs，有这六本就够了！
 
 ## 获取方法：
