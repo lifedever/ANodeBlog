@@ -2,6 +2,8 @@ ANodeBlog
 ----
 A Blog build by NodeJS+Express
 
+请关注专题：[我的NodeJS学习之路（实践之路）](http://www.jianshu.com/collection/a9b2729478eb)
+
 # Used
 - NodeJs
 - Express
