@@ -38,7 +38,7 @@
                                     |
                                     <a href="#comment"><span class="ds-thread-count" data-thread-key="{{article._id}}" data-count-type="comments"></span></a> 次评论
                                     |
-                                    <span class="text-success">最后编辑于 {{timeFromNow article.updated_at}}</span>
+                                    <span class="text-success">最后编辑于 {{timeFromNow article.updated_time}}</span>
                                 </small>
                                 {{#equals article._user.username session.passport.user.username}}
                                     <small class="pull-right">

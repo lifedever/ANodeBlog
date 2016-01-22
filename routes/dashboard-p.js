@@ -30,6 +30,7 @@ router.post('/create', function (req, res, next) {
     var title = req.body.title;
     var content = req.body.content;
     var id = req.body.id;
+
     articleDao.saveOrUpdate({
         id: id,
         title: title,

@@ -53,6 +53,7 @@ var _getArticle = function () {
         views: {type: Number, default: 0},                  // 阅读数
         favorite: {type: Number, default: 0},               // 喜欢数
         created_time: {type: Date, default: Date.now},      // 创建时间
+        updated_time: {type: Date, default: Date.now},      // 更新日期
         _user: {
             type: Schema.Types.ObjectId,
             ref: 'User'
