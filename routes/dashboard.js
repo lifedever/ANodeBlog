@@ -3,7 +3,6 @@
  */
 var express = require('express');
 var webHelper = require('../lib/webHelper');
-var authority = require('../lib/authority');
 var config = require('../config');
 
 var router = express.Router();
