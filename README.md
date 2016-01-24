@@ -17,6 +17,10 @@ A Blog build by NodeJS+Express
 # Demo
 [http://wincn.net](http://wincn.net)
 
+# Plan
+
+On [Trello](https://trello.com/b/L9btNWNT/anodeblog)
+
 # 资料放送
 ![img](https://raw.githubusercontent.com/gefangshuai/wincn-static/master/imgs/node-ziliao.png)
 
