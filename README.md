@@ -17,8 +17,14 @@ A Blog build by NodeJS+Express
 # Demo
 [http://wincn.net](http://wincn.net)
 
-# Plan
+# Run
+```bash
+cd ANodeBlog
+npm install
+npm start
+```
 
+# Plan
 On [Trello](https://trello.com/b/L9btNWNT/anodeblog)
 
 # 资料放送

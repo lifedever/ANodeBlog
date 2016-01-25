@@ -7,6 +7,8 @@ var router = express.Router();
 var passport = require('passport');
 var utils = require('utility');
 var async = require('async');
+var superagent = require('superagent');
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
     var Article = dbHelper.Article;
@@ -135,7 +137,8 @@ router.post('/join', function (req, res, next) {
 router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
-    req.session.clear
+    req.session.destroy();
 });
+
 
 module.exports = router;
