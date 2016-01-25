@@ -17,7 +17,7 @@
                                  alt="user image">
                             <span class="username">
 
-                              <a href="/p/{{article._id}}" >{{article.title}}</a>
+                              <a href="/p/{{article._id}}">{{article.title}}</a>
                                 <small>
                                     {{#if article.up}} <span class="label label-primary">置顶</span>{{/if}}
                                     {{#if article.recommend}} <span class="label label-success">推荐</span>{{/if}}
@@ -36,7 +36,8 @@
                                     |
                                     {{article.views}} 次浏览
                                     |
-                                    <a href="#comment"><span class="ds-thread-count" data-thread-key="{{article._id}}" data-count-type="comments"></span></a> 次评论
+                                    <a href="#comment"><span class="ds-thread-count" data-thread-key="{{article._id}}"
+                                                             data-count-type="comments"></span></a> 次评论
                                     |
                                     <span class="text-success">最后编辑于 {{timeFromNow article.updated_time}}</span>
                                 </small>
@@ -61,7 +62,8 @@
 
                 <div class="box-footer box-comments">
                     <!-- 多说评论框 start -->
-                    <div class="ds-thread" data-thread-key="{{article._id}}" data-title="{{article.title}}" data-url="http://wincn.net/p/{{article._id}}"></div>
+                    <div class="ds-thread" data-thread-key="{{article._id}}" data-title="{{article.title}}"
+                         data-url="http://wincn.net/p/{{article._id}}"></div>
                     <!-- 多说评论框 end -->
                     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
                     <script type="text/javascript">
@@ -83,68 +85,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3">
-            <div class="box box-widget widget-user">
-                <!-- Add the bg color to the header using any of the bg-* classes -->
-                <div class="widget-user-header bg-aqua-active">
-                    <h2 class="widget-user-username">{{article._user.username}}
-                        <small style="color: #ffffff; font-size: 10px;">
-                            <b>{{timeFromNow article._user.created_time}}</b> 加入本站
-                        </small>
-                    </h2>
-                    <h5 class="widget-user-desc">{{article._user.job}}</h5>
-                </div>
-                <div class="widget-user-image">
-                    <img class="img-circle" src="{{gravatar article._user.email}}" alt="User Avatar">
-                </div>
-                <div class="box-footer">
 
-                    <div class="text-center margin small">{{article._user.signature}}</div>
-                    <hr>
-                    <dl>
-                        <dt>他的主页</dt>
-                        <dd><a href="{{article._user.website}}" target="_blank">{{article._user.website}}</a></dd>
-                    </dl>
-                    <dl>
-                        <dt>他的Github</dt>
-                        <dd><a href="{{article._user.github}}" target="_blank">{{article._user.github}}</a></dd>
-                    </dl>
-                    <dl>
-                        <dt>他的热门文章</dt>
-                        <ol style="margin-left: -15px;">
-                            {{#each userHotArticles}}
-                                <li>
-                                    <a href="/p/{{_id}}" class="text-over">{{title}}</a>
-                                    <small title="{{views}} 次查看" class="pull-right">({{views}})</small>
-                                </li>
-                            {{/each}}
-                        </ol>
-                    </dl>
-                </div>
-            </div>
-            <div class="box  box-primary">
-                <div class="box-header with-border ">
-                    <b>热评文章</b>
-                </div>
-                <div class="box-body">
-                    <!-- 多说热评文章 start -->
-                    <div class="ds-top-threads" data-range="monthly" data-num-items="10"></div>
-                    <!-- 多说热评文章 end -->
-                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        var duoshuoQuery = {short_name:"gefangshuai"};
-                        (function() {
-                            var ds = document.createElement('script');
-                            ds.type = 'text/javascript';ds.async = true;
-                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                            ds.charset = 'UTF-8';
-                            (document.getElementsByTagName('head')[0]
-                            || document.getElementsByTagName('body')[0]).appendChild(ds);
-                        })();
-                    </script>
-                    <!-- 多说公共JS代码 end -->
-                </div>
-            </div>
+        <div class="col-md-3">
+            {{> sidebar/author-info}}
+            {{> sidebar/more-comments}}
         </div>
     </div>
 </section>
