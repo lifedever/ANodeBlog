@@ -40,7 +40,7 @@
                                     |
                                     <span class="text-success">最后编辑于 {{timeFromNow article.updated_time}}</span>
                                 </small>
-                                {{#equals article._user.username session.passport.user.username}}
+                                {{#equals article._user.username session.user.username}}
                                     <small class="pull-right">
                                         <a href="/dashboard/p/edit/{{article._id}}">编辑</a>
                                     </small>

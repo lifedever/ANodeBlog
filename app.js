@@ -38,16 +38,11 @@ passport.use(new LocalStrategy(
 
 
 passport.serializeUser(function (user, done) {
-    done(null, user);
+    done(null, user.id);
 });
 
 passport.deserializeUser(function (id, done) {
-    dbHelper.User.findById(id, function (err, user) {
-        if (err) {
-            return done(err);
-        }
-        done(null, user);
-    });
+    done(null, id);
 });
 
 var app = express();
@@ -67,8 +62,6 @@ try {
 } catch (error) {
     console.log(error);
 }
-global.dbHelper = dbHelper;
-
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

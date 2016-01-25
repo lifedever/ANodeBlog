@@ -17,7 +17,7 @@ var User = dbHelper.User;
 var md = webHelper.Remarkable();
 
 router.get('/', function (req, res, next) {
-    articleDao.findArticlesByUser(req.session.passport.user._id, function (articles) {
+    articleDao.findArticlesByUser(req.session.user._id, function (articles) {
         res.render('dashboard/p/list', {articles: articles, menu: 'p-list', layout: 'dashboard'});
     });
 });
@@ -36,7 +36,7 @@ router.post('/create', function (req, res, next) {
         title: title,
         content: content,
         html: md.render(content),
-        _user: req.session.passport.user._id
+        _user: req.session.user._id
     }, function (error, doc) {
         webHelper.reshook(error, next, function () {
             req.flash(config.constant.flash.success, '文章添加成功!');

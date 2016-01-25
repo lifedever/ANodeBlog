@@ -13,8 +13,8 @@
                 <ul class="nav navbar-nav">
                     <li {{#equals menu 'hot'}}class="active"{{/equals}}><a href="/">热门文章 <span class="sr-only">(current)</span></a></li>
                     <li {{#equals menu 'new'}}class="active"{{/equals}}><a href="/new">最新发表</a></li>
-                    {{#if session.passport.user}}
-                        <li {{#equals menu 'my'}}class="active"{{/equals}}><a href="/u/{{session.passport.user.username}}">我发表的</a></li>
+                    {{#if session.user}}
+                        <li {{#equals menu 'my'}}class="active"{{/equals}}><a href="/u/{{session.user.username}}">我发表的</a></li>
                     {{/if}}
                 </ul>
 
@@ -22,23 +22,23 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
-                   {{#if session.passport.user}}
+                   {{#if session.user}}
                        <!-- User Account Menu -->
                        <li class="dropdown user user-menu">
                            <!-- Menu Toggle Button -->
                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                <!-- The user image in the navbar-->
-                               <img src="{{gravatar session.passport.user.email}}" class="user-image" alt="User Image">
+                               <img src="{{gravatar session.user.email}}" class="user-image" alt="User Image">
                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                               <span class="hidden-xs">{{session.passport.user.username}}</span>
+                               <span class="hidden-xs">{{session.user.username}}</span>
                            </a>
                            <ul class="dropdown-menu">
                                <!-- The user image in the menu -->
                                <li class="user-header">
-                                   <img src="{{gravatar session.passport.user.email}}" class="img-circle" alt="User Image">
+                                   <img src="{{gravatar session.user.email}}" class="img-circle" alt="User Image">
                                    <p>
-                                       {{session.passport.user.username}}
-                                       <small><b>{{timeFromNow session.passport.user.created_time}}</b> 加入本站</small>
+                                       {{session.user.username}}
+                                       <small><b>{{timeFromNow session.user.created_time}}</b> 加入本站</small>
                                    </p>
                                </li>
                                <!-- Menu Body -->
@@ -46,7 +46,7 @@
                                    <div class="row">
                                        <div class="col-md-12">
                                            <div class="text-center small">
-                                               {{session.passport.user.signature}}
+                                               {{session.user.signature}}
                                            </div>
                                        </div>
                                    </div>

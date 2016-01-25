@@ -6,14 +6,14 @@ var config = require('../config');
 var router = express.Router();
 
 router.get('/', function (req, res, next) {
-    dbHelper.User.findById(req.session.passport.user._id, function (err, user) {
+    dbHelper.User.findById(req.session.user._id, function (err, user) {
         res.render('dashboard/u/index', {menu: 'u-info',user: user, layout: 'dashboard'});
     });
 });
 
 router.post('/', function (req, res, next) {
 
-    dbHelper.User.findOneAndUpdate({_id: req.session.passport.user._id}, {
+    dbHelper.User.findOneAndUpdate({_id: req.session.user._id}, {
         website: req.body.website,    // 个人网站
         address: req.body.address,    // 所在地点
         github: req.body.github, // github

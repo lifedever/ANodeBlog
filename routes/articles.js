@@ -57,7 +57,7 @@ router.post('/:id/comment', function (req, res, next) {
         function(article, callback) {
             article.children.push({
                 content: md.render(content),
-                _user: req.session.passport.user._id
+                _user: req.session.user._id
             });
             article.save(function(err) {
                 callback(err, article);
