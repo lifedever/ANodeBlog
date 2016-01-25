@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
 router.get('/new', function (req, res, next) {
     var Article = dbHelper.Article;
 
-    Article.find().populate('_user').sort({up: -1,'created_time': 'desc'}).exec(function (error, doc) {
+    Article.find().populate('_user').sort({up: -1, 'created_time': 'desc'}).exec(function (error, doc) {
         webHelper.reshook(error, next, function () {
             res.render('index', {
                 articles: doc,
@@ -51,11 +51,11 @@ router.post('/login', passport.authenticate('local', {
 }), function (req, res, next) {
     var username = req.body.username;
     dbHelper.User.findOne({username: username}).exec(function (err, user) {
-        if(!err){
+        if (!err) {
             req.session.user = user;
             req.flash(config.constant.flash.success, '欢迎回来，' + username);
             res.redirect('/dashboard');
-        }else{
+        } else {
             next(err);
         }
     });
@@ -135,7 +135,7 @@ router.post('/join', function (req, res, next) {
 router.get('/logout', function (req, res) {
     req.logout();
     res.redirect('/');
-    req.session.destroy();
+    req.session.clear
 });
 
 module.exports = router;
