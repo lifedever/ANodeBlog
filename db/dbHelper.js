@@ -95,6 +95,7 @@ var pageQuery = function (page, pageSize, Model, populate, queryParams, sortPara
         var count = results.count;
         $page.pageCount = parseInt((count - 1) / pageSize + 1);
         $page.results = results.records;
+        $page.count = count;
         callback(err, $page);
     });
 };

@@ -26,6 +26,7 @@ router.get('/', function (req, res, next) {
                 articles: $page.results,
                 pageCount: $page.pageCount,
                 pageNumber: page,
+                count: $page.count,
                 q: q,
                 menu: 'hot'
             });
