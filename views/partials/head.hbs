@@ -1,5 +1,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="title" content="{{#if article}}{{article.title}} | {{/if}}{{site.title}} - {{site.description}}"/>
+<meta name="author" content="{{article._user.username}}">
+<meta name="description" content="{{articleDesc article.html}}">
 <link href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <link href="/font-awesome/css/font-awesome.css" rel="stylesheet">
 <link rel="stylesheet" href="/highlight.js/styles/github-gist.css">
@@ -16,4 +19,4 @@
 
 <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
 
-<title>{{site.title}} | {{site.description}}</title>
+<title> {{#if article}}{{article.title}} | {{/if}}{{site.title}} - {{site.description}}</title>
