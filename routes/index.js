@@ -11,15 +11,32 @@ var superagent = require('superagent');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+    var page = req.query.page || 1;
     var Article = dbHelper.Article;
-    Article.find().populate('_user').sort({up: -1, views: 'desc'}).exec(function (error, doc) {
+
+    // 加入分页查询
+    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', {}, {
+        up: -1,
+        created_time: 'desc'
+    }, function (error, $page) {
+        webHelper.reshook(error, next, function () {
+            res.render('index', {
+                articles: $page.results,
+                pageCount: $page.pageCount,
+                pageNumber: page,
+                menu: 'hot'
+            });
+        });
+    });
+
+    /*Article.find().skip(0).limit(5).populate('_user').sort({up: -1, created_time: 'desc'}).exec(function (error, doc) {
         webHelper.reshook(error, next, function () {
             res.render('index', {
                 articles: doc,
                 menu: 'hot'
             });
         });
-    });
+    });*/
 });
 
 /**

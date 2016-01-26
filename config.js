@@ -15,6 +15,9 @@ var Config = {
             success: 'success',
             error: 'error'
         }
+    },
+    article: {
+        pageSize: 10
     }
 };
 module.exports = Config;

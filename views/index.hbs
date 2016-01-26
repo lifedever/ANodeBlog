@@ -10,11 +10,41 @@
     <div class="row">
         <div class="col-md-9">
             {{#if articles}}
-                <table class="table table-hover bg-white">
-                    {{#each articles}}
-                        {{> index-article}}
-                    {{/each}}
-                </table>
+                <div class="box box-solid">
+                    <div class="box-body">
+                        <table class="table table-hover">
+                            <tbody>
+                            {{#each articles}}
+                                {{> index-article}}
+                            {{/each}}
+                            </tbody>
+
+                        </table>
+                    </div>
+                    <div class="box-footer">
+                        <nav>
+                            <ul class="pagination">
+
+                                <li>
+                                    <a href="{{#le pageNumber 1}}/{{else}}/?page={{reduce pageNumber 1}}{{/le}}"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                {{#times pageCount}}
+                                    <li><a href="?page={{addOne this}}">{{addOne this}}</a></li>
+                                {{/times}}
+                                <li>
+                                    <a href="{{#ge pageNumber pageCount}}/?page={{pageCount}}{{else}}/?page={{add pageNumber 1}}{{/ge}}"
+                                       aria-label="Previous">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
             {{else}}
                 <div class="box box-solid">
                     <div class="box-body">

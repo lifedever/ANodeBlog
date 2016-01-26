@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var utils = require('utility');
 var Promise = require("bluebird");
+var async = require('async');
 
 var _getUser = function () {
     /* 用户定义 */
@@ -64,7 +65,45 @@ var _getArticle = function () {
     return Promise.promisifyAll(Article);
 };
 
+/**
+ *  对分页进行封装
+ * @param page 当前页码，从1开始
+ * @param pageSize 一页多少记录
+ * @param Model Mongoose Model
+ * @param populate populate参数
+ * @param queryParams 查询参数
+ * @param sortParams 排序参数
+ * @param callback 回调函数
+ */
+var pageQuery = function (page, pageSize, Model, populate, queryParams, sortParams, callback) {
+    var start = (page - 1) * pageSize;
+    var $page = {
+        pageNumber: page
+    };
+    async.parallel({
+        count: function (done) {  // 查询数量
+            Model.count(queryParams).exec(function (err, count) {
+                done(err, count);
+            });
+        },
+        records: function (done) {   // 查询一页的记录
+            Model.find(queryParams).skip(start).limit(pageSize).populate(populate).sort(sortParams).exec(function (err, doc) {
+                done(err, doc);
+            });
+        }
+    }, function (err, results) {
+        var count = results.count;
+        $page.pageCount = parseInt((count - 1) / pageSize + 1);
+        $page.results = results.records;
+        callback(err, $page);
+    });
+};
+
+
 module.exports = {
     User: _getUser(),
-    Article: _getArticle()
+    Article: _getArticle(),
+    Methods: {
+        pageQuery: pageQuery
+    }
 };
