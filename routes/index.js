@@ -12,14 +12,19 @@ var superagent = require('superagent');
 /* GET home page. */
 router.get('/', function (req, res, next) {
     var type = req.query.type || '';
+    var recommend = req.query.recommend;
     var page = req.query.page || 1;
     var Article = dbHelper.Article;
     var q = req.query.q||'';
-    // 加入分页查询
-    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', {
+    var searchParams = {
         title: new RegExp(q, 'i'),
         type: new RegExp(type, 'i')
-    }, {
+    };
+    if(recommend) {
+        searchParams.recommend = recommend;
+    }
+    // 加入分页查询
+    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', searchParams, {
         up: -1,
         created_time: 'desc'
     }, function (error, $page) {
@@ -31,6 +36,7 @@ router.get('/', function (req, res, next) {
                 count: $page.count,
                 q: q,
                 type: type,
+                recommend: recommend,
                 menu: 'hot'
             });
         });

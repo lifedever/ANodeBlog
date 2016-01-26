@@ -53,7 +53,7 @@ var _getArticle = function () {
         index: {type: String},                              // 目录索引
         views: {type: Number, default: 0},                  // 阅读数
         favorite: {type: Number, default: 0},               // 喜欢数
-        type: {type: String, default: '原创'},              // 类型
+        type: {type: String, default: '原创'},               // 类型
         created_time: {type: Date, default: Date.now},      // 创建时间
         updated_time: {type: Date, default: Date.now},      // 更新日期
         url: {type: String},                                // 相关链接
