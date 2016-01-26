@@ -22,9 +22,15 @@
                         {{#equals type '分享'}}
                             <span class="label label-warning">分享</span>
                             <a href="{{url}}" target="_blank" title="作者: {{_user.username}} 编辑于 {{timeFromNow updated_time}}">{{title}}</a>
+
                         {{/equals}}
                     </span>
-                    <span class="pull-right time-from-now">{{timeFromNow created_time}}</span>
+                    <span class="pull-right time-from-now text-right  small">
+                        {{timeFromNow created_time}}
+                        {{#if source}}
+                        <div class="text-light">来自 {{source}}</div>
+                        {{/if}}
+                    </span>
                 </div>
             </div>
         </div>
