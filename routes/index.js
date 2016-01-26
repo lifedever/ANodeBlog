@@ -13,9 +13,11 @@ var superagent = require('superagent');
 router.get('/', function (req, res, next) {
     var page = req.query.page || 1;
     var Article = dbHelper.Article;
-
+    var q = req.query.q||'';
     // 加入分页查询
-    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', {}, {
+    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', {
+        title: new RegExp(q, 'i')
+    }, {
         up: -1,
         created_time: 'desc'
     }, function (error, $page) {
@@ -24,6 +26,7 @@ router.get('/', function (req, res, next) {
                 articles: $page.results,
                 pageCount: $page.pageCount,
                 pageNumber: page,
+                q: q,
                 menu: 'hot'
             });
         });
