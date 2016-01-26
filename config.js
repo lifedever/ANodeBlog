@@ -2,7 +2,7 @@ var Config = {
     site: {
         title: 'Wincn.net',
         description: '秉承开源、分享精神，专注技术开发领域，用Coding创造财富',
-        version: '1.0.1'
+        version: '1.0.2'
     },
     db:{
     	cookieSecret: 'blogbynodesecret',
