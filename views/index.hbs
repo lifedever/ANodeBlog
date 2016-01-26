@@ -2,7 +2,7 @@
 <section class="content-header">
     <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">文章列表 <small class="text-danger">共{{count}}篇</small> </li>
+        <li class="active">文章列表 <small class="text-danger">(共{{count}}篇)</small> </li>
     </ol>
 </section>
 <!-- Main content -->
@@ -11,6 +11,13 @@
         <div class="col-md-9">
             {{#if articles}}
                 <div class="box box-solid">
+                    <div class="box-header">
+                        <ul class="nav nav-pills nav-small">
+                            <li role="presentation" {{#equals type ''}}class="active"{{/equals}}><a href="/">全部</a></li>
+                            <li role="presentation" {{#equals type '原创'}}class="active"{{/equals}}><a href="/?type=原创">原创</a></li>
+                            <li role="presentation" {{#equals type '分享'}}class="active"{{/equals}}><a href="/?type=分享">分享</a></li>
+                        </ul>
+                    </div>
                     <div class="box-body">
                         <table class="table table-hover">
                             <tbody>

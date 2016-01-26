@@ -10,7 +10,7 @@
         <input type="hidden" name="id" value="{{article._id}}">
         <div class="box box-primary " id="createP">
             <div class="box-header with-border">
-                <h3 class="box-title">发表原创文章</h3>
+                <h3 class="box-title">发表分享文章</h3>
                 <a href="http://jonschlinkert.github.io/remarkable/demo/" target="_blank">Markdown语法参考</a>
                 <a href="#" data-toggle="fullscreen" data-target="#createP"><i class="fa fa-arrows-alt pull-right"></i></a>
             </div>
@@ -21,7 +21,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <select class="form-control" name="type" id="">
-                                        <option value="原创">原创</option>
+                                        <option value="分享">分享</option>
                                     </select>
                                 </div>
                             </div>
@@ -32,11 +32,15 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <label for="content">文章内容</label>
-                            <textarea class="form-control " id="content" name="content">{{article.content}}</textarea>
+                            <label for="url">文章链接</label>
+                            <input type="text" class="form-control" name="url" id="url" placeholder="如：http://wincn.net/p/ddddd">
                         </div>
+                        <div class="form-group">
+                            <label for="source">文章来源</label>
+                            <input type="text" class="form-control" name="source" id="source" placeholder="如：wincn开发网">
+                        </div>
+                        
                         <button type="submit" class="btn btn-primary"><i class="fa fa-location-arrow"></i> 发布</button>
                     </div>
                 </div>

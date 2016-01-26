@@ -184,3 +184,20 @@ blockquote {
 .fullscreen .create .CodeMirror{
     height:360px;
 }
+.input-radius {
+    border-radius: 20px;
+}
+
+.nav-small>li>a{
+    padding: 4px 15px;
+    border-radius: 4px;
+}
+.nav-small>li.active>a{
+    padding: 4px 15px;
+    border-radius: 4px;
+    font-weight:normal;
+}
+.box.box-solid > .box-header .btn:hover, .box.box-solid > .box-header>.nav-small>li>a:hover {
+    background: #337AB7;
+    color: #fff;
+}

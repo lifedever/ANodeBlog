@@ -3,18 +3,27 @@
         <div class="article">
             <div class="media">
                 <div class="pull-left">
-                    <a href="/u/{{_user.username}}" title="查看 {{_user.username}} 的所有作品"><img class="media-object touxiang" src="{{gravatar _user.email}}"></a>
+                    <a href="/u/{{_user.username}}" title="查看 {{_user.username}} 的所有作品"><img
+                            class="media-object touxiang" src="{{gravatar _user.email}}"></a>
                 </div>
                 <div class="media-body article-cell">
                     <span class="media-heading">
                         <!--<span class="label label-primary">置顶</span>-->
                         {{#if up}} <span class="label label-primary">置顶</span>{{/if}}
                         {{#if recommend}} <span class="label label-success">推荐</span>{{/if}}
-                        <a href="/p/{{id}}" title="作者: {{_user.username}} 编辑于 {{timeFromNow updated_time}}">{{title}}</a>
-                    </span>
-                      <span class="label label-default">
-                            <span class="ds-thread-count" data-thread-key="{{_id}}" data-count-type="comments"></span>/<span title="点击数">{{views}}</span>
+                        {{#equals type '原创'}}
+                            <span class="label label-info">原创</span>
+                            <a href="/p/{{id}}" title="作者: {{_user.username}} 编辑于 {{timeFromNow updated_time}}">{{title}}</a>
+                            <span class="label label-default">
+                            <span title="评论数" class="ds-thread-count" data-thread-key="{{_id}}"
+                                  data-count-type="comments"></span>/<span title="点击数">{{views}}</span>
                         </span>
+                        {{/equals}}
+                        {{#equals type '分享'}}
+                            <span class="label label-warning">分享</span>
+                            <a href="{{url}}" target="_blank" title="作者: {{_user.username}} 编辑于 {{timeFromNow updated_time}}">{{title}}</a>
+                        {{/equals}}
+                    </span>
                     <span class="pull-right time-from-now">{{timeFromNow created_time}}</span>
                 </div>
             </div>

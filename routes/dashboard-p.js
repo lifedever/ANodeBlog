@@ -23,25 +23,32 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/create', function (req, res, next) {
-    res.render('dashboard/p/create', {menu: 'p-list', layout: 'dashboard'});
+    res.render('dashboard/p/create', {
+        menu: 'p-list',
+        types: config.article.types,
+        layout: 'dashboard'
+    });
 });
 
 router.post('/create', function (req, res, next) {
-    var title = req.body.title;
-    var content = req.body.content;
-    var id = req.body.id;
-
-    articleDao.saveOrUpdate({
-        id: id,
-        title: title,
-        content: content,
-        html: md.render(content),
-        _user: req.session.user._id
-    }, function (error, doc) {
+    var article = req.body;
+    article._user = req.session.user._id;
+    articleDao.saveOrUpdate(article, function (error, doc) {
         webHelper.reshook(error, next, function () {
             req.flash(config.constant.flash.success, '文章添加成功!');
             res.redirect('/dashboard/p');
         });
+    });
+});
+
+/**
+ * 发表分享
+ */
+router.get('/create-share', function (req, res, next) {
+    res.render('dashboard/p/create-share', {
+        menu: 'p-list',
+        types: config.article.types,
+        layout: 'dashboard'
     });
 });
 
@@ -72,7 +79,12 @@ router.get('/edit/:id', function (req, res, next) {
     var id = req.params.id;
     Article.findById(id, function (err, doc) {
         if (doc) {
-            res.render('dashboard/p/create', {menu: 'p-list', article: doc, layout: 'dashboard'})
+            res.render('dashboard/p/create', {
+                menu: 'p-list',
+                article: doc,
+                types: config.article.types,
+                layout: 'dashboard'
+            })
         } else {
             var error = new Error('cannot find the article which id is [' + id + ']');
             error.status = 500;

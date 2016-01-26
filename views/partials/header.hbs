@@ -78,10 +78,12 @@
             </div>
 
             <form class="navbar-form navbar-right" role="search" action="/">
+                <input type="hidden" name="type" value="{{type}}">
                 <div class="form-group">
-                    <input type="text" class="form-control input-sm" placeholder="Press Enter to search" name="q" value="{{q}}">
+                    <input type="text" class="form-control input-radius input-sm" placeholder="Press Enter to search" name="q" value="{{q}}">
                 </div>
             </form>
+
             <!-- /.navbar-custom-menu -->
         </div>
         <!-- /.container-fluid -->

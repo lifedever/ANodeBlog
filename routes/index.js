@@ -11,12 +11,14 @@ var superagent = require('superagent');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
+    var type = req.query.type || '';
     var page = req.query.page || 1;
     var Article = dbHelper.Article;
     var q = req.query.q||'';
     // 加入分页查询
     dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', {
-        title: new RegExp(q, 'i')
+        title: new RegExp(q, 'i'),
+        type: new RegExp(type, 'i')
     }, {
         up: -1,
         created_time: 'desc'
@@ -28,6 +30,7 @@ router.get('/', function (req, res, next) {
                 pageNumber: page,
                 count: $page.count,
                 q: q,
+                type: type,
                 menu: 'hot'
             });
         });
