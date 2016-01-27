@@ -26,7 +26,7 @@ router.get('/', function (req, res, next) {
     // 加入分页查询
     dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', searchParams, {
         up: -1,
-        created_time: 'desc'
+        views: 'desc'
     }, function (error, $page) {
         webHelper.reshook(error, next, function () {
             res.render('index', {
@@ -56,12 +56,32 @@ router.get('/', function (req, res, next) {
  * 最新发表
  */
 router.get('/new', function (req, res, next) {
+    var type = req.query.type || '';
+    var recommend = req.query.recommend;
+    var page = req.query.page || 1;
     var Article = dbHelper.Article;
-
-    Article.find().populate('_user').sort({up: -1, 'created_time': 'desc'}).exec(function (error, doc) {
+    var q = req.query.q||'';
+    var searchParams = {
+        title: new RegExp(q, 'i'),
+        type: new RegExp(type, 'i')
+    };
+    if(recommend) {
+        searchParams.recommend = recommend;
+    }
+    // 加入分页查询
+    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', searchParams, {
+        up: -1,
+        created_time: 'desc'
+    }, function (error, $page) {
         webHelper.reshook(error, next, function () {
             res.render('index', {
-                articles: doc,
+                articles: $page.results,
+                pageCount: $page.pageCount,
+                pageNumber: page,
+                count: $page.count,
+                q: q,
+                type: type,
+                recommend: recommend,
                 menu: 'new'
             });
         });

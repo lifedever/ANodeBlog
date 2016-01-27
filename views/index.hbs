@@ -13,10 +13,10 @@
                 <div class="box box-primary">
                     <div class="box-header">
                         <ul class="nav nav-pills nav-small">
-                            <li role="presentation" {{#equals type ''}}{{#equals recommend undefind}}class="active"{{/equals}}{{/equals}}><a href="/">全部</a></li>
-                            <li role="presentation" {{#if recommend}}class="active"{{/if}}><a href="/?recommend=true">推荐</a></li>
-                            <li role="presentation" {{#equals type '原创'}}class="active"{{/equals}}><a href="/?type=原创">原创</a></li>
-                            <li role="presentation" {{#equals type '分享'}}class="active"{{/equals}}><a href="/?type=分享">分享</a></li>
+                            <li role="presentation" {{#equals type ''}}{{#equals recommend undefind}}class="active"{{/equals}}{{/equals}}><a href="?">全部</a></li>
+                            <li role="presentation" {{#if recommend}}class="active"{{/if}}><a href="?recommend=true">推荐</a></li>
+                            <li role="presentation" {{#equals type '原创'}}class="active"{{/equals}}><a href="?type=原创">原创</a></li>
+                            <li role="presentation" {{#equals type '分享'}}class="active"{{/equals}}><a href="?type=分享">分享</a></li>
                         </ul>
                     </div>
                     <div class="box-body">
@@ -33,7 +33,7 @@
                         <nav>
                             <ul class="pagination">
                                 <li>
-                                    <a href="{{#le pageNumber 1}}/?{{else}}/?page={{reduce pageNumber 1}}{{/le}}{{#if recommend}}&recommend={{recommend}}{{/if}}{{#if type}}&type={{type}}{{/if}}"
+                                    <a href="{{#le pageNumber 1}}?{{else}}?page={{reduce pageNumber 1}}{{/le}}{{#if recommend}}&recommend={{recommend}}{{/if}}{{#if type}}&type={{type}}{{/if}}"
                                        aria-label="Previous">
                                         <span aria-hidden="true">&laquo;</span>
                                     </a>
@@ -42,7 +42,7 @@
                                     <li><a href="?page={{step}}{{#if recommend}}&recommend={{recommend}}{{/if}}{{#if type}}&type={{type}}{{/if}}">{{step}}</a></li>
                                 {{/times}}
                                 <li>
-                                    <a href="{{#ge pageNumber pageCount}}/?page={{pageCount}}{{else}}/?page={{add pageNumber 1}}{{/ge}}{{#if recommend}}&recommend={{recommend}}{{/if}}{{#if type}}&type={{type}}{{/if}}"
+                                    <a href="{{#ge pageNumber pageCount}}?page={{pageCount}}{{else}}?page={{add pageNumber 1}}{{/ge}}{{#if recommend}}&recommend={{recommend}}{{/if}}{{#if type}}&type={{type}}{{/if}}"
                                        aria-label="Previous">
                                         <span aria-hidden="true">&raquo;</span>
                                     </a>
