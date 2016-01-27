@@ -7,6 +7,8 @@
 </section>
 <!-- Main content -->
 <section class="content">
+
+
     <div class="row">
         <div class="col-md-9">
             <div class="box box-primary">
@@ -16,8 +18,10 @@
                             <img class="img-circle" src="{{gravatar article._user.email}}"
                                  alt="user image">
                             <span class="username">
-
-                              <a href="/p/{{article._id}}">{{article.title}}</a>
+                                {{#ge article.views 100}}
+                                    <i class="fa fa-fire text-red" title="阅读量大于100会点亮小图标"></i>
+                                {{/ge}}
+                                <a href="/p/{{article._id}}">{{article.title}}</a>
                                 <small>
                                     {{#if article.recommend}} <span class="label label-success">推荐</span>{{/if}}
                                 </small>
@@ -72,20 +76,26 @@
                             <div class="col-md-6 text-center">
                                 <div class="box box-solid">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">客官赏口饭吃吧 <small class="text-danger">支付宝扫描</small></h3>
+                                        <h3 class="box-title">客官赏口饭吃吧
+                                            <small class="text-danger">支付宝扫描</small>
+                                        </h3>
                                     </div>
                                     <div class="box-body">
-                                        <img src="https://raw.githubusercontent.com/gefangshuai/wincn-static/master/imgs/zhong-notitle.png" alt="">
+                                        <img src="https://raw.githubusercontent.com/gefangshuai/wincn-static/master/imgs/zhong-notitle.png"
+                                             alt="">
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 text-center">
                                 <div class="box box-solid">
                                     <div class="box-header with-border">
-                                        <h3 class="box-title">关注了解更多精彩内容 <small class="text-danger">微信扫描</small></h3>
+                                        <h3 class="box-title">关注了解更多精彩内容
+                                            <small class="text-danger">微信扫描</small>
+                                        </h3>
                                     </div>
                                     <div class="box-body">
-                                        <img src="https://raw.githubusercontent.com/gefangshuai/wincn-static/master/imgs/qrcode_for_gh_d4117a038b97_258.jpg" alt="">
+                                        <img src="https://raw.githubusercontent.com/gefangshuai/wincn-static/master/imgs/qrcode_for_gh_d4117a038b97_258.jpg"
+                                             alt="">
                                     </div>
                                 </div>
                             </div>

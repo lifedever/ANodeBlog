@@ -13,7 +13,11 @@
                         {{#if recommend}} <span class="label label-success">推荐</span>{{/if}}
                         {{#equals type '原创'}}
                             <span class="label label-info">原创</span>
-                            <a href="/p/{{id}}" title="作者: {{_user.username}} 编辑于 {{timeFromNow updated_time}}">{{title}}</a>
+                            {{#ge views 100}}
+                                <i class="fa fa-fire text-red" title="阅读量大于100会点亮小图标"></i>
+                            {{/ge}}
+                             <a href="/p/{{id}}"
+                                title="作者: {{_user.username}} 编辑于 {{timeFromNow updated_time}}">{{title}}</a>
                             <span class="label label-default">
                             <span title="评论数" class="ds-thread-count" data-thread-key="{{_id}}"
                                   data-count-type="comments"></span>/<span title="点击数">{{views}}</span>
@@ -21,14 +25,15 @@
                         {{/equals}}
                         {{#equals type '分享'}}
                             <span class="label label-warning">分享</span>
-                            <a href="{{url}}" target="_blank" title="作者: {{_user.username}} 编辑于 {{timeFromNow updated_time}}">{{title}}</a>
+                            <a href="{{url}}" target="_blank"
+                               title="作者: {{_user.username}} 编辑于 {{timeFromNow updated_time}}">{{title}}</a>
 
                         {{/equals}}
                     </span>
                     <span class="pull-right time-from-now text-right  small">
                         {{timeFromNow created_time}}
                         {{#if source}}
-                        <div class="text-light">来自 {{source}}</div>
+                            <div class="text-light">来自 {{source}}</div>
                         {{/if}}
                     </span>
                 </div>

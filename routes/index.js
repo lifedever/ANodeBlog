@@ -89,6 +89,45 @@ router.get('/new', function (req, res, next) {
 });
 
 /**
+ * 被点亮的文章
+ */
+router.get('/fire', function (req, res, next) {
+    var type = req.query.type || '';
+    var recommend = req.query.recommend;
+    var page = req.query.page || 1;
+    var Article = dbHelper.Article;
+    var q = req.query.q||'';
+    var searchParams = {
+        title: new RegExp(q, 'i'),
+        type: new RegExp(type, 'i'),
+        views: {$gt: 99}
+    };
+    if(recommend) {
+        searchParams.recommend = recommend;
+    }
+    // 加入分页查询
+    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', searchParams, {
+        up: -1,
+        views: 'desc'
+    }, function (error, $page) {
+        webHelper.reshook(error, next, function () {
+            res.render('index', {
+                articles: $page.results,
+                pageCount: $page.pageCount,
+                pageNumber: page,
+                count: $page.count,
+                q: q,
+                type: type,
+                recommend: recommend,
+                menu: 'fire'
+            });
+        });
+    });
+});
+
+
+
+/**
  * 登录
  */
 router.get('/login', function (req, res) {

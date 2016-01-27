@@ -7,6 +7,19 @@
 </section>
 <!-- Main content -->
 <section class="content">
+    {{#equals menu 'fire'}}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-solid text-success">
+                    <div class="box-body">
+                        <h4>
+                             阅读量大于 <code>100</code> 的文章会被自动点亮 <i class="fa fa-fire text-red"></i> 图标 <i class="fa fa-smile-o"></i>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/equals}}
     <div class="row">
         <div class="col-md-9">
             {{#if articles}}
