@@ -1,6 +1,6 @@
 <!-- Bootstrap 3.3.5 -->
 <script src="//cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.1.0/highlight.min.js"></script>
+<script src="/js/highlight.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/AdminLTE2/js/app.min.js"></script>
 <script src="/js/pace.min.js"></script>
@@ -8,4 +8,13 @@
 <script src="/editor/0.1.0/marked.js"></script>
 <script>
     $('[title]').tooltip();
+    $('a[data-toggle="async-modal"]').on('click', function(e){
+        e.preventDefault();
+        var $this = $(this);
+        var $modal = $($this.data('target'));
+
+        $.get($this.attr('href'), function (data) {
+            $modal.html(data).modal('show');
+        });
+    });
 </script>

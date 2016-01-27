@@ -1,6 +1,6 @@
 <!-- 多说js加载开始，一个页面只需要加载一次 -->
 var duoshuoQuery = {
-    short_name: "gefangshuai",
+    short_name: short_name,
     sso: {
         login: "/sso-login",//替换为你自己的回调地址
         logout: "/sso-logout"//替换为你自己的回调地址
@@ -26,3 +26,6 @@ var duoshuoQuery = {
 
 ga('create', 'UA-72898178-1', 'auto');
 ga('send', 'pageview');
+
+<!--end google analytics-->
+

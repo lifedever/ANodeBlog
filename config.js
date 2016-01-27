@@ -2,7 +2,10 @@ var Config = {
     site: {
         title: 'Wincn开发网',
         description: '秉承开源、分享精神，专注技术开发领域，用Coding创造财富',
-        version: '1.0.2'
+        version: '1.0.2',
+        duoshuo: {
+            short_name: 'gefangshuai'   // 请将这里替换成自己的
+        }
     },
     db: {
         cookieSecret: 'blogbynodesecret',

@@ -57,6 +57,7 @@ var _getArticle = function () {
         updated_time: {type: Date, default: Date.now},      // 更新日期
         url: {type: String},                                // 相关链接
         source: {type: String},                             // 文章来源
+        source_id:{type: String},                            // 资源唯一标识
         _user: {
             type: Schema.Types.ObjectId,
             ref: 'User'

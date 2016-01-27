@@ -14,6 +14,11 @@ A Blog build by NodeJS+Express
 - MongoDB
 - Bootstrap
 
+# 开发须知
+请将程序中[多说](http://duoshuo.com)的信息和[google adsense](https://www.google.com/adsense/app)改成自己的！
+
+替换方法：打开`/config.js`文件，将`site.duoshuo.short_name`值替换成自己的
+
 # Demo
 [http://wincn.net](http://wincn.net)
 
@@ -26,6 +31,11 @@ npm start
 
 # Plan
 On [Trello](https://trello.com/b/L9btNWNT/anodeblog)
+
+# 赞助
+![img](https://raw.githubusercontent.com/gefangshuai/wincn-static/master/imgs/zhong.png)
+
+----
 
 # 资料放送
 ![img](https://raw.githubusercontent.com/gefangshuai/wincn-static/master/imgs/node-ziliao.png)
