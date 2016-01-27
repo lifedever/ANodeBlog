@@ -33,6 +33,7 @@ router.get('/create', function (req, res, next) {
 router.post('/create', function (req, res, next) {
     var article = req.body;
     article._user = req.session.user._id;
+    article.html = md.render(article.content);
     articleDao.saveOrUpdate(article, function (error, doc) {
         webHelper.reshook(error, next, function () {
             req.flash(config.constant.flash.success, '文章添加成功!');
