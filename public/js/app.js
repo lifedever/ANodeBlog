@@ -28,4 +28,16 @@ ga('create', 'UA-72898178-1', 'auto');
 ga('send', 'pageview');
 
 <!--end google analytics-->
+$('#searchBtn').on('click', function(e) {
+    e.preventDefault();
+    var $this = $(this);
+    $this.hide();
+    $('.navbar-form').show();
+    $('.navbar-form input').focus();
+});
 
+$('.navbar-form input').on('blur', function(e) {
+    e.preventDefault();
+    $('.navbar-form').hide();
+    $('#searchBtn').show();
+});

@@ -26,6 +26,7 @@
             <!-- Navbar Right Menu -->
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <li><a href="#" id="searchBtn"><i class="fa fa-search"></i></a></li>
                    {{#if session.user}}
                        <!-- User Account Menu -->
                        <li class="dropdown user user-menu">
@@ -78,15 +79,17 @@
                    {{/if}}
                 </ul>
             </div>
-
-            <form class="navbar-form navbar-right" role="search" action="/">
-                <input type="hidden" name="type" value="{{type}}">
-                <input type="hidden" name="recommend" value="{{recommend}}">
-                <div class="form-group">
-                    <input type="text" class="form-control input-radius input-sm" placeholder="Press Enter to search" name="q" value="{{q}}">
+            <form method="get" style="display: none" class=" navbar-form navbar-right" role="search" action="http://www.google.com/search" target="_blank">
+                <div class="form-group has-feedback">
+                    <span class=" glyphicon glyphicon-search form-control-feedback-left text-primary" aria-hidden="true"></span>
+                    <input class="form-control input-radius input-sm feedback-left-input" style="padding-right: 10px; min-width: 220px; margin-top: 2px;" type="text" name="q" placeholder="Google Search">
                 </div>
+                <input type="hidden" name="ie" value="UTF-8">
+                <input type="hidden" name="oe" value="UTF-8">
+                <input type="hidden" name="hl" value="zh-CN">
+                <input type="hidden" name="domains" value="wincn.net">
+                <input type="hidden" name="sitesearch" value="wincn.net">
             </form>
-
             <!-- /.navbar-custom-menu -->
         </div>
         <!-- /.container-fluid -->
