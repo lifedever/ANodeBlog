@@ -109,7 +109,7 @@ app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard-u
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
-    next(err);
+    res.render('404');
 });
 
 // development error handler
