@@ -229,5 +229,8 @@ router.get('/logout', function (req, res) {
     req.session.destroy();
 });
 
+router.get('/more-visitor', function (req, res) {
+    res.render('more-visitor');
+});
 
 module.exports = router;
