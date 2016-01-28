@@ -7,8 +7,6 @@
 </section>
 <!-- Main content -->
 <section class="content">
-
-
     <div class="row">
         <div class="col-md-9">
             <div class="box box-primary">
@@ -16,7 +14,7 @@
                     <div class="post margin-bottom">
                         <div class="user-block">
                             <img class="img-circle" src="{{gravatar article._user.email}}"
-                                 alt="user image">
+                                 alt="user image" data-toggle="user-popover">
                             <span class="username">
                                 {{#ge article.views 100}}
                                     <i class="fa fa-fire text-red" title="阅读量大于100会点亮小图标"></i>
@@ -131,3 +129,8 @@
         </div>
     </div>
 </section>
+{{#section 'js'}}
+    <script>
+
+    </script>
+{{/section}}

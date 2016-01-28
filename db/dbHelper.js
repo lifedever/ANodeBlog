@@ -14,6 +14,7 @@ var _getUser = function () {
         password: {type: String, required: true},
         email: {type: String},  // 邮箱
         website: {type: String},    // 个人网站
+        weibo: {type: String},      // 个人微博
         address: {type: String},    // 所在地点
         github: {type: String}, // github
         signature: {type: String},  // 个人签名

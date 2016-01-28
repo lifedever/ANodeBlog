@@ -12,11 +12,11 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-
     dbHelper.User.findOneAndUpdate({_id: req.session.user._id}, {
         website: req.body.website,    // 个人网站
         address: req.body.address,    // 所在地点
         github: req.body.github, // github
+        weibo: req.body.weibo, // weibo
         job: req.body.job,      // 职业
         signature: req.body.signature  // 个人签名
     }, function (err, user) {

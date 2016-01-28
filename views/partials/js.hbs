@@ -8,7 +8,7 @@
 <script src="/editor/0.1.0/marked.js"></script>
 <script>
     $('[title]').tooltip();
-    $('a[data-toggle="async-modal"]').on('click', function(e){
+    $('a[data-toggle="async-modal"]').on('click', function (e) {
         e.preventDefault();
         var $this = $(this);
         var $modal = $($this.data('target'));
@@ -17,4 +17,7 @@
             $modal.html(data).modal('show');
         });
     });
+
+
+    $('[data-toggle="popover"]').popover();
 </script>
