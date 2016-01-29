@@ -32,6 +32,7 @@
     "remarkable": "^1.6.1",
     "serve-favicon": "~2.3.0",
     "superagent": "^1.7.1",
-    "utility": "^1.6.0"
+    "utility": "^1.6.0",
+    "wechat": "^2.0.3"
   }
 }

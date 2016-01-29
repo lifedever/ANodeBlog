@@ -22,6 +22,9 @@ var Config = {
     article: {
         pageSize: 10,
         types: ['原创', '分享']
+    },
+    wx: {
+        token: 'thoughyg20150101'
     }
 };
 module.exports = Config;

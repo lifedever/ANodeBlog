@@ -98,12 +98,18 @@ app.use(function (req, res, next) {
     next();
 });
 
+// home
 app.use('/', require('./routes/index'));
 app.use('/p', require('./routes/articles'));
 app.use('/u', require('./routes/users'));
+
+// dashboard
 app.use('/dashboard', authority.isAuthenticated, require('./routes/dashboard'));
 app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard-p'));
 app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard-u'));
+
+// wx
+app.use('/api/wx', require('./routes/api/wx/index'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
