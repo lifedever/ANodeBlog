@@ -128,7 +128,7 @@ app.use('/api/wx', wx({
 }, function (req, res, next) {
     var message = req.weixin;
     res.reply({
-        content: '正在维护，请稍后...',
+        content: '正在维护.. [https://yunpan.cn/cr3DCNqt2ittu  访问密码 0dff]',
         type: 'text'
     });
 }));
