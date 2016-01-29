@@ -13,6 +13,7 @@ A Blog build by NodeJS+Express
 - Handlebars
 - MongoDB
 - Bootstrap
+- 微信
 
 # 开发须知
 请将程序中[多说](http://duoshuo.com)的信息和[google adsense](https://www.google.com/adsense/app)改成自己的！
