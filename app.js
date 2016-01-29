@@ -17,9 +17,17 @@ var authority = require('./lib/authority');
 var dbHelper = require('./db/dbHelper');
 var hbsHelper = require('./lib/hbsHelper');
 var wxHelper = require('./lib/wxHelper');
+var wx = require('wechat');
 
-if(config.wx.load)  // 是否加载微信配置信息
+if(config.wx.load) {  // 是否加载微信配置信息
     wxHelper.loadWX();
+    var wxConfig = {
+        token: global.wx.token,
+        appid: global.wx.appid,
+        encodingAESKey: global.wx.encodingAESKey
+    };
+
+}
 
 // routers
 
@@ -116,8 +124,16 @@ app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard-p
 app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard-u'));
 app.use('/dashboard/wx', authority.isAuthenticated, require('./routes/dashboard-wx'));
 
+
+
 // wx
-app.use('/api/wx', require('./routes/api/wx/index'));
+app.use('/api/wx', wx(wxConfig, function(req, res, next){
+    var message = req.weixin;
+    res.reply({
+        content: 'text object',
+        type: 'text'
+    });
+}));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

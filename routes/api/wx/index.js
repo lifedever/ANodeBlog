@@ -17,7 +17,7 @@ router.get('/', function (req, res, next) {
     }
 
 });
-
+/*
 router.post('/', function (req, res) {
     var wxApi = req.body;
     if (wxHelper.checkSignature(wxApi.signature, wxApi.timestamp, wxApi.nonce)) {
@@ -33,6 +33,6 @@ router.post('/', function (req, res) {
         res.send('auth failed!');
     }
 
-});
+});*/
 
 module.exports = router;
