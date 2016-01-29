@@ -122,10 +122,7 @@ app.use('/dashboard/wx', authority.isAuthenticated, require('./routes/dashboard-
 // wx
 app.use('/api/wx', wx(global.wx, function (req, res, next) {
     var wx = req.weixin;
-    res.reply({
-        content: wx.Content,
-        type: 'text'
-    });
+    wxRobot.reply(wx, res);
 }));
 
 // catch 404 and forward to error handler
