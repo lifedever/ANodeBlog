@@ -22,6 +22,7 @@ router.post('/', function (req, res, next) {
         dbHelper.WX.create({
             token: wx.token,
             appid: wx.appid,
+            appSecret: wx.appSecret,
             encodingAESKey: wx.encodingAESKey
         },function (err, doc) {
             if (err) {
@@ -35,6 +36,7 @@ router.post('/', function (req, res, next) {
         dbHelper.WX.update({_id: wx.id}, {
             token: wx.token,
             appid: wx.appid,
+            appSecret: wx.appSecret,
             encodingAESKey: wx.encodingAESKey
         }).exec(function (err, doc) {
             if (err) {

@@ -11,6 +11,7 @@ var _getWX = function () {
     var wxSchema = new Schema({
         token: {type: String},
         appid: {type: String},
+        appSecret: {type: String},
         encodingAESKey: {type: String}
     });
 
