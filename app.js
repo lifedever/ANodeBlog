@@ -19,13 +19,9 @@ var hbsHelper = require('./lib/hbsHelper');
 var wxHelper = require('./lib/wxHelper');
 var wx = require('wechat');
 
-if(config.wx.load) {  // 是否加载微信配置信息
+if (config.wx.load) {  // 是否加载微信配置信息
     wxHelper.loadWX();
-    var wxConfig = {
-        token: global.wx.token,
-        appid: global.wx.appid,
-        encodingAESKey: global.wx.encodingAESKey
-    };
+
 
 }
 
@@ -105,7 +101,6 @@ app.use(passport.session());
 app.use(function (req, res, next) {
 
 
-
     res.locals.site = config.site;
     res.locals.success = req.flash(config.constant.flash.success);
     res.locals.error = req.flash(config.constant.flash.error);
@@ -125,9 +120,12 @@ app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard-u
 app.use('/dashboard/wx', authority.isAuthenticated, require('./routes/dashboard-wx'));
 
 
-
 // wx
-app.use('/api/wx', wx(wxConfig, function(req, res, next){
+app.use('/api/wx', wx({
+    token: 'thoughyg20150101',
+    appid: 'wxb595291ff33c6b21',
+    encodingAESKey: 'J4XXSEnTygKLEwklT6GdIFGIp7wmmZnbv7O7T5x7lpy'
+}, function (req, res, next) {
     var message = req.weixin;
     res.reply({
         content: 'text object',
