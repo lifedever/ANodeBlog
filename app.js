@@ -124,7 +124,7 @@ app.use('/api/wx', wx(global.wx, function (req, res, next) {
     var wx = req.weixin;
 
     res.reply({
-        content: wx.content,
+        content: JSON.stringify(wx.content),
         type: 'text'
     });
 }));
