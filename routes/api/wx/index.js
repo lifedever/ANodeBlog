@@ -1,5 +1,4 @@
 var express = require('express');
-var wx = require('wechat');
 var wxHelper = require('../../../lib/wxHelper');
 
 var router = express.Router();
@@ -17,22 +16,4 @@ router.get('/', function (req, res, next) {
     }
 
 });
-/*
-router.post('/', function (req, res) {
-    var wxApi = req.body;
-    if (wxHelper.checkSignature(wxApi.signature, wxApi.timestamp, wxApi.nonce)) {
-        var reply = "<xml>" +
-            "<ToUserName>" + wxApi.ToUserName + "</ToUserName>" +
-            "<FromUserName>" + wxApi.FromUserName + "</FromUserName>" +
-            "<CreateTime>12345678</CreateTime>" +
-            "<MsgType>text</MsgType>" +
-            "<Content>meg: " + wxApi.Content + "</Content>" +
-            "</xml>";
-        res.send(reply);
-    } else {
-        res.send('auth failed!');
-    }
-
-});*/
-
 module.exports = router;
