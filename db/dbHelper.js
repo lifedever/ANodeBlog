@@ -7,6 +7,17 @@ var utils = require('utility');
 var Promise = require("bluebird");
 var async = require('async');
 
+var _getWX = function () {
+    var wxSchema = new Schema({
+        token: {type: String},
+        appid: {type: String},
+        encodingAESKey: {type: String}
+    });
+
+    var WX = mongoose.model('WX', wxSchema);
+    return WX;
+};
+
 var _getUser = function () {
     /* 用户定义 */
     var userSchema = new Schema({
@@ -58,7 +69,7 @@ var _getArticle = function () {
         updated_time: {type: Date, default: Date.now},      // 更新日期
         url: {type: String},                                // 相关链接
         source: {type: String},                             // 文章来源
-        source_id:{type: String},                            // 资源唯一标识
+        source_id: {type: String},                            // 资源唯一标识
         _user: {
             type: Schema.Types.ObjectId,
             ref: 'User'
@@ -108,6 +119,7 @@ var pageQuery = function (page, pageSize, Model, populate, queryParams, sortPara
 module.exports = {
     User: _getUser(),
     Article: _getArticle(),
+    WX: _getWX(),
     Methods: {
         pageQuery: pageQuery
     }

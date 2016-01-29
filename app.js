@@ -16,6 +16,10 @@ var config = require('./config');
 var authority = require('./lib/authority');
 var dbHelper = require('./db/dbHelper');
 var hbsHelper = require('./lib/hbsHelper');
+var wxHelper = require('./lib/wxHelper');
+
+if(config.wx.load)  // 是否加载微信配置信息
+    wxHelper.loadWX();
 
 // routers
 
@@ -91,6 +95,9 @@ app.use(passport.session());
  * 全局参数传递
  */
 app.use(function (req, res, next) {
+
+
+
     res.locals.site = config.site;
     res.locals.success = req.flash(config.constant.flash.success);
     res.locals.error = req.flash(config.constant.flash.error);
@@ -107,6 +114,7 @@ app.use('/u', require('./routes/users'));
 app.use('/dashboard', authority.isAuthenticated, require('./routes/dashboard'));
 app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard-p'));
 app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard-u'));
+app.use('/dashboard/wx', authority.isAuthenticated, require('./routes/dashboard-wx'));
 
 // wx
 app.use('/api/wx', require('./routes/api/wx/index'));

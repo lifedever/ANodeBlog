@@ -24,7 +24,7 @@ var Config = {
         types: ['原创', '分享']
     },
     wx: {
-        token: 'thoughyg20150101'
+        load: true
     }
 };
 module.exports = Config;
