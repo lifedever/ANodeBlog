@@ -128,7 +128,7 @@ app.use('/api/wx', wx({
 }, function (req, res, next) {
     var message = req.weixin;
     res.reply({
-        content: 'text object',
+        content: '正在维护，请稍后...',
         type: 'text'
     });
 }));
