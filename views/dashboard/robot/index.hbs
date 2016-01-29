@@ -1,0 +1,57 @@
+<section class="content-header">
+    <ol class="breadcrumb">
+        <li><a href="/dashboard"><i class="fa fa-dashboard"></i> 管理中心</a></li>
+        <li class="active">自动回复机器人</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"> <i class="fa fa-rocket"></i> 添加规则</h3>
+                </div>
+                <div class="box-body">
+                    <form class="form-inline" action="/dashboard/robot" method="post">
+                        <div class="form-group">
+                            <label for="key">标识</label>
+                            <input type="text" class="form-control" id="key" name="key">
+                        </div>
+                        <div class="form-group">
+                            <label for="value">规则</label>
+                            <input type="text" class="form-control" style="width: 700px;" id="value" name="value">
+                        </div>
+                        <button type="submit" class="btn btn-primary">添加</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title"> <i class="fa fa-list"></i> 规则列表</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th width="120">标识</th>
+                            <th>规则</th>
+                            <th width="120">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{#each robots}}
+                            <tr>
+                                <td>{{key}}</td>
+                                <td>{{value}}</td>
+                                <td><a href="/dashboard/robot/delete/{{_id}}" class="btn btn-danger btn-sm" data-toggle="confirm" data-message="确认删除此规则吗">删除</a></td>
+                            </tr>
+                        {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

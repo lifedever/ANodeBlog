@@ -19,6 +19,24 @@ var _getWX = function () {
     return WX;
 };
 
+/**
+ * 信息自动回复
+ * @private
+ */
+var _getRobot = function () {
+    var robotSchema = new Schema({
+        key: {type: String, required: true, unique: true},
+        value: {type: String, required: true}
+    }, {
+        timestamps: {
+            createdAt: 'created_at',
+            updatedAt: 'updated_at'
+        }
+    });
+    var robot = mongoose.model('Robot', robotSchema);
+    return robot;
+};
+
 var _getUser = function () {
     /* 用户定义 */
     var userSchema = new Schema({
@@ -121,6 +139,7 @@ module.exports = {
     User: _getUser(),
     Article: _getArticle(),
     WX: _getWX(),
+    Robot: _getRobot(),
     Methods: {
         pageQuery: pageQuery
     }

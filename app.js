@@ -117,6 +117,7 @@ app.use('/dashboard', authority.isAuthenticated, require('./routes/dashboard'));
 app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard-p'));
 app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard-u'));
 app.use('/dashboard/wx', authority.isAuthenticated, require('./routes/dashboard-wx'));
+app.use('/dashboard/robot', authority.isAuthenticated, require('./routes/dashboard-robot'));
 
 
 // wx
