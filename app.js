@@ -21,8 +21,6 @@ var wx = require('wechat');
 
 if (config.wx.load) {  // 是否加载微信配置信息
     wxHelper.loadWX();
-
-
 }
 
 // routers
@@ -121,11 +119,7 @@ app.use('/dashboard/wx', authority.isAuthenticated, require('./routes/dashboard-
 
 
 // wx
-app.use('/api/wx', wx({
-    token: 'thoughyg20150101',
-    appid: 'wxb595291ff33c6b21',
-    encodingAESKey: 'J4XXSEnTygKLEwklT6GdIFGIp7wmmZnbv7O7T5x7lpy'
-}, function (req, res, next) {
+app.use('/api/wx', wx(global.wx, function (req, res, next) {
     var message = req.weixin;
     res.reply({
         content: '正在维护.. [https://yunpan.cn/cr3DCNqt2ittu  访问密码 0dff]',
