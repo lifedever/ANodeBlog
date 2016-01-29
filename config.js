@@ -24,7 +24,8 @@ var Config = {
         types: ['原创', '分享']
     },
     wx: {
-        load: true
+        load: true,
+        noSkill: "没有此技能，请关注网站: http://wincn.net了解更多!"
     }
 };
 module.exports = Config;
