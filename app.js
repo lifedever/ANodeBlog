@@ -122,7 +122,7 @@ app.use('/dashboard/wx', authority.isAuthenticated, require('./routes/dashboard-
 // wx
 app.use('/api/wx', wx(global.wx, function (req, res, next) {
     var wx = req.weixin;
-
+    console.log(wx);
     res.reply({
         content: JSON.stringify(wx.content),
         type: 'text'
