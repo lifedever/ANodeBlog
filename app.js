@@ -18,6 +18,7 @@ var dbHelper = require('./db/dbHelper');
 var hbsHelper = require('./lib/hbsHelper');
 var wxHelper = require('./lib/wxHelper');
 var wx = require('wechat');
+var wxRobot = require('./lib/wxRobot');
 
 if (config.wx.load) {  // 是否加载微信配置信息
     wxHelper.loadWX();
@@ -120,9 +121,10 @@ app.use('/dashboard/wx', authority.isAuthenticated, require('./routes/dashboard-
 
 // wx
 app.use('/api/wx', wx(global.wx, function (req, res, next) {
-    var message = req.weixin;
+    var wx = req.weixin;
+
     res.reply({
-        content: '正在维护.. [https://yunpan.cn/cr3DCNqt2ittu  访问密码 0dff]',
+        content: wx.content,
         type: 'text'
     });
 }));
