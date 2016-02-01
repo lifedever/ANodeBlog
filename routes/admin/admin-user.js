@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
             next(err);
         } else {
             res.render('dashboard/admin/user', {
-                menu: 'index',
+                menu: 'admin-user',
                 users: users,
                 layout: 'dashboard'
             });
