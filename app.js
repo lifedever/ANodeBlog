@@ -98,8 +98,6 @@ app.use(passport.session());
  * 全局参数传递
  */
 app.use(function (req, res, next) {
-
-
     res.locals.site = config.site;
     res.locals.success = req.flash(config.constant.flash.success);
     res.locals.error = req.flash(config.constant.flash.error);
@@ -112,13 +110,17 @@ app.use('/', require('./routes/index'));
 app.use('/p', require('./routes/articles'));
 app.use('/u', require('./routes/users'));
 
-// dashboard
-app.use('/dashboard', authority.isAuthenticated, require('./routes/dashboard'));
-app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard-p'));
-app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard-u'));
-app.use('/dashboard/wx', authority.isAuthenticated, require('./routes/dashboard-wx'));
-app.use('/dashboard/robot', authority.isAuthenticated, require('./routes/dashboard-robot'));
+// dashboard role['user']
+app.use('/dashboard', authority.isAuthenticated, require('./routes/dashboard/dashboard'));
+app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard/dashboard-p'));
+app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard/dashboard-u'));
 
+// admin role['admin']
+app.use('/admin', authority.isAdmin, require('./routes/admin/admin'));
+app.use('/admin/user', authority.isAdmin, require('./routes/admin/admin-user'));
+app.use('/admin/inviteCode', authority.isAdmin, require('./routes/admin/admin-inviteCode'));
+app.use('/admin/wx', authority.isAdmin, require('./routes/admin/admin-wx'));
+app.use('/admin/robot', authority.isAdmin, require('./routes/admin/admin-robot'));
 
 // wx
 app.use('/api/wx', wx(global.wx, function (req, res, next) {

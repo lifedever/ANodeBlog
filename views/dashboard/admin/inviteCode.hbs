@@ -1,0 +1,46 @@
+<section class="content-header">
+    <ol class="breadcrumb">
+        <li><a href="/dashboard"><i class="fa fa-dashboard"></i> 管理中心</a></li>
+        <li class="active">注册码列表</li>
+    </ol>
+</section>
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">生成注册码</h3>
+                </div>
+                <div class="box-body">
+                    <form class="form-inline" action="/admin/inviteCode/generate" method="get">
+                        <div class="form-group">
+                            <label for="num">数量</label>
+                            <input type="number" class="form-control" id="num" name="num" min="1" value="1">
+                        </div>
+                        <button type="submit" class="btn btn-primary">生成</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">邀请码列表</h3>
+                </div>
+                <div class="box-body">
+                    <div class="row">
+                        {{#each codes}}
+                            <div class="col-md-2">
+                                {{#if used}}
+                                    <del class="text-danger">{{code}}</del>
+                                {{else}}
+                                    {{code}}
+                                {{/if}}
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

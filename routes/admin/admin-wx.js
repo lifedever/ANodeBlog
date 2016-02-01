@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var dbHelper = require('../db/dbHelper');
-var wxHelper = require('../lib/wxHelper');
+var dbHelper = require('../../db/dbHelper');
+var wxHelper = require('../../lib/wxHelper');
 
 router.get('/', function (req, res, next) {
     dbHelper.WX.find().exec(function (err, doc) {

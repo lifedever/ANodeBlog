@@ -6,7 +6,12 @@ var Schema = mongoose.Schema;
 var utils = require('utility');
 var Promise = require("bluebird");
 var async = require('async');
-
+var config = require('../config');
+/**
+ * 微信定义
+ * @returns {*|Model|Aggregate}
+ * @private
+ */
 var _getWX = function () {
     var wxSchema = new Schema({
         token: {type: String},
@@ -17,6 +22,26 @@ var _getWX = function () {
 
     var WX = mongoose.model('WX', wxSchema);
     return WX;
+};
+
+/**
+ * 邀请码定义
+ * @returns {*|Model|Aggregate}
+ * @private
+ */
+var _getInviteCode = function () {
+    var inviteCodeSchema = new Schema({
+        code: {type: String, required: true, unique: true},
+        used: {type: Boolean, default: false}
+    }, {
+        timestamps: {
+            createdAt: 'created_at',
+            updatedAt: 'updated_at'
+        }
+    });
+
+    var InviteCode = mongoose.model('inviteCode', inviteCodeSchema);
+    return InviteCode;
 };
 
 /**
@@ -42,13 +67,16 @@ var _getUser = function () {
     var userSchema = new Schema({
         username: {type: String, required: true, unique: true},// 用户名
         password: {type: String, required: true},
+        role: {type: String, default: config.constant.role.user}, // 角色：admin、user，默认为'user'
         email: {type: String},  // 邮箱
         website: {type: String},    // 个人网站
         weibo: {type: String},      // 个人微博
         address: {type: String},    // 所在地点
         github: {type: String}, // github
         signature: {type: String},  // 个人签名
-        job: {type: String}         // 职业
+        job: {type: String},         // 职业
+        inviteCode: {type: String},     // 注册码
+        status: {type: Boolean, default: true}  // 用户是否有效
     }, {
         timestamps: {
             createdAt: 'created_at',
@@ -140,6 +168,7 @@ module.exports = {
     Article: _getArticle(),
     WX: _getWX(),
     Robot: _getRobot(),
+    InviteCode: _getInviteCode(),
     Methods: {
         pageQuery: pageQuery
     }

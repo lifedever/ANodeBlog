@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var dbHelper = require('../db/dbHelper');
+var dbHelper = require('../../db/dbHelper');
 var async = require('async');
-var config = require('../config');
+var config = require('../../config');
 
 router.get('/', function (req, res, next) {
     dbHelper.Robot.find().exec(function (err, doc) {

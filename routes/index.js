@@ -15,12 +15,12 @@ router.get('/', function (req, res, next) {
     var recommend = req.query.recommend;
     var page = req.query.page || 1;
     var Article = dbHelper.Article;
-    var q = req.query.q||'';
+    var q = req.query.q || '';
     var searchParams = {
         title: new RegExp(q, 'i'),
         type: new RegExp(type, 'i')
     };
-    if(recommend) {
+    if (recommend) {
         searchParams.recommend = recommend;
     }
     // 加入分页查询
@@ -43,13 +43,13 @@ router.get('/', function (req, res, next) {
     });
 
     /*Article.find().skip(0).limit(5).populate('_user').sort({up: -1, created_time: 'desc'}).exec(function (error, doc) {
-        webHelper.reshook(error, next, function () {
-            res.render('index', {
-                articles: doc,
-                menu: 'hot'
-            });
-        });
-    });*/
+     webHelper.reshook(error, next, function () {
+     res.render('index', {
+     articles: doc,
+     menu: 'hot'
+     });
+     });
+     });*/
 });
 
 /**
@@ -60,12 +60,12 @@ router.get('/new', function (req, res, next) {
     var recommend = req.query.recommend;
     var page = req.query.page || 1;
     var Article = dbHelper.Article;
-    var q = req.query.q||'';
+    var q = req.query.q || '';
     var searchParams = {
         title: new RegExp(q, 'i'),
         type: new RegExp(type, 'i')
     };
-    if(recommend) {
+    if (recommend) {
         searchParams.recommend = recommend;
     }
     // 加入分页查询
@@ -96,13 +96,13 @@ router.get('/fire', function (req, res, next) {
     var recommend = req.query.recommend;
     var page = req.query.page || 1;
     var Article = dbHelper.Article;
-    var q = req.query.q||'';
+    var q = req.query.q || '';
     var searchParams = {
         title: new RegExp(q, 'i'),
         type: new RegExp(type, 'i'),
         views: {$gt: 99}
     };
-    if(recommend) {
+    if (recommend) {
         searchParams.recommend = recommend;
     }
     // 加入分页查询
@@ -126,7 +126,6 @@ router.get('/fire', function (req, res, next) {
 });
 
 
-
 /**
  * 登录
  */
@@ -142,12 +141,15 @@ router.post('/login', passport.authenticate('local', {
 }), function (req, res, next) {
     var username = req.body.username;
     dbHelper.User.findOne({username: username}).exec(function (err, user) {
-        if (!err) {
+        if (err) {
+            next(err);
+        } else if (!user.status) {
+            req.flash(config.constant.flash.error, '账户已被禁用，请联系gefangshuai@outlook.com！');
+            res.redirect('/login');
+        } else {
             req.session.user = user;
             req.flash(config.constant.flash.success, '欢迎回来，' + username);
             res.redirect('/dashboard');
-        } else {
-            next(err);
         }
     });
 });
@@ -162,9 +164,9 @@ router.get('/join', function (req, res) {
 });
 router.post('/join', function (req, res, next) {
 
-    req.flash(config.constant.flash.error, '注册功能已被停用，请联系管理员: gefangshuai@outlook.com');
-    res.redirect('/login');
-    return;
+    /* req.flash(config.constant.flash.error, '注册功能已被停用，请联系管理员: gefangshuai@outlook.com');
+     res.redirect('/login');
+     return;*/
     var user = req.body;
     if (!user.username || !user.password) {
         req.flash(config.constant.flash.error, '用户名或密码不能为空!');
@@ -186,6 +188,7 @@ router.post('/join', function (req, res, next) {
 }, function (req, res, next) {
     var user = req.body;
     var User = dbHelper.User;
+    var InviteCode = dbHelper.InviteCode;
 
     async.parallel({
         username: function (callback) {
@@ -197,6 +200,11 @@ router.post('/join', function (req, res, next) {
             User.findOne({email: user.email}, function (err, doc) {
                 callback(null, doc);
             });
+        },
+        inviteCode: function (callback) {
+            InviteCode.update({code: user.inviteCode, used: false}, {used: true}, function (err, raw) {
+                callback(null, raw);
+            })
         }
     }, function (err, results) {
         if (results.username) {
@@ -210,6 +218,11 @@ router.post('/join', function (req, res, next) {
             return;
         }
 
+        if (results.inviteCode.ok == 0) {
+            req.flash(config.constant.flash.error, '注册码无效');
+            res.redirect('/join');
+            return;
+        }
         user.password = utils.md5(user.password, 'base64');
         User.create(user, function (err, doc) {
             webHelper.reshook(err, next, function () {
@@ -232,7 +245,6 @@ router.get('/logout', function (req, res) {
 router.get('/more-visitor', function (req, res) {
     res.render('more-visitor');
 });
-
 
 
 module.exports = router;

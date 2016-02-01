@@ -1,7 +1,7 @@
 var express = require('express');
-var webHelper = require('../lib/webHelper');
-var dbHelper = require('../db/dbHelper');
-var config = require('../config');
+var webHelper = require('../../lib/webHelper');
+var dbHelper = require('../../db/dbHelper');
+var config = require('../../config');
 
 var router = express.Router();
 

@@ -17,6 +17,10 @@ var Config = {
         flash: {
             success: 'success',
             error: 'error'
+        },
+        role: {
+            admin: 'admin',
+            user: 'user'
         }
     },
     article: {

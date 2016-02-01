@@ -2,11 +2,11 @@ var express = require('express');
 var passport = require('passport');
 
 var async = require('async');
-var webHelper = require('../lib/webHelper');
-var dbHelper = require('../db/dbHelper');
-var articleDao = require('../db/articleDao');
-var authority = require('../lib/authority');
-var config = require('../config');
+var webHelper = require('../../lib/webHelper');
+var dbHelper = require('../../db/dbHelper');
+var articleDao = require('../../db/articleDao');
+var authority = require('../../lib/authority');
+var config = require('../../config');
 var lodash = require('lodash');
 
 
