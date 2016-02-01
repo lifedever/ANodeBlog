@@ -69,9 +69,7 @@ router.get('/delete/:id', function (req, res, next) {
                 });
             });
         } else {
-            var error = new Error('cannot find the article which id is [' + id + ']');
-            error.status = 500;
-            next(error);
+            next(err);
         }
     });
 });
@@ -80,16 +78,21 @@ router.get('/edit/:id', function (req, res, next) {
     var id = req.params.id;
     Article.findById(id, function (err, doc) {
         if (doc) {
-            res.render('dashboard/p/create', {
-                menu: 'p-list',
-                article: doc,
-                types: config.article.types,
-                layout: 'dashboard'
-            })
+
+            if(doc._user != req.session.user._id){
+                req.flash(config.constant.flash.error, '没权限编辑其他用户的文章!');
+                res.redirect('/p/' + id);
+            }else{
+                res.render('dashboard/p/create', {
+                    menu: 'p-list',
+                    article: doc,
+                    types: config.article.types,
+                    layout: 'dashboard'
+                })
+            }
+
         } else {
-            var error = new Error('cannot find the article which id is [' + id + ']');
-            error.status = 500;
-            next(error);
+            next(err);
         }
     });
 });
