@@ -214,6 +214,14 @@ blockquote {
     padding-right: 10px;
 }
 
-footer a {
-    color: #444449
+.bg-footer {
+    background: #3c8dbc;
+    color: #fff;
+}
+.bg-footer a {
+    color: #fff;
+}
+
+.bg-footer a:hover {
+    color: #dddddd;
 }
