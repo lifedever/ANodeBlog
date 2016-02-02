@@ -5,6 +5,11 @@ body{
     line-height: 20px;
     color: #555;
     word-wrap: break-word;
+    position:relative;
+    z-index:0;
+}
+.wrapper {
+    z-index: 1;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 500;
@@ -292,3 +297,4 @@ Back to top button
 .text-white {
     color: #fff;
 }
+
