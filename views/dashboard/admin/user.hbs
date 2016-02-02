@@ -24,7 +24,7 @@
                                 邮箱
                             </th>
                             <th>
-                                邀请码
+                                注册码
                             </th>
                             <th></th>
                         </tr>
@@ -40,7 +40,7 @@
                                 <td>
                                     <a href="mailto:{{email}}">{{email}}</a>
                                 </td>
-                                <td width="160">{{formatDate created_at 'yy.MM.dd hh:mm'}}</td>
+                                <td width="160">{{inviteCode}}</td>
                                 <td width="150">
                                     {{#if status}}
                                         <a href="/admin/user/disabled/{{id}}/{{status}}" class="btn btn-danger btn-sm" data-toggle="confirm" data-message="确定要将此用户禁用吗?">禁用</a>
