@@ -174,21 +174,23 @@ blockquote {
     height: 70vh;
 }
 
-.comment .CodeMirror{
+.comment .CodeMirror {
     height: 150px;
 }
-.create .CodeMirror{
+
+.create .CodeMirror {
     height: 165px;
 }
 
-.fullscreen .create .CodeMirror{
-    height:360px;
+.fullscreen .create .CodeMirror {
+    height: 360px;
 }
+
 .input-radius {
     border-radius: 20px;
 }
 
-.nav-small>li>a{
+.nav-small > li > a {
     padding: 4px 15px;
     border-radius: 4px;
 }
@@ -209,6 +211,7 @@ blockquote {
     text-align: center;
     pointer-events: none;
 }
+
 .feedback-left-input {
     padding-left: 28px;
     padding-right: 10px;
@@ -218,6 +221,7 @@ blockquote {
     background: #3c8dbc;
     color: #fff;
 }
+
 .bg-footer a {
     color: #fff;
 }
@@ -230,4 +234,37 @@ dd {
     width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+/*
+Back to top button
+*/
+#back-top {
+    position: fixed;
+    bottom: 30px;
+    right: 50px;
+}
+#back-top a {
+    width: 48px;
+    display: block;
+    text-align: center;
+    font: 11px/100% Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #bbb;
+    /* background color transition */
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    transition: 1s;
+}
+#back-top a:hover {
+    color: #000;
+}
+/* arrow icon (span tag) */
+#back-top span {
+    width: 48px;
+    height: 48px;
+    display: block;
+    margin-bottom: 7px;
+    background: url('../img/up-arrow.png') no-repeat center center;
 }
