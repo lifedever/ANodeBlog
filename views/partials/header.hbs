@@ -11,8 +11,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li {{#equals menu 'hot'}}class="active"{{/equals}}><a href="/">热门文章 <span class="sr-only">(current)</span></a></li>
                     <li {{#equals menu 'new'}}class="active"{{/equals}}><a href="/new">最新发表</a></li>
+                    <li {{#equals menu 'hot'}}class="active"{{/equals}}><a href="/hot">热门文章 <span class="sr-only">(current)</span></a></li>
                     <li {{#equals menu 'fire'}}class="active"{{/equals}}><a href="/fire"><i class="fa fa-fire text-red"></i> 被点亮的文章</a></li>
 
                     {{#if session.user}}
