@@ -8,10 +8,10 @@
                 <!-- Add the bg color to the header using any of the bg-* classes -->
                 <div class="widget-user-header bg-aqua-active">
                     <h2 class="widget-user-username">{{user.username}}
-                        <small style="color: #ffffff; font-size: 10px;"><b>{{timeFromNow user.created_time}}</b> 加入本站
+                        <small style="color: #ffffff; font-size: 10px;"><b>{{timeFromNow user.created_at}}</b> 加入本站
                         </small>
                     </h2>
-                    <h5 class="widget-user-desc">{{article._user.job}}</h5>
+                    <h5 class="widget-user-desc">{{user.job}}</h5>
                 </div>
                 <div class="widget-user-image">
                     <img class="img-circle" src="{{gravatar user.email}}" alt="User Avatar">
