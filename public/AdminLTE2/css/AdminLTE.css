@@ -24,8 +24,7 @@ body {
 body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: Consolas, 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-weight: 400;
+    font-family: Helvetica, Tahoma, Arial, STXihei, "华文细黑", "Microsoft YaHei", "微软雅黑", SimSun, "宋体", Heiti, "黑体", sans-serif;
     overflow-x: hidden;
     overflow-y: auto;
 }
