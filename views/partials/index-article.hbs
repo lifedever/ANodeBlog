@@ -23,7 +23,7 @@
                         {{#equals type '分享'}}
                             <span title="分享" class="text-orange h4"><i class="fa fa-external-link"></i></span>
                             <a href="{{url}}" target="_blank">{{title}}</a>
-
+                            <span class="pull-right small">来自 {{source}}</span>
                         {{/equals}}
                         {{#ge views 100}}
                             <span class="text-red h4" title="已被点亮">
