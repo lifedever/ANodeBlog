@@ -1,11 +1,12 @@
 body{
-    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,STHeiti,"Microsoft Yahei",SimSun,sans-serif;
+    font-family: Georgia, "Times New Roman", Times, serif;
     font-size: 14px;
-    line-height: 1.5;
+    line-height: 20px;
+    color: #555;
     word-wrap: break-word;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-weight: 600;
+    font-weight: 500;
 }
 
 .text-over {
@@ -273,4 +274,20 @@ Back to top button
     display: block;
     margin-bottom: 7px;
     background: url('../img/up-arrow.png') no-repeat center center;
+}
+
+.label {
+    display: inline;
+    padding: .25em .6em;
+    font-size: 65%;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+.text-white {
+    color: #fff;
 }

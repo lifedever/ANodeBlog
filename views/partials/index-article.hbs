@@ -9,20 +9,20 @@
                 <div class="media-body article-cell">
                     <span class="media-heading">
                         <!--<span class="label label-primary">置顶</span>-->
-                        {{#if up}} <span title="置顶" class="text-blue h4"><i class="fa fa-thumb-tack"></i></span>{{/if}}
-                        {{#if recommend}} <span title="推荐" class="text-green h4"><i class="fa fa-thumbs-up"></i></span>{{/if}}
+                        {{#if up}} <span class="label label-primary">置顶</span>{{/if}}
+                        {{#if recommend}} <span class="label label-success">推荐</span>{{/if}}
                         {{#equals type '原创'}}
                             <!--<span class="label label-info">原创</span>-->
 
-                             <a href="/p/{{id}}" class="h3">{{title}}</a>
+                             <a href="/p/{{id}}" class="h2">{{title}}</a>
                             <span class="label label-default pull-right">
                             <span title="评论数" class="ds-thread-count" data-thread-key="{{_id}}"
                                   data-count-type="comments"></span>/<span title="点击数">{{views}}</span>
                         </span>
                         {{/equals}}
                         {{#equals type '分享'}}
-                            <span title="分享" class="text-orange h4"><i class="fa fa-external-link"></i></span>
-                            <a href="{{url}}" target="_blank">{{title}}</a>
+                            <span class="label label-warning label-inverse">分享</span>
+                            <a href="{{url}}" target="_blank" class="h2">{{title}}</a>
                             <span class="pull-right small">来自 {{source}}</span>
                         {{/equals}}
                         {{#ge views 100}}

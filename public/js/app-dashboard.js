@@ -32,6 +32,14 @@ $('[data-toggle="confirm"]').on('click', function (e) {
 var editor = new Editor({
     element: document.getElementById('editor')
 });
-if(document.querySelector('textarea')){
+if (document.querySelector('textarea')) {
     editor.render();
 }
+
+$('#shareUrl').on('blur', function () {
+    var url = this.value;
+    $.get('/dashboard/p/getTitleByUrl?url=' + url, function (data) {
+        console.log(data);
+        $('#shareTitle').val(data);
+    });
+});

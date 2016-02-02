@@ -8,7 +8,8 @@ var articleDao = require('../../db/articleDao');
 var authority = require('../../lib/authority');
 var config = require('../../config');
 var lodash = require('lodash');
-
+var cheerio = require('cheerio');
+var superagent = require('superagent');
 
 var router = express.Router();
 var Article = dbHelper.Article;
@@ -135,6 +136,18 @@ router.get('/recommend/:id', function (req, res, next) {
             next(err);
         } else {
             res.redirect('/dashboard/p');
+        }
+    });
+});
+
+router.get('/getTitleByUrl', function(req, res, next) {
+    var url = req.query.url;
+    superagent.get(url).end(function (err, xhr) {
+        if(err) {
+            res.send(err);
+        }else{
+            var $ = cheerio.load(xhr.text);
+            res.send(lodash.trim($('title').text()));
         }
     });
 });

@@ -15,18 +15,19 @@
                         <div class="user-block">
                             <img class="img-circle touxiang" src="{{gravatar article._user.email}}"
                                  alt="user image" data-toggle="user-popover">
-                            <span class="username">
+                            <div class="username">
                                 <small>
-                                    {{#if article.recommend}} <span title="推荐" class="text-green h2"><i class="fa fa-thumbs-up"></i></span>{{/if}}
+                                    {{#if article.recommend}} <span class="label label-success">推荐</span>{{/if}}
                                 </small>
+
                                 <a href="/p/{{article._id}}">{{article.title}}</a>
                                 {{#ge article.views 100}}
                                     <i class="fa fa-fire text-red" title="阅读量大于100会点亮小图标"></i>
                                 {{/ge}}
 
-                            </span>
+                            </div>
 
-                            <span class="description">
+                            <p class="description margin">
                                 <strong>
                                     <span class="">
                                         <a href="/u/{{article._user.username}}">{{article._user.username}}</a>
@@ -49,7 +50,7 @@
                                     </small>
                                 {{/equals}}
 
-                            </span>
+                            </p>
                         </div>
                         <div>
                             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
