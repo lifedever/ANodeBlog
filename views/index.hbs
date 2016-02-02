@@ -2,7 +2,9 @@
 <section class="content-header">
     <ol class="breadcrumb">
         <li><a href="/"><i class="fa fa-dashboard"></i> 首页</a></li>
-        <li class="active">文章列表 <small class="text-danger">(共{{count}}篇)</small> </li>
+        <li class="active">文章列表
+            <small class="text-danger">(共{{count}}篇)</small>
+        </li>
     </ol>
 </section>
 <!-- Main content -->
@@ -14,7 +16,25 @@
                 <div class="box box-solid text-success">
                     <div class="box-body">
                         <h4>
-                             阅读量大于 <code>100</code> 的文章会被自动点亮 <i class="fa fa-fire text-red"></i> 图标 <i class="fa fa-smile-o"></i>
+                            阅读量大于 <code>100</code> 的文章会被自动点亮 <i class="fa fa-fire text-red"></i> 图标 <i
+                                class="fa fa-smile-o"></i>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{else}}
+        <div class="row hide">
+            <div class="col-md-12">
+                <div class="box box-solid">
+                    <div class="box-body">
+                        <h4>
+                            <b>
+                                JS Tip:
+                            </b>
+                            <span id="duanzi" title="js 小知识">
+
+                            </span>
                         </h4>
                     </div>
                 </div>
@@ -27,10 +47,14 @@
                 <div class="box box-primary">
                     <div class="box-header">
                         <ul class="nav nav-pills nav-small">
-                            <li role="presentation" {{#equals type ''}}{{#equals recommend undefind}}class="active"{{/equals}}{{/equals}}><a href="?">全部</a></li>
-                            <li role="presentation" {{#if recommend}}class="active"{{/if}}><a href="?recommend=true">推荐</a></li>
-                            <li role="presentation" {{#equals type '原创'}}class="active"{{/equals}}><a href="?type=原创">原创</a></li>
-                            <li role="presentation" {{#equals type '分享'}}class="active"{{/equals}}><a href="?type=分享">分享</a></li>
+                            <li role="presentation" {{#equals type ''}}{{#equals recommend undefind}}class="active"{{/equals}}{{/equals}}>
+                                <a href="?">全部</a></li>
+                            <li role="presentation" {{#if recommend}}class="active"{{/if}}><a
+                                    href="?recommend=true">推荐</a></li>
+                            <li role="presentation" {{#equals type '原创'}}class="active"{{/equals}}><a
+                                    href="?type=原创">原创</a></li>
+                            <li role="presentation" {{#equals type '分享'}}class="active"{{/equals}}><a
+                                    href="?type=分享">分享</a></li>
                         </ul>
                     </div>
                     <div class="box-body">
@@ -53,7 +77,9 @@
                                     </a>
                                 </li>
                                 {{#times pageCount 1 pageCount}}
-                                    <li><a href="?page={{step}}{{#if recommend}}&recommend={{recommend}}{{/if}}{{#if type}}&type={{type}}{{/if}}">{{step}}</a></li>
+                                    <li>
+                                        <a href="?page={{step}}{{#if recommend}}&recommend={{recommend}}{{/if}}{{#if type}}&type={{type}}{{/if}}">{{step}}</a>
+                                    </li>
                                 {{/times}}
                                 <li>
                                     <a href="{{#ge pageNumber pageCount}}?page={{pageCount}}{{else}}?page={{add pageNumber 1}}{{/ge}}{{#if recommend}}&recommend={{recommend}}{{/if}}{{#if type}}&type={{type}}{{/if}}"
@@ -83,3 +109,11 @@
         </div>
     </div>
 </section>
+{{#section 'js'}}
+    <script>
+        $.get('/duanzi', function(data) {
+            $('#duanzi').html(data);
+            $('#duanzi').closest('div.row').removeClass('hide');
+        })
+    </script>
+{{/section}}

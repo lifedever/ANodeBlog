@@ -7,7 +7,9 @@ var router = express.Router();
 var passport = require('passport');
 var utils = require('utility');
 var async = require('async');
+var cheerio = require('cheerio');
 var superagent = require('superagent');
+var lodash = require('lodash');
 
 router.get('/', function (req, res, next) {
     var type = req.query.type || '';
@@ -271,5 +273,11 @@ router.get('/more-visitor', function (req, res) {
     res.render('more-visitor');
 });
 
-
+router.get('/duanzi', function (req, res) {
+    superagent.get('https://github.com/loverajoel/jstips/').end(function (err, xhr) {
+        var $ = cheerio.load(xhr.text);
+        var html = $('#user-content-tips-list').closest('h1').next('ul').find('li').html();
+        res.send(html);
+    });
+});
 module.exports = router;
