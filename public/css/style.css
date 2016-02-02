@@ -225,3 +225,9 @@ blockquote {
 .bg-footer a:hover {
     color: #dddddd;
 }
+
+dd {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

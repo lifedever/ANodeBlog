@@ -26,7 +26,7 @@
                             <th>
                                 注册码
                             </th>
-                            <th></th>
+                            <th>加入时间</th>
                         </tr>
                         {{#each users}}
                             <tr>
@@ -34,7 +34,7 @@
                                     <img src="{{gravatar email}}" class="img-circle" alt="">
                                 </td>
                                 <td>
-                                    <a href="/u/{{_id}}" title="查看当前用户下的所有文章" target="_blank">{{username}}</a>
+                                    <a href="/u/{{username}}" title="查看当前用户下的所有文章" target="_blank">{{username}}</a>
                                     {{#equals status false}}
                                         <span class="text-danger small">已禁用</span>
                                     {{/equals}}
@@ -49,6 +49,9 @@
                                     {{else}}
                                         <a href="/admin/user/disabled/{{id}}/{{status}}" class="btn btn-primary btn-sm" >启用</a>
                                     {{/if}}
+                                </td>
+                                <td>
+                                    {{timeFromNow created_at}}
                                 </td>
                             </tr>
                         {{/each}}
