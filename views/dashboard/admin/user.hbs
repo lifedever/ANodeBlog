@@ -30,9 +30,11 @@
                         </tr>
                         {{#each users}}
                             <tr>
-                                <td width="60">{{addOne @index}}</td>
+                                <td width="60">
+                                    <img src="{{gravatar email}}" class="img-circle" alt="">
+                                </td>
                                 <td>
-                                    {{username}}
+                                    <a href="/u/{{_id}}" title="查看当前用户下的所有文章" target="_blank">{{username}}</a>
                                     {{#equals status false}}
                                         <span class="text-danger small">已禁用</span>
                                     {{/equals}}
