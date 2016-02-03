@@ -10,6 +10,7 @@ var async = require('async');
 var cheerio = require('cheerio');
 var superagent = require('superagent');
 var lodash = require('lodash');
+var jwt = require('jwt-simple');
 
 router.get('/', function (req, res, next) {
     var type = req.query.type || '';
@@ -265,8 +266,9 @@ router.post('/join', function (req, res, next) {
  */
 router.get('/logout', function (req, res) {
     req.logout();
-    res.redirect('/');
+    res.clearCookie('duoshuo_token');
     req.session.destroy();
+    res.redirect('/');
 });
 
 /**
@@ -299,12 +301,28 @@ router.get('/sso-login', function (req, res, next) {
             }
         ],
         function (error, userInfo) {
+
+            var obj = {
+                short_name: config.site.duoshuo.short_name,
+                user_key: userInfo.response.user_id,
+                name: userInfo.response.name
+            };
+
+            var duoshuo_token = jwt.encode(obj, 'a96576a72e54d62a1f36a69dc9234b8c');
+            res.cookie('duoshuo_token', duoshuo_token, {maxAge: 60 * 1000 * 60 * 24 * 7});
             req.flash(config.constant.flash.success, userInfo.response.name + ', 欢迎登录');
             res.redirect('/');
         }
     );
 
 
+});
+
+/**
+ * SSO登出
+ */
+router.get('/sso-logout', function (req, res, next) {
+    res.redirect('/logout');
 });
 
 /**

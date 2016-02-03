@@ -2,7 +2,8 @@
 var duoshuoQuery = {
     short_name: short_name,
     sso: {
-        login: "/sso-login"
+        login: '/sso-login',
+        logout: 'http://localhost:3000/sso-logout'
     }
 
 };

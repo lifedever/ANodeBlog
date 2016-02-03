@@ -24,50 +24,15 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li><a href="#" id="searchBtn"><i class="fa fa-search"></i></a></li>
-                    {{#if session.user}}
-                       <!-- User Account Menu -->
-                       <li class="dropdown user user-menu">
-                           <!-- Menu Toggle Button -->
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                               <!-- The user image in the navbar-->
-                               <img src="{{gravatar session.user.email}}" class="user-image" alt="User Image">
-                               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                               <span class="hidden-xs">{{session.user.username}}</span>
-                           </a>
-                           <ul class="dropdown-menu">
-                               <!-- The user image in the menu -->
-                               <li class="user-header">
-                                   <img src="{{gravatar session.user.email}}" class="img-circle" alt="User Image">
-                                   <p>
-                                       <a href="/u/{{session.user.username}}" class="text-white">{{session.user.username}}</a>
-                                       <small><b>{{timeFromNow session.user.created_at}}</b> 加入本站</small>
-                                   </p>
-                               </li>
-                               <!-- Menu Body -->
-                               <li class="user-body">
-                                   <div class="row">
-                                       <div class="col-md-12">
-                                           <div class="text-center small">
-                                               {{session.user.signature}}
-                                           </div>
-                                       </div>
-                                   </div>
-                                   <!-- /.row -->
-                               </li>
-                               <!-- Menu Footer-->
-                               <li class="user-footer">
-                                   <div class="row">
-                                       <div class="col-md-6">
-                                           <a href="/dashboard" class="btn btn-primary btn-block"> <i class="fa fa-dashboard"></i> 管理中心</a>
-                                       </div>
-
-                                       <div class="col-md-6">
-                                           <a href="/logout" class="btn btn-default btn-block"> <i class="fa fa-sign-out"></i> 退出</a>
-                                       </div>
-                                   </div>
-                               </li>
-                           </ul>
-                       </li>
+                    {{#if session.duoshuoUser}}
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.duoshuoUser.username}} <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">我的收藏</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/logout">退出</a></li>
+                            </ul>
+                        </li>
                    {{else}}
                        <li>
                            <a href="/login">加入我们</a>

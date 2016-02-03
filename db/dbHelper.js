@@ -62,6 +62,30 @@ var _getRobot = function () {
     return robot;
 };
 
+/**
+ * 读者定义
+ * @private
+ */
+var _getReader = function () {
+    var readerSchema = new Schema({
+        username: {type: String, required: true},
+        duoshuo_id: {type: String},
+        url: {type: String},
+        avatar_url: {type: String}
+    }, {
+        timestamps: {
+            createdAt: 'created_at',
+            updatedAt: 'updated_at'
+        }
+    })
+
+    return mongoose.model('Reader', readerSchema);
+};
+
+/**
+ * 站点用户
+ * @private
+ */
 var _getUser = function () {
     /* 用户定义 */
     var userSchema = new Schema({
@@ -124,7 +148,7 @@ var _getArticle = function () {
         children: [commentSchema]
     }, {timestamps: {createdAt: 'created_at', updatedAt: 'updated_at'}});
 
-    articleSchema.methods.isShared = function() {
+    articleSchema.methods.isShared = function () {
         return this.type == '分享';
     };
 
@@ -169,6 +193,7 @@ var pageQuery = function (page, pageSize, Model, populate, queryParams, sortPara
 
 
 module.exports = {
+    Reader: _getReader(),
     User: _getUser(),
     Article: _getArticle(),
     WX: _getWX(),

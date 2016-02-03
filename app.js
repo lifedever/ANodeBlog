@@ -19,8 +19,9 @@ var hbsHelper = require('./lib/hbsHelper');
 var wxHelper = require('./lib/wxHelper');
 var wx = require('wechat');
 var wxRobot = require('./lib/wxRobot');
-
+var duoshuoHelper = require('./lib/duoshuoHelper');
 var jwt = require('jwt-simple');
+
 
 if (config.wx.load) {  // 是否加载微信配置信息
     wxHelper.loadWX();
@@ -100,11 +101,48 @@ app.use(passport.session());
  * 全局参数传递
  */
 app.use(function (req, res, next) {
+
+
     res.locals.site = config.site;
     res.locals.success = req.flash(config.constant.flash.success);
     res.locals.error = req.flash(config.constant.flash.error);
     res.locals.session = req.session;
     next();
+});
+
+/**
+ * sso登录
+ */
+app.use(function (req, res, next) {
+    var duoshuo_token = req.cookies.duoshuo_token;
+    if (duoshuo_token && !req.session.duoshuoUser) {
+        var obj = jwt.decode(duoshuo_token, 'a96576a72e54d62a1f36a69dc9234b8c');
+        duoshuoHelper.login(obj, function(err, results){
+            if(err) {
+                next(err);
+            }else{
+                if(!results.localInfo) {
+                    dbHelper.Reader.create({
+                        username: results.duosuoInfo.response.name,
+                        duoshuo_id: results.duosuoInfo.response.user_id,
+                        url: results.duosuoInfo.response.url,
+                        avatar_url: results.duosuoInfo.response.avatar_url
+                    }, function(err, user){
+                        if(err){
+                            next(err);
+                        }else{
+                            req.session.duoshuoUser = user;
+                        }
+                    })
+                }else{
+                    req.session.duoshuoUser = results.localInfo;
+                }
+                next();
+            }
+        });
+    }else{
+        next();
+    }
 });
 
 // home
