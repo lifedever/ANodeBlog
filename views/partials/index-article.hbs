@@ -18,19 +18,19 @@
                             <span class="label label-default pull-right">
                             <span title="评论数" class="ds-thread-count" data-thread-key="{{_id}}"
                                   data-count-type="comments"></span>/<span title="点击数">{{views}}</span>
-                        </span>
+                            </span>
                         {{/equals}}
                         {{#equals type '分享'}}
                             <span class="label label-warning label-inverse">分享</span>
                             <a href="{{url}}" target="_blank" class="h2">{{title}}</a>
-                            <span class="pull-right small">来自 {{source}}</span>
+                            <span class="pull-right small">来自 <span class="text-primary">{{source}}</span> </span>
                         {{/equals}}
                         {{#ge views 100}}
                             <span class="text-red h4" title="已被点亮">
                                     <i class="fa fa-fire"></i>
                                 </span>
                         {{/ge}}
-                        <span class="help-block" style="font-size: 12px; color: #acacac;">
+                        <span class="help-block" style="font-size: 12px;margin-top: 6px; color: #acacac;">
                             <a href="/u/{{_user.username}}" style="color: #00a7d0; font-size: 12px; font-weight: 600">{{_user.username}}</a>
                             发表于 {{timeFromNow created_time}}
                             |
