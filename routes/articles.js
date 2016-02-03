@@ -20,22 +20,35 @@ router.get('/:id', function (req, res, next) {
             });
         },
         function (article, callback) {
-            article.views += 1;
-            Article.update({_id: id}, {views: article.views}, function (err, doc) {
+
+            if(article.isShared()){
                 callback(null, article);
-            });
+            }else{
+                article.views += 1;
+                Article.update({_id: id}, {views: article.views}, function (err, doc) {
+                    callback(null, article);
+                });
+            }
         },
         // 热门文章
         function (article, callback) {
-            Article.find({_user: article._user.id}).limit(10).sort({views: -1}).exec(function(err, docs){
-                callback(null, article, docs);
-            });
+            if(article.isShared()){
+                callback(null, article);
+            }else {
+                Article.find({_user: article._user.id}).limit(10).sort({views: -1}).exec(function (err, docs) {
+                    callback(null, article, docs);
+                });
+            }
         }
     ], function (error, article, userHotArticles) {
-        res.render('article/view', {
-            article: article,
-            userHotArticles: userHotArticles
-        });
+        if(article.isShared()){
+            res.redirect(article.url);
+        }else{
+            res.render('article/view', {
+                article: article,
+                userHotArticles: userHotArticles
+            });
+        }
     });
 
 });

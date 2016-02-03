@@ -269,10 +269,54 @@ router.get('/logout', function (req, res) {
     req.session.destroy();
 });
 
+/**
+ * 多说单点登录
+ */
+router.get('/sso-login', function (req, res, next) {
+    var code = req.query.code;
+    var url = 'http://api.duoshuo.com/oauth2/access_token';
+    var infoUrl = "http://api.duoshuo.com/users/profile.json";
+    async.waterfall(
+        [
+            function (callback) {
+                superagent.post(url)
+                    .type('form')
+                    .accept('application/json')
+                    .send({
+                        client_id: config.site.duoshuo.short_name,
+                        code: code
+                    })
+                    .end(function (err, xhr) {
+                        callback(err, xhr.body);
+                    });
+            },
+            function (dsUser, callback) {
+                superagent.get(infoUrl)
+                    .query({user_id: dsUser.user_id})
+                    .end(function (err, xhr) {
+                        callback(err, xhr.body);
+                    });
+            }
+        ],
+        function (error, userInfo) {
+            req.flash(config.constant.flash.success, userInfo.response.name + ', 欢迎登录');
+            res.redirect('/');
+        }
+    );
+
+
+});
+
+/**
+ * 更多访客
+ */
 router.get('/more-visitor', function (req, res) {
     res.render('more-visitor');
 });
 
+/**
+ * 获取首页段子
+ */
 router.get('/duanzi', function (req, res) {
     superagent.get('https://github.com/loverajoel/jstips/').end(function (err, xhr) {
         var $ = cheerio.load(xhr.text);

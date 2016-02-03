@@ -123,6 +123,11 @@ var _getArticle = function () {
         },
         children: [commentSchema]
     }, {timestamps: {createdAt: 'created_at', updatedAt: 'updated_at'}});
+
+    articleSchema.methods.isShared = function() {
+        return this.type == '分享';
+    };
+
     var Article = mongoose.model('Article', articleSchema);
     return Promise.promisifyAll(Article);
 };

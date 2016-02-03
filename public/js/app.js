@@ -2,8 +2,7 @@
 var duoshuoQuery = {
     short_name: short_name,
     sso: {
-        login: "/sso-login",//替换为你自己的回调地址
-        logout: "/sso-logout"//替换为你自己的回调地址
+        login: "/sso-login"
     }
 
 };

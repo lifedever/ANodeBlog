@@ -20,6 +20,8 @@ var wxHelper = require('./lib/wxHelper');
 var wx = require('wechat');
 var wxRobot = require('./lib/wxRobot');
 
+var jwt = require('jwt-simple');
+
 if (config.wx.load) {  // 是否加载微信配置信息
     wxHelper.loadWX();
 }
