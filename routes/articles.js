@@ -21,29 +21,25 @@ router.get('/:id', function (req, res, next) {
         },
         function (article, callback) {
 
-            if(article.isShared()){
+            article.views += 1;
+            Article.update({_id: id}, {views: article.views}, function (err, doc) {
                 callback(null, article);
-            }else{
-                article.views += 1;
-                Article.update({_id: id}, {views: article.views}, function (err, doc) {
-                    callback(null, article);
-                });
-            }
+            });
         },
         // 热门文章
         function (article, callback) {
-            if(article.isShared()){
+            if (article.isShared()) {
                 callback(null, article);
-            }else {
+            } else {
                 Article.find({_user: article._user.id}).limit(10).sort({views: -1}).exec(function (err, docs) {
                     callback(null, article, docs);
                 });
             }
         }
     ], function (error, article, userHotArticles) {
-        if(article.isShared()){
+        if (article.isShared()) {
             res.redirect(article.url);
-        }else{
+        } else {
             res.render('article/view', {
                 article: article,
                 userHotArticles: userHotArticles
@@ -62,24 +58,24 @@ router.post('/:id/comment', function (req, res, next) {
     var content = req.body.content;
 
     async.waterfall([
-        function(callback){
+        function (callback) {
             Article.findById(id).exec(function (err, article) {
                 callback(err, article);
             });
         },
-        function(article, callback) {
+        function (article, callback) {
             article.children.push({
                 content: md.render(content),
                 _user: req.session.user._id
             });
-            article.save(function(err) {
+            article.save(function (err) {
                 callback(err, article);
             })
         }
-    ], function(err, article){
-        if(!err) {
+    ], function (err, article) {
+        if (!err) {
             res.redirect('/p/' + id + '#chat-box');
-        }else{
+        } else {
             next(err);
         }
     })

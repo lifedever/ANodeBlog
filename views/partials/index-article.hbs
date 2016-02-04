@@ -2,9 +2,15 @@
     <td>
         <div class="article">
             <div class="media">
-                <div class="pull-left">
-                    <a href="/u/{{_user.username}}" ><img
-                            class="media-object touxiang" src="{{gravatar _user.email}} " data-user="{{_user.id}}"></a>
+                <div class="pull-left" style="margin-top: 5px;">
+                    <div  title="阅览数" class="item-media bg-primary border-half-top">
+                        {{views}}
+                    </div>
+                    <div  title="评论数" class="item-media bg-green border-half-bottom">
+                        <span class="ds-thread-count" data-thread-key="{{_id}}"
+                              data-count-type="comments"></span>
+                        </span>
+                    </div>
                 </div>
                 <div class="media-body article-cell">
                     <span class="media-heading">

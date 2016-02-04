@@ -2,7 +2,7 @@
 var duoshuoQuery = {
     short_name: short_name,
     sso: {
-        login: '/sso-login',
+        login: 'http://localhost:3000/sso-login',
         logout: 'http://localhost:3000/sso-logout'
     }
 
@@ -40,4 +40,10 @@ $('.navbar-form input').on('blur', function(e) {
     e.preventDefault();
     $('.navbar-form').hide();
     $('#searchBtn').show();
+});
+
+$('#closeJoinFloat').on('click', function (e) {
+    e.preventDefault();
+    var $this = $(this);
+    $this.closest('div.join-float').addClass('join-float-hide');
 });

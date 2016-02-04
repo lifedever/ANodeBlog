@@ -1,6 +1,6 @@
 var Config = {
     site: {
-        title: 'Wincn开发网',
+        title: 'WincnDEV',
         description: '开源、分享，专注开发，用Coding创造财富',
         version: '1.0.4',
         duoshuo: {

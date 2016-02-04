@@ -1,15 +1,62 @@
-body{
+body {
     font-family: Georgia, "Times New Roman", Times, serif;
     font-size: 14px;
     line-height: 20px;
     color: #555;
     word-wrap: break-word;
-    position:relative;
-    z-index:0;
+    position: relative;
+    z-index: 0;
 }
+
+ul.navbar-nav > li.active {
+    color: #000;
+    border-bottom: 1px solid #DD4B39;
+}
+.skin-black-light .main-header>.navbar .nav>.active>a {
+    background: #fff;
+    font-weight: bold;
+    color: #5f5f5f;
+}
+
+.skin-black-light .main-header>.navbar .nav>li>a:hover{
+    background: #fff;
+    font-weight: bold;
+    color: #5f5f5f;
+}
+.skin-black-light .main-header > .navbar {
+    -webkit-box-shadow: 0px 5px 15px 0px rgba(207, 205, 207, 1);
+    -moz-box-shadow: 0px 5px 15px 0px rgba(207, 205, 207, 1);
+    box-shadow: 0px 5px 15px 0px rgba(207, 205, 207, 1);
+}
+
+.navbar-default {
+    background-color: #f8f8f8;
+    border-color: #e7e7e7;
+}
+
+.border-half-top {
+    border-radius: 4px 4px 0 0;
+}
+
+.border-half-bottom {
+    border-radius: 0 0 4px 4px;
+
+}
+
+.item-media {
+    width: 48px;
+    height: 21px;
+    text-align: center;
+}
+
+/*.container {
+    width: 980px;
+}*/
+
 .wrapper {
     z-index: 1;
 }
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-weight: 500;
 }
@@ -256,6 +303,7 @@ Back to top button
     bottom: 30px;
     right: 50px;
 }
+
 #back-top a {
     width: 48px;
     display: block;
@@ -269,9 +317,11 @@ Back to top button
     -moz-transition: 1s;
     transition: 1s;
 }
+
 #back-top a:hover {
     color: #000;
 }
+
 /* arrow icon (span tag) */
 #back-top span {
     width: 48px;
@@ -293,7 +343,47 @@ Back to top button
     vertical-align: baseline;
     border-radius: .25em;
 }
+
 .text-white {
     color: #fff;
 }
 
+.join-float {
+    font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    position: fixed;
+    font-weight: bold;
+    bottom: 0;
+    border-top: 1px solid #c6c6c6;
+    color: #000;
+    width: 100%;
+    margin-bottom: -220px;
+    background: #f4f4f4;
+    z-index: 3;
+    animation: join-float-animation 1.5s ease-in-out 5s;
+    padding-bottom: 20px;
+    animation-fill-mode: forwards;
+
+}
+
+.join-float-hide {
+    animation: join-float-animation-hide 1.5s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+@keyframes join-float-animation {
+    0% {
+        margin-bottom: -220px;
+    }
+    100% {
+        margin-bottom: 0px;
+    }
+}
+
+@keyframes join-float-animation-hide {
+    0% {
+        margin-bottom: 0px;
+    }
+    100% {
+        margin-bottom: -220px;
+    }
+}
