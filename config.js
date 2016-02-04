@@ -2,7 +2,7 @@ var Config = {
     site: {
         title: 'WincnDEV',
         description: '开源、分享，专注开发，用Coding创造财富',
-        version: '1.0.4',
+        version: '2.0.0',
         duoshuo: {
             short_name: 'gefangshuai'   // 请将这里替换成自己的
         }
