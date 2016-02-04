@@ -78,7 +78,7 @@
                                     </a>
                                 </li>
                                 {{#times pageCount 1 pageCount}}
-                                    <li {{#equals pageNumber step}}class="active" {{/equals}}>
+                                    <li {{#equals pageNumber this.step}}class="active" {{/equals}}>
                                         <a href="?page={{step}}{{#if recommend}}&recommend={{recommend}}{{/if}}{{#if type}}&type={{type}}{{/if}}">{{step}}</a>
                                     </li>
                                 {{/times}}
