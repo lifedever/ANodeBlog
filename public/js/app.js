@@ -2,8 +2,10 @@
 var duoshuoQuery = {
     short_name: short_name,
     sso: {
-        login: 'http://localhost:3000/sso-login',
-        logout: 'http://localhost:3000/sso-logout'
+        //login: 'http://localhost:3000/sso-login',
+        //logout: 'http://localhost:3000/sso-logout'
+        login: 'http://wincn.net/sso-login',
+        logout: 'http://wincn.net/sso-logout'
     }
 
 };
