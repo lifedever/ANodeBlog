@@ -12,71 +12,85 @@ var superagent = require('superagent');
 var lodash = require('lodash');
 var jwt = require('jwt-simple');
 
-router.get('/', function (req, res, next) {
+var search = function (req, res, next, menu) {
+
+    var searchParams, orderParams;
+
     var type = req.query.type || '';
     var recommend = req.query.recommend;
     var page = req.query.page || 1;
     var Article = dbHelper.Article;
     var q = req.query.q || '';
-    var searchParams = {
-        title: new RegExp(q, 'i'),
-        type: new RegExp(type, 'i')
-    };
+
+    if (menu == undefined || menu == 'new') {
+        searchParams = {
+            title: new RegExp(q, 'i'),
+            type: new RegExp(type, 'i')
+        };
+        orderParams = {
+            up: -1,
+            created_time: 'desc'
+        };
+    } else if (menu == 'hot') {
+        searchParams = {
+            title: new RegExp(q, 'i'),
+            type: new RegExp(type, 'i')
+        };
+        orderParams = {
+            up: -1,
+            views: 'desc'
+        };
+    } else if (menu == 'fire') {
+        searchParams = {
+            title: new RegExp(q, 'i'),
+            type: new RegExp(type, 'i'),
+            views: {$gt: 99}
+        };
+        orderParams = {
+            up: -1,
+            views: 'desc'
+        };
+    }
     if (recommend) {
         searchParams.recommend = recommend;
     }
-    // 加入分页查询
-    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', searchParams, {
-        up: -1,
-        created_time: 'desc'
-    }, function (error, $page) {
-        webHelper.reshook(error, next, function () {
+    async.parallel({
+        page: function (callback) {
+            dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', searchParams, orderParams, function (error, $page) {
+                callback(error, $page);
+            });
+        },
+        reader: function (callback) {
+            var userId = req.session.duoshuoUser ? req.session.duoshuoUser._id : null;
+            dbHelper.Reader.findById(userId, function (err, reader) {
+                callback(err, reader);
+            });
+        }
+    }, function (err, results) {
+        webHelper.reshook(err, next, function () {
             res.render('index', {
-                articles: $page.results,
-                pageCount: $page.pageCount,
+                articles: results.page.results,
+                pageCount: results.page.pageCount,
                 pageNumber: page,
-                count: $page.count,
+                count: results.page.count,
                 q: q,
                 type: type,
                 recommend: recommend,
-                menu: 'new'
+                menu: menu,
+                reader: results.reader
             });
         });
     });
+
+};
+
+router.get('/', function (req, res, next) {
+    search(req, res, next);
 });
 
 /* GET home page. */
 router.get('/hot', function (req, res, next) {
-    var type = req.query.type || '';
-    var recommend = req.query.recommend;
-    var page = req.query.page || 1;
-    var Article = dbHelper.Article;
-    var q = req.query.q || '';
-    var searchParams = {
-        title: new RegExp(q, 'i'),
-        type: new RegExp(type, 'i')
-    };
-    if (recommend) {
-        searchParams.recommend = recommend;
-    }
-    // 加入分页查询
-    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', searchParams, {
-        up: -1,
-        views: 'desc'
-    }, function (error, $page) {
-        webHelper.reshook(error, next, function () {
-            res.render('index', {
-                articles: $page.results,
-                pageCount: $page.pageCount,
-                pageNumber: page,
-                count: $page.count,
-                q: q,
-                type: type,
-                recommend: recommend,
-                menu: 'hot'
-            });
-        });
-    });
+    search(req, res, next, 'hot');
 
 });
 
@@ -84,73 +98,14 @@ router.get('/hot', function (req, res, next) {
  * 最新发表
  */
 router.get('/new', function (req, res, next) {
-    var type = req.query.type || '';
-    var recommend = req.query.recommend;
-    var page = req.query.page || 1;
-    var Article = dbHelper.Article;
-    var q = req.query.q || '';
-    var searchParams = {
-        title: new RegExp(q, 'i'),
-        type: new RegExp(type, 'i')
-    };
-    if (recommend) {
-        searchParams.recommend = recommend;
-    }
-    // 加入分页查询
-    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', searchParams, {
-        up: -1,
-        created_time: 'desc'
-    }, function (error, $page) {
-        webHelper.reshook(error, next, function () {
-            res.render('index', {
-                articles: $page.results,
-                pageCount: $page.pageCount,
-                pageNumber: page,
-                count: $page.count,
-                q: q,
-                type: type,
-                recommend: recommend,
-                menu: 'new'
-            });
-        });
-    });
+    search(req, res, next, 'new');
 });
 
 /**
  * 被点亮的文章
  */
 router.get('/fire', function (req, res, next) {
-    var type = req.query.type || '';
-    var recommend = req.query.recommend;
-    var page = req.query.page || 1;
-    var Article = dbHelper.Article;
-    var q = req.query.q || '';
-    var searchParams = {
-        title: new RegExp(q, 'i'),
-        type: new RegExp(type, 'i'),
-        views: {$gt: 99}
-    };
-    if (recommend) {
-        searchParams.recommend = recommend;
-    }
-    // 加入分页查询
-    dbHelper.Methods.pageQuery(page, config.article.pageSize, Article, '_user', searchParams, {
-        up: -1,
-        views: 'desc'
-    }, function (error, $page) {
-        webHelper.reshook(error, next, function () {
-            res.render('index', {
-                articles: $page.results,
-                pageCount: $page.pageCount,
-                pageNumber: page,
-                count: $page.count,
-                q: q,
-                type: type,
-                recommend: recommend,
-                menu: 'fire'
-            });
-        });
-    });
+    search(req, res, next, 'fire');
 });
 
 
@@ -310,7 +265,7 @@ router.get('/sso-login', function (req, res, next) {
 
             var duoshuo_token = jwt.encode(obj, 'a96576a72e54d62a1f36a69dc9234b8c');
             res.cookie('duoshuo_token', duoshuo_token, {maxAge: 60 * 1000 * 60 * 24 * 7});
-            req.flash(config.constant.flash.success, '欢迎登录, '+ userInfo.response.name);
+            req.flash(config.constant.flash.success, '欢迎登录, ' + userInfo.response.name);
             res.redirect('/');
         }
     );

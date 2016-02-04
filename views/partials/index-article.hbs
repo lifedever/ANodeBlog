@@ -4,10 +4,10 @@
             <div class="media">
                 <div class="pull-left" style="margin-top: 5px;">
                     <div title="阅览数" class="item-media bg-primary border-half-top">
-                        {{views}}
+                        {{article.views}}
                     </div>
                     <div title="评论数" class="item-media bg-green border-half-bottom">
-                        <span class="ds-thread-count" data-thread-key="{{_id}}"
+                        <span class="ds-thread-count" data-thread-key="{{article._id}}"
                               data-count-type="comments"></span>
                         </span>
                     </div>
@@ -15,37 +15,45 @@
                 <div class="media-body article-cell">
                     <span class="media-heading pull-left">
                         <!--<span class="label label-primary">置顶</span>-->
-                        {{#if up}} <span class="label label-primary">置顶</span>{{/if}}
-                        {{#if recommend}} <span class="label label-success">推荐</span>{{/if}}
-                        {{#equals type '原创'}}
+                        {{#if article.up}} <span class="label label-primary">置顶</span>{{/if}}
+                        {{#if article.recommend}} <span class="label label-success">推荐</span>{{/if}}
+                        {{#equals article.type '原创'}}
                             <!--<span class="label label-info">原创</span>-->
-                             <a href="/p/{{id}}" class="h2">{{title}}</a>
+                             <a href="/p/{{article.id}}" class="h2">{{article.title}}</a>
                         {{/equals}}
-                        {{#equals type '分享'}}
+                        {{#equals article.type '分享'}}
                             <span class="label label-warning label-inverse">分享</span>
-                            <a href="/p/{{id}}" target="_blank" class="h2">{{title}}</a>
+                            <a href="/p/{{article.id}}" target="_blank" class="h2">{{article.title}}</a>
                         {{/equals}}
-                        {{#ge views 100}}
+                        {{#ge article.views 100}}
                             <span class="text-red h4" title="已被点亮">
                                     <i class="fa fa-fire"></i>
                                 </span>
                         {{/ge}}
                         <span class="help-block" style="font-size: 12px;margin-top: 6px; color: #acacac;">
-                            <a href="/u/{{_user.username}}"
-                               style="color: #00a7d0; font-size: 12px; font-weight: 600">{{_user.username}}</a>
-                            发表于 {{timeFromNow created_time}}
+                            <a href="/u/{{article._user.username}}"
+                               style="color: #00a7d0; font-size: 12px; font-weight: 600">{{article._user.username}}</a>
+                            发表于 {{timeFromNow article.created_time}}
                             |
-                            最后编辑于 {{timeFromNow updated_time}}
+                            最后编辑于 {{timeFromNow article.updated_time}}
 
                             {{#equals type '分享'}}
                                 |
-                                <span class=" small">来自 <span class="text-primary">{{source}}</span> </span>
+                                <span class=" small">来自 <span class="text-primary">{{article.source}}</span> </span>
                             {{/equals}}
                         </span>
                     </span>
                     <span class="pull-right">
-                        <a class="btn btn-default" href="/reader/p/{{_id}}/favorite" title="添加收藏"><i class="fa fa-bookmark-o"></i></a>
-                        <!--<button class="btn btn-primary" title="已收藏"><i class="fa fa-bookmark"></i></button>-->
+                        {{#if session.duoshuoUser}}
+                            {{#contains favorites article.id}}
+                                <a class="btn  btn-add-favorite btn-primary" href="/reader/p/{{article.id}}/favorite/remove" title="已收藏"><i class="fa fa-bookmark"></i></a>
+                            {{else}}
+                                <a class="btn btn-default btn-add-favorite" href="/reader/p/{{article.id}}/favorite/add" title="添加收藏"><i class="fa fa-bookmark-o"></i></a>
+                            {{/contains}}
+                        {{else}}
+                            <a class="btn btn-default" href="/login" title="登录以添加收藏"><i class="fa fa-bookmark-o"></i></a>
+                        {{/if}}
+
                     </span>
                 </div>
             </div>

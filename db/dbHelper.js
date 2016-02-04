@@ -71,13 +71,14 @@ var _getReader = function () {
         username: {type: String, required: true},
         duoshuo_id: {type: String},
         url: {type: String},
-        avatar_url: {type: String}
+        avatar_url: {type: String},
+        favorites: {type: Array, default: []}   // 收藏的文章
     }, {
         timestamps: {
             createdAt: 'created_at',
             updatedAt: 'updated_at'
         }
-    })
+    });
 
     return mongoose.model('Reader', readerSchema);
 };

@@ -19,16 +19,23 @@ var duoshuoQuery = {
 
 <!-- 多说js加载结束，一个页面只需要加载一次 -->
 <!-- google analytics-->
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+(function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
 ga('create', 'UA-72898178-1', 'auto');
 ga('send', 'pageview');
 
 <!--end google analytics-->
-$('#searchBtn').on('click', function(e) {
+$('#searchBtn').on('click', function (e) {
     e.preventDefault();
     var $this = $(this);
     $this.hide();
@@ -36,7 +43,7 @@ $('#searchBtn').on('click', function(e) {
     $('.navbar-form input').focus();
 });
 
-$('.navbar-form input').on('blur', function(e) {
+$('.navbar-form input').on('blur', function (e) {
     e.preventDefault();
     $('.navbar-form').hide();
     $('#searchBtn').show();
@@ -46,4 +53,16 @@ $('#closeJoinFloat').on('click', function (e) {
     e.preventDefault();
     var $this = $(this);
     $this.closest('div.join-float').addClass('join-float-hide');
+});
+
+$('a.btn-add-favorite').on('click', function (e) {
+    e.preventDefault();
+    var $this = $(this);
+
+    $.get($this.attr('href'), function (data) {
+        toastr.success(data);
+        setTimeout(function () {
+            location.reload();
+        }, 1500);
+    })
 });

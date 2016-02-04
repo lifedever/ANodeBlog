@@ -62,7 +62,7 @@
                         <table class="table table-hover">
                             <tbody>
                             {{#each articles}}
-                                {{> index-article}}
+                                {{> index-article favorites=../reader.favorites article=this session=../session }}
                             {{/each}}
                             </tbody>
 

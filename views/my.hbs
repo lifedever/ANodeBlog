@@ -36,7 +36,7 @@
                                 <dt>他的所有文章：</dt>
                             </dl>
                             {{#each articles}}
-                                {{> index-article}}
+                                {{> index-article favorites=../reader.favorites article=this session=../session}}
                             {{/each}}
                         </table>
                     {{else}}

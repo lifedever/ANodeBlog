@@ -32,12 +32,19 @@ router.get('/:username', function (req, res, next) {
             } else {
                 callback(null, null);
             }
+        },
+        function (articles, user, callback) {
+            var userId = req.session.duoshuoUser ? req.session.duoshuoUser._id : null;
+            dbHelper.Reader.findById(userId, function (err, reader) {
+                callback(err,articles, user, reader);
+            });
         }
-    ], function (err, articles, user) {
+    ], function (err, articles, user, reader) {
         res.render('my', {
             articles: articles,
             user: user,
-            menu: 'my'
+            menu: 'my',
+            reader: reader
         });
     });
 });

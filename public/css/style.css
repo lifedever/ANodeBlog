@@ -126,13 +126,11 @@ a {
 }
 
 .article a {
-    color: #6c6c6c;
     text-decoration: none;
     font-size: 16px;
 }
 
 .article a:hover {
-    color: #2c2c2c;
     text-decoration: none;
 }
 
