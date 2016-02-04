@@ -310,7 +310,7 @@ router.get('/sso-login', function (req, res, next) {
 
             var duoshuo_token = jwt.encode(obj, 'a96576a72e54d62a1f36a69dc9234b8c');
             res.cookie('duoshuo_token', duoshuo_token, {maxAge: 60 * 1000 * 60 * 24 * 7});
-            req.flash(config.constant.flash.success, userInfo.response.name + ', 欢迎登录');
+            req.flash(config.constant.flash.success, '欢迎登录, '+ userInfo.response.name);
             res.redirect('/');
         }
     );

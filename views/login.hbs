@@ -1,26 +1,46 @@
-<div class="login-box">
-    {{> flash-message}}
-    <div class="login-logo">
-        <a href="/">{{site.title}}</a>
+<div class="row pad margin">
+    <div class="col-md-12">
+        <div class="login-logo">
+            <a href="/">{{site.title}}</a>
+        </div>
     </div>
-    <div class="login-box-body">
-        <p class="login-box-msg">账户登录</p>
-        <form action="/login" method="post">
-            <div class="form-group has-feedback">
-                <input type="text" class="form-control" name="username" placeholder="用户名"   required>
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+    <div class="col-md-6">
+        <div class="login-box pull-right">
+            <div class="login-box-body">
+                <p class="login-box-msg">读者登录</p>
+                <div class="ds-login"></div>
+                <br>
+                <br>
+                <br>
             </div>
-            <div class="form-group has-feedback">
-                <input type="password" class="form-control" name="password" placeholder="密码" required>
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-            </div>
-            <button type="submit" class="btn btn-primary btn-block btn-flat">登 录</button>
-        </form>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="login-box pull-left">
+            <div class="login-box-body">
+                <p class="login-box-msg">投稿者登录</p>
+                <form action="/login" method="post">
+                    <div class="form-group has-feedback">
+                        <input type="text" class="form-control" name="username" placeholder="用户名"   required>
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="password" class="form-control" name="password" placeholder="密码" required>
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">登 录</button>
+                </form>
 
-        <div class="social-auth-links text-center">
-            <p>- OR -</p>
-            <!--<a href="/join" class="btn btn-block btn-github">注册</a>-->
-            <a href="/join" class="btn btn-block btn-github" id="registerBtn">注册</a>
+                <div class="social-auth-links text-center">
+                    <p>- OR -</p>
+                    <!--<a href="/join" class="btn btn-block btn-github">注册</a>-->
+                    <a href="/join" class="btn btn-block btn-github" id="registerBtn">注册</a>
+                </div>
+
+
+            </div>
         </div>
     </div>
 </div>
+
+

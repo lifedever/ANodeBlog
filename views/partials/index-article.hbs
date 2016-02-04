@@ -3,33 +3,27 @@
         <div class="article">
             <div class="media">
                 <div class="pull-left" style="margin-top: 5px;">
-                    <div  title="阅览数" class="item-media bg-primary border-half-top">
+                    <div title="阅览数" class="item-media bg-primary border-half-top">
                         {{views}}
                     </div>
-                    <div  title="评论数" class="item-media bg-green border-half-bottom">
+                    <div title="评论数" class="item-media bg-green border-half-bottom">
                         <span class="ds-thread-count" data-thread-key="{{_id}}"
                               data-count-type="comments"></span>
                         </span>
                     </div>
                 </div>
                 <div class="media-body article-cell">
-                    <span class="media-heading">
+                    <span class="media-heading pull-left">
                         <!--<span class="label label-primary">置顶</span>-->
                         {{#if up}} <span class="label label-primary">置顶</span>{{/if}}
                         {{#if recommend}} <span class="label label-success">推荐</span>{{/if}}
                         {{#equals type '原创'}}
                             <!--<span class="label label-info">原创</span>-->
-
                              <a href="/p/{{id}}" class="h2">{{title}}</a>
-                            <span class="label label-default pull-right">
-                            <span title="评论数" class="ds-thread-count" data-thread-key="{{_id}}"
-                                  data-count-type="comments"></span>/<span title="点击数">{{views}}</span>
-                            </span>
                         {{/equals}}
                         {{#equals type '分享'}}
                             <span class="label label-warning label-inverse">分享</span>
                             <a href="/p/{{id}}" target="_blank" class="h2">{{title}}</a>
-                            <span class="pull-right small">来自 <span class="text-primary">{{source}}</span> </span>
                         {{/equals}}
                         {{#ge views 100}}
                             <span class="text-red h4" title="已被点亮">
@@ -37,15 +31,22 @@
                                 </span>
                         {{/ge}}
                         <span class="help-block" style="font-size: 12px;margin-top: 6px; color: #acacac;">
-                            <a href="/u/{{_user.username}}" style="color: #00a7d0; font-size: 12px; font-weight: 600">{{_user.username}}</a>
+                            <a href="/u/{{_user.username}}"
+                               style="color: #00a7d0; font-size: 12px; font-weight: 600">{{_user.username}}</a>
                             发表于 {{timeFromNow created_time}}
                             |
                             最后编辑于 {{timeFromNow updated_time}}
+
+                            {{#equals type '分享'}}
+                                |
+                                <span class=" small">来自 <span class="text-primary">{{source}}</span> </span>
+                            {{/equals}}
                         </span>
-
                     </span>
-
-
+                    <span class="pull-right">
+                        <a class="btn btn-default" href="/reader/p/{{_id}}/favorite" title="添加收藏"><i class="fa fa-bookmark-o"></i></a>
+                        <!--<button class="btn btn-primary" title="已收藏"><i class="fa fa-bookmark"></i></button>-->
+                    </span>
                 </div>
             </div>
         </div>

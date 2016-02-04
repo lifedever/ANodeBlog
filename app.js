@@ -97,18 +97,6 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-/**
- * 全局参数传递
- */
-app.use(function (req, res, next) {
-
-
-    res.locals.site = config.site;
-    res.locals.success = req.flash(config.constant.flash.success);
-    res.locals.error = req.flash(config.constant.flash.error);
-    res.locals.session = req.session;
-    next();
-});
 
 /**
  * sso登录
@@ -144,6 +132,16 @@ app.use(function (req, res, next) {
         next();
     }
 });
+/**
+ * 全局参数传递
+ */
+app.use(function (req, res, next) {
+    res.locals.site = config.site;
+    res.locals.success = req.flash(config.constant.flash.success);
+    res.locals.error = req.flash(config.constant.flash.error);
+    res.locals.session = req.session;
+    next();
+});
 
 // home
 app.use('/', require('./routes/index'));
@@ -154,6 +152,8 @@ app.use('/u', require('./routes/users'));
 app.use('/dashboard', authority.isAuthenticated, require('./routes/dashboard/dashboard'));
 app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard/dashboard-p'));
 app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard/dashboard-u'));
+
+app.use('/reader/p', authority.isReaderLogin, require('./routes/reader/reader-p'));
 
 // admin role['admin']
 app.use('/admin', authority.isAdmin, require('./routes/admin/admin'));

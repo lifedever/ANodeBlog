@@ -14,13 +14,11 @@ ul.navbar-nav > li.active {
 }
 .skin-black-light .main-header>.navbar .nav>.active>a {
     background: #fff;
-    font-weight: bold;
     color: #5f5f5f;
 }
 
 .skin-black-light .main-header>.navbar .nav>li>a:hover{
     background: #fff;
-    font-weight: bold;
     color: #5f5f5f;
 }
 .skin-black-light .main-header > .navbar {
@@ -277,17 +275,11 @@ blockquote {
 }
 
 .bg-footer {
-    background: #3c8dbc;
-    color: #fff;
+    background: #f4f4f4;
+    color: #000;
 }
 
-.bg-footer a {
-    color: #fff;
-}
 
-.bg-footer a:hover {
-    color: #dddddd;
-}
 
 dd {
     width: 100%;
