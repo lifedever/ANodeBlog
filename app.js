@@ -153,6 +153,7 @@ app.use('/dashboard', authority.isAuthenticated, require('./routes/dashboard/das
 app.use('/dashboard/p', authority.isAuthenticated, require('./routes/dashboard/dashboard-p'));
 app.use('/dashboard/u', authority.isAuthenticated, require('./routes/dashboard/dashboard-u'));
 
+app.use('/reader', authority.isReaderLogin, require('./routes/reader/reader'));
 app.use('/reader/p', authority.isReaderLogin, require('./routes/reader/reader-p'));
 
 // admin role['admin']
