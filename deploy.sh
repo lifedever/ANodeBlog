@@ -1,3 +1,3 @@
 #!/bin/sh
-forever stop bin/www && git pull && npm install && forever start bin/www
+pm2 stop processes.json && git pull && npm install && pm2 start processes.json
 exit 0
