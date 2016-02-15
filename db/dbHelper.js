@@ -142,6 +142,7 @@ var _getArticle = function () {
         url: {type: String},                                // 相关链接
         source: {type: String},                             // 文章来源
         source_id: {type: String},                            // 资源唯一标识
+        tags: {type: Array, default: []},              // 文章标签
         _user: {
             type: Schema.Types.ObjectId,
             ref: 'User'
@@ -152,7 +153,6 @@ var _getArticle = function () {
     articleSchema.methods.isShared = function () {
         return this.type == '分享';
     };
-
     var Article = mongoose.model('Article', articleSchema);
     return Promise.promisifyAll(Article);
 };

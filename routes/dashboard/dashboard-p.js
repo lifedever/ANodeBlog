@@ -17,6 +17,10 @@ var User = dbHelper.User;
 
 var md = webHelper.Remarkable();
 
+var getTags = function(value) {
+    return lodash.split(value, ',');
+};
+
 router.get('/', function (req, res, next) {
     articleDao.findArticlesByUser(req.session.user._id, function (articles) {
         res.render('dashboard/p/list', {articles: articles, menu: 'p-list', layout: 'dashboard'});
@@ -33,6 +37,7 @@ router.get('/create', function (req, res, next) {
 
 router.post('/create', function (req, res, next) {
     var article = req.body;
+    article.tags = getTags(article.articleTags);
     article._user = req.session.user._id;
     article.html = md.render(article.content);
     articleDao.saveOrUpdate(article, function (error, doc) {
@@ -56,6 +61,7 @@ router.get('/create-share', function (req, res, next) {
 
 router.post('/create/preview', function (req, res) {
     var content = req.body.content;
+
     res.send(md.render(content));
 });
 
@@ -84,6 +90,7 @@ router.get('/edit/:id', function (req, res, next) {
                 req.flash(config.constant.flash.error, '没权限编辑其他用户的文章!');
                 res.redirect('/p/' + id);
             }else{
+
                 res.render('dashboard/p/create', {
                     menu: 'p-list',
                     article: doc,

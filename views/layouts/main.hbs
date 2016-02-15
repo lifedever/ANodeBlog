@@ -14,41 +14,6 @@
     </div>
 </div>
 
-{{#equals session.duoshuoUser undefined}}
-    <div class="join-float">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>
-                        赶快加入我们，更多新鲜好玩内容，等待你的探索!
-                        <a href="#" class="pull-right " id="closeJoinFloat"><i class="fa fa-times"></i></a>
-                    </h3>
-
-                </div>
-                <div class="col-md-6">
-                    <h4>成为读者，你可以：</h4>
-                    <ul>
-                        <li>收藏你喜欢得技术文摘</li>
-                        <li>对技术文章进行点评, 获得支持</li>
-                    </ul>
-
-                    <div class="ds-login"></div>
-                </div>
-                <div class="col-md-6">
-                    <h4>成为投稿者，你可以：</h4>
-                    <ul>
-                        <li>发表自己的原创文章</li>
-                        <li>分享对自己有用的文章, 造福更多网友</li>
-                    </ul>
-                    <div>
-                        <a href="/login" class="btn btn-adn">&nbsp;&nbsp;&nbsp;&nbsp;成为投稿者&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-{{/equals}}
-
 {{>footer}}
 <script src="/js/app.js"></script>
 {{{_sections.js}}}

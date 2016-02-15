@@ -32,7 +32,10 @@
                                 </div>
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <label for="tags">文章标签</label>
+                            <input type="text" class="form-control" name="articleTags" value="{{article.tags}}">
+                        </div>
                         <div class="form-group">
                             <label for="content">文章内容</label>
                             <textarea class="form-control " id="content" name="content">{{article.content}}</textarea>

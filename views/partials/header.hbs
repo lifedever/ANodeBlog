@@ -24,14 +24,13 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li><a href="#" id="searchBtn"><i class="fa fa-search"></i></a></li>
-                    {{#if session.duoshuoUser}}
+                    {{#if session.user}}
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.duoshuoUser.username}} <span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{session.user.username}} <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/reader/favorite">我的收藏</a></li>
                                 <li role="separator" class="divider"></li>
-                                <!--<li><a href="http://gefangshuai.duoshuo.com/logout/?sso=1&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fsso-logout">退出</a></li>-->
-                                <li><a href="http://gefangshuai.duoshuo.com/logout/?sso=1&redirect_uri=http%3A%2F%2Fwincn.net%2Fsso-logout">退出</a></li>
+                                <li><a href="/logout">退出</a></li>
                             </ul>
                         </li>
                    {{else}}

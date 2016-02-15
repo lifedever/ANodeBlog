@@ -50,21 +50,3 @@ $('.navbar-form input').on('blur', function (e) {
     $('.navbar-form').hide();
     $('#searchBtn').show();
 });
-
-$('#closeJoinFloat').on('click', function (e) {
-    e.preventDefault();
-    var $this = $(this);
-    $this.closest('div.join-float').addClass('join-float-hide');
-});
-
-$('a.btn-add-favorite').on('click', function (e) {
-    e.preventDefault();
-    var $this = $(this);
-
-    $.get($this.attr('href'), function (data) {
-        toastr.success(data);
-        setTimeout(function () {
-            location.reload();
-        }, 1500);
-    })
-});
