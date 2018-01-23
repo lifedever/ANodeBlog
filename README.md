@@ -20,9 +20,6 @@ A Blog build by NodeJS+Express
 
 替换方法：打开`/config.js`文件，将`site.duoshuo.short_name`值替换成自己的
 
-# Demo
-[http://wincn.net](http://wincn.net)
-
 # Run
 ```bash
 cd ANodeBlog
